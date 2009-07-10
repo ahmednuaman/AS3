@@ -172,7 +172,7 @@ package com.firestartermedia.lib.as3.display.component
 		
 		private function handleNetStatus(e:NetStatusEvent):void
 		{
-			var code:String = e.info.code; trace(e.info.code);
+			var code:String = e.info.code;
 			
 			switch ( code )
 			{
@@ -215,6 +215,8 @@ package com.firestartermedia.lib.as3.display.component
 			rawHeight = height;
 			rawWidth = width;
 			
+			video.visible = false;
+			
 			if ( !metaData.hasOwnProperty( 'height') && !metaData.hasOwnProperty( 'width' ) )
 			{
 				setTimeout( resize, 200, width, height );
@@ -241,6 +243,7 @@ package com.firestartermedia.lib.as3.display.component
 			
 			video.height = targetHeight;
 			video.width = targetWidth;
+			video.visible = true;
 			video.x = ( width / 2 ) - ( targetWidth / 2 );
 			video.y = ( height / 2 ) - ( targetHeight / 2 );
 		}

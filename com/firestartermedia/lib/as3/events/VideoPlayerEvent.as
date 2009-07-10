@@ -25,6 +25,7 @@ package com.firestartermedia.lib.as3.events
 		public static const ENDED:String						= NAME + 'Ended';
 		public static const ERROR:String						= NAME + 'Error';
 		public static const SOUND_CHANGED:String				= NAME + 'SoundChanged';
+		public static const CLICKED:String						= NAME + 'Clicked';
 		
 		public var data:Object;
 		
