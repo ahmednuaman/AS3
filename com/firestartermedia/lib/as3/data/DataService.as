@@ -13,9 +13,10 @@ package com.firestartermedia.lib.as3.data
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.events.HTTPStatusEvent;
 	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
-		
+
 	public class DataService extends EventDispatcher
 	{
 		public static const TYPE_XML:String						= 'xml';
@@ -40,9 +41,10 @@ package com.firestartermedia.lib.as3.data
 			
 			loader = new URLLoader();
 			
-			loader.addEventListener( Event.OPEN, handleLoaderStarted );
-			loader.addEventListener( ProgressEvent.PROGRESS, handleLoaderProgress );
-			loader.addEventListener( Event.COMPLETE, handleLoaderComplete );
+			loader.addEventListener( Event.OPEN, 					handleLoaderStarted );
+			loader.addEventListener( HTTPStatusEvent.HTTP_STATUS, 	handleHTTPStatus );
+			loader.addEventListener( ProgressEvent.PROGRESS, 		handleLoaderProgress );
+			loader.addEventListener( Event.COMPLETE, 				handleLoaderComplete );
 		}
 		
 		public function handleLoaderStarted(e:Event):void
@@ -50,9 +52,14 @@ package com.firestartermedia.lib.as3.data
 			dispatchEvent( new DataServiceEvent( loadingEvent ) );
 		}
 		
+		public function handleHTTPStatus(e:HTTPStatusEvent):void
+		{
+			dispatchEvent( e );
+		}
+		
 		public function handleLoaderProgress(e:ProgressEvent):void
 		{
-			dispatchEvent( new ProgressEvent( ProgressEvent.PROGRESS, true, false, e.bytesLoaded, e.bytesTotal ) );
+			dispatchEvent( e );
 		}
 		
 		public function handleLoaderComplete(e:Event):void
