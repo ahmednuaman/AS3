@@ -8,7 +8,7 @@
 */
 package com.firestartermedia.lib.as3.utils
 {
-	import com.adobe.utils.DateUtil;
+	//import com.adobe.utils.DateUtil;
 	
 	import mx.utils.StringUtil;
 	

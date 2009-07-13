@@ -8,8 +8,6 @@
 */
 package com.firestartermedia.lib.puremvc.patterns
 {
-	import com.oneclicktofame.ApplicationFacade;
-	
 	import org.puremvc.as3.patterns.proxy.Proxy;
 
 	public class Proxy extends org.puremvc.as3.patterns.proxy.Proxy
@@ -23,7 +21,7 @@ package com.firestartermedia.lib.puremvc.patterns
 		
 		public function trackEvent(event:String):void
 		{
-			sendNotification( ApplicationFacade.TRACK, event );
+			sendNotification( 'ApplicationFacadeTrack', event );
 		}
 	}
 }

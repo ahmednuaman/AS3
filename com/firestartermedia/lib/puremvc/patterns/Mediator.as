@@ -10,7 +10,6 @@ package com.firestartermedia.lib.puremvc.patterns
 {	
 	import com.adobe.utils.ArrayUtil;
 	import com.firestartermedia.lib.puremvc.events.SpriteEvent;
-	import com.oneclicktofame.ApplicationFacade;
 	
 	import flash.utils.Dictionary;
 	
@@ -31,7 +30,7 @@ package com.firestartermedia.lib.puremvc.patterns
 		
 		public function trackEvent(event:String):void
 		{
-			sendNotification( ApplicationFacade.TRACK, event );
+			sendNotification( 'ApplicationFacadeTrack', event );
 		}
 				
 		public function sendEvent(event:SpriteEvent):void
