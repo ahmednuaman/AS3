@@ -10,8 +10,8 @@ package com.firestartermedia.lib.as3.data
 {
 	import com.firestartermedia.lib.as3.events.DataServiceEvent;
 	
+	import flash.errors.IOError;
 	import flash.net.URLRequest;
-	import flash.net.URLRequestHeader;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
 
@@ -29,7 +29,10 @@ package com.firestartermedia.lib.as3.data
 			request.data = data;
 			request.method = method;
 			
-			loader.load( request );		
+			try 
+			{
+				loader.load( request );
+			} catch (e:*) { }
 		}
 		
 		public function sendPost(url:String, data:URLVariables=null):void

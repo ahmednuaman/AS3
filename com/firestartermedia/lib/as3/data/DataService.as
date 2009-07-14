@@ -14,6 +14,7 @@ package com.firestartermedia.lib.as3.data
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.HTTPStatusEvent;
+	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
 
@@ -43,6 +44,7 @@ package com.firestartermedia.lib.as3.data
 			
 			loader.addEventListener( Event.OPEN, 					handleLoaderStarted );
 			loader.addEventListener( HTTPStatusEvent.HTTP_STATUS, 	handleHTTPStatus );
+			loader.addEventListener( IOErrorEvent.IO_ERROR, 		handleIOError );
 			loader.addEventListener( ProgressEvent.PROGRESS, 		handleLoaderProgress );
 			loader.addEventListener( Event.COMPLETE, 				handleLoaderComplete );
 		}
@@ -53,6 +55,11 @@ package com.firestartermedia.lib.as3.data
 		}
 		
 		public function handleHTTPStatus(e:HTTPStatusEvent):void
+		{
+			dispatchEvent( e );
+		}
+		
+		public function handleIOError(e:IOErrorEvent):void
 		{
 			dispatchEvent( e );
 		}
