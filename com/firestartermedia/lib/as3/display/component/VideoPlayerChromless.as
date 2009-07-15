@@ -138,8 +138,8 @@ package com.firestartermedia.lib.as3.display.component
 				}
 				
 			}
-			
-			if ( !isOverHalfWay && ( time / 2 ) > playingTime.total )
+
+			if ( !isOverHalfWay && time > ( playingTime.total / 2 ) )
 			{
 				isOverHalfWay = true;
 				
