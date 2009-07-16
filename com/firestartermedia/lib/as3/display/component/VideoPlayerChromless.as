@@ -78,6 +78,11 @@ package com.firestartermedia.lib.as3.display.component
 			addEventListener( Event.ENTER_FRAME, handleEnterFrame );
 		}
 		
+		public function stop():void
+		{
+			stream.close();
+		}
+		
 		public function seekTo(seconds:Number):void
 		{
 			stream.seek( seconds );
