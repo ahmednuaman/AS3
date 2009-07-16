@@ -81,6 +81,8 @@ package com.firestartermedia.lib.as3.display.component
 		public function stop():void
 		{
 			stream.close();
+			
+			video.alpha = 0;
 		}
 		
 		public function seekTo(seconds:Number):void
@@ -177,7 +179,7 @@ package com.firestartermedia.lib.as3.display.component
 		
 		private function handleNetStatus(e:NetStatusEvent):void
 		{
-			var code:String = e.info.code;
+			var code:String = e.info.code; trace(code);
 			
 			switch ( code )
 			{
@@ -189,7 +191,7 @@ package com.firestartermedia.lib.as3.display.component
 				case 'NetStream.Buffer.Full':
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.STARTED ) );
 				
-				//resume();
+				video.alpha = 1;
 				
 				break;
 				
