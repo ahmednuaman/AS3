@@ -179,7 +179,7 @@ package com.firestartermedia.lib.as3.display.component
 		
 		private function handleNetStatus(e:NetStatusEvent):void
 		{
-			var code:String = e.info.code; trace(code);
+			var code:String = e.info.code;
 			
 			switch ( code )
 			{
