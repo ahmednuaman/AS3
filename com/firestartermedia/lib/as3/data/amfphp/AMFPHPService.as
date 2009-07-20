@@ -14,10 +14,28 @@ package com.firestartermedia.lib.as3.data.amfphp
 	import flash.net.ObjectEncoding;
 
 	public class AMFPHPService extends RemoteConnectionService
-	{	
-		public function AMFPHPService( url:String )
+	{
+		protected var ciMethod:String;
+		protected var ciPath:String;
+				
+		public function AMFPHPService( url:String, ciMethod:String=null, ciPath:String=null )
 		{
 			super( url, RemoteConnectionServiceEvent.LOADED, RemoteConnectionServiceEvent.READY, RemoteConnectionServiceEvent.FAULT, ObjectEncoding.AMF3 );
+			
+			this.ciMethod	= ciMethod;
+			this.ciPath		= ciPath;
+		}
+		
+		public function ciSend(...args):void
+		{
+			if ( ciMethod && ciPath )
+			{
+				send.apply( null, [ ciMethod, ciPath ].concat( args ) );
+			}
+			else
+			{
+				throw new ArgumentError('You need to specify the ciMethod and ciPath');
+			}
 		}
 	}
 }
