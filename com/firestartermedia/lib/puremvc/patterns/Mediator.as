@@ -9,7 +9,6 @@
 package com.firestartermedia.lib.puremvc.patterns
 {	
 	import com.adobe.utils.ArrayUtil;
-	import com.firestartermedia.lib.puremvc.events.SpriteEvent;
 	
 	import flash.utils.Dictionary;
 	
@@ -33,13 +32,13 @@ package com.firestartermedia.lib.puremvc.patterns
 			sendNotification( 'ApplicationFacadeTrack', event );
 		}
 				
-		public function sendEvent(event:SpriteEvent):void
+		public function sendEvent(event:*):void
 		{
 			sendNotification( event.type, event.data );
 		}
 		
 		public function declareNotificationInterest(notificationName:String, func:Function):void
-		{
+		{			
 			notificationInterests.push( notificationName );
 			
 			notificationInterests = ArrayUtil.createUniqueCopy( notificationInterests );
