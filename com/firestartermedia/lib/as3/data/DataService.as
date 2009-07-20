@@ -43,9 +43,9 @@ package com.firestartermedia.lib.as3.data
 			loader = new URLLoader();
 			
 			loader.addEventListener( Event.OPEN, 					handleLoaderStarted );
-			loader.addEventListener( HTTPStatusEvent.HTTP_STATUS, 	handleHTTPStatus );
-			loader.addEventListener( IOErrorEvent.IO_ERROR, 		handleIOError );
-			loader.addEventListener( ProgressEvent.PROGRESS, 		handleLoaderProgress );
+			loader.addEventListener( HTTPStatusEvent.HTTP_STATUS, 	handleGenericEvent );
+			loader.addEventListener( IOErrorEvent.IO_ERROR, 		handleGenericEvent );
+			loader.addEventListener( ProgressEvent.PROGRESS, 		handleGenericEvent );
 			loader.addEventListener( Event.COMPLETE, 				handleLoaderComplete );
 		}
 		
@@ -54,17 +54,7 @@ package com.firestartermedia.lib.as3.data
 			dispatchEvent( new DataServiceEvent( loadingEvent ) );
 		}
 		
-		public function handleHTTPStatus(e:HTTPStatusEvent):void
-		{
-			dispatchEvent( e );
-		}
-		
-		public function handleIOError(e:IOErrorEvent):void
-		{
-			dispatchEvent( e );
-		}
-		
-		public function handleLoaderProgress(e:ProgressEvent):void
+		public function handleGenericEvent(e:*):void
 		{
 			dispatchEvent( e );
 		}
