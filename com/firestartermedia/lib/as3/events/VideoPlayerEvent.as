@@ -28,6 +28,7 @@ package com.firestartermedia.lib.as3.events
 		public static const CLICKED:String						= NAME + 'Clicked';
 		public static const OVER:String							= NAME + 'Over';
 		public static const OUT:String							= NAME + 'Out';
+		public static const SHARE:String						= NAME + 'Share';
 		
 		public var data:Object;
 		
