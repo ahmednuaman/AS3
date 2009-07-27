@@ -31,7 +31,7 @@ package com.firestartermedia.lib.puremvc.display
 			sendEvent( eventName );
 		}
 		
-		public function reset():void
+		public function handleReset():void
 		{
 			ready = false;
 		}
