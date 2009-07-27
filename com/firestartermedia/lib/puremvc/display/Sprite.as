@@ -31,9 +31,14 @@ package com.firestartermedia.lib.puremvc.display
 			sendEvent( eventName );
 		}
 		
+		public function reset():void
+		{
+			ready = false;
+		}
+		
 		public function handleResize(e:Object):void
 		{
 			
-		}	
+		}
 	}
 }
