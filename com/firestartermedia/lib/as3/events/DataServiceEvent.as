@@ -20,7 +20,7 @@ package com.firestartermedia.lib.as3.events
 		
 		public var data:Object;
 		
-		public function DataServiceEvent(type:String, data:Object=null, bubbles:Boolean=true, cancelable:Boolean=false)
+		public function DataServiceEvent(type:String, data:Object=null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super( type, bubbles, cancelable );
 		

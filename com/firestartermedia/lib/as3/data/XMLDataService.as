@@ -32,7 +32,9 @@ package com.firestartermedia.lib.as3.data
 			try 
 			{
 				loader.load( request );
-			} catch (e:*) { }
+			} 
+			catch (e:*) 
+			{ }
 		}
 		
 		public function sendPost(url:String, data:URLVariables=null):void

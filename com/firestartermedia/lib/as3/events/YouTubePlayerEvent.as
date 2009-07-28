@@ -23,7 +23,7 @@ package com.firestartermedia.lib.as3.events
 		public static const BUFFERING:String					= NAME + 'Buffering';
 		public static const NOT_STARTED:String					= NAME + 'NotStarted';
 		
-		public function YouTubePlayerEvent(type:String, bubbles:Boolean=true, cancelable:Boolean=false)
+		public function YouTubePlayerEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super( type, bubbles, cancelable );
 		}
