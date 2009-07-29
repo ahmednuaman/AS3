@@ -36,13 +36,18 @@ package com.firestartermedia.lib.as3.utils
 			var hours:Number = Math.floor( number / 3600 );
     		var minutes:Number = Math.floor( ( number % 3600 ) / 60 );
     		var seconds:Number = Math.floor( ( number % 3600 ) % 60 );
+    		var times:Array = [ likeTime( hours ), likeTime( minutes ), likeTime( seconds ) ];	
     		
-    		return 	likeTime( hours ) + ':' + likeTime( minutes ) + ':' + likeTime( seconds );
+    		times = times.filter();
+    		
+    		return times.join( ':' );
 		}
 		
 		public static function likeTime(number:Number):String
 		{
-			return ( number < 10 ? '0' + number.toString() : number.toString() );
+			return ( number > 0 ? 
+								( number < 10 ? '0' + number.toString() : number.toString() ) :
+								'' );
 		}
 	}
 }
