@@ -110,8 +110,8 @@ package com.firestartermedia.lib.as3.display.tools
 		
 		override public function set height(value:Number):void
 		{
-			var targetHeight:Number = Math.round( value - bitmapTL.height - bitmapBL.height );
-			var targetY:Number = Math.round( value - bitmapBL.height );
+			var targetHeight:Number = Math.floor( value - bitmapTL.height - bitmapBL.height );
+			var targetY:Number = Math.floor( value - bitmapBL.height );
 			
 			bitmapML.height 	= targetHeight;
 			bitmapMC.height 	= targetHeight;
@@ -124,8 +124,8 @@ package com.firestartermedia.lib.as3.display.tools
 		
 		override public function set width(value:Number):void
 		{
-			var targetWidth:Number = Math.round( value - bitmapTL.width - bitmapTR.width );
-			var targetX:Number = Math.round( value - bitmapTL.width );
+			var targetWidth:Number = Math.floor( value - bitmapTL.width - bitmapTR.width );
+			var targetX:Number = Math.floor( value - bitmapTL.width );
 			
 			bitmapTC.width 		= targetWidth;
 			bitmapMC.width 		= targetWidth;
