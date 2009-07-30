@@ -104,7 +104,20 @@ package com.firestartermedia.lib.as3.display.component
 			}
 			
 			dispatchEvent( new CountdownEvent( CountdownEvent.TIME, 
-							{ decades: _decades, years: _years, months: _months, weeks: _weeks, days: _days, hours: _hours, mins: _mins, secs: _secs, mSecs: _mSecs } ) );
+							{ 
+								diff: 		targetDate.getTime() - currentDate.getTime(),
+								decades: 	_decades, 
+								years: 		_years, 
+								months: 	_months, 
+								weeks: 		_weeks, 
+								days: 		_days, 
+								hours: 		_hours, 
+								mins: 		_mins, 
+								secs: 		_secs, 
+								mSecs: 		_mSecs 
+							}
+						) 
+					);
 			
 			currentDate = new Date();
 		}
