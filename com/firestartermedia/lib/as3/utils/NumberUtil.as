@@ -47,7 +47,7 @@ package com.firestartermedia.lib.as3.utils
 		
 		public static function likeTime(number:Number, forceZero:Boolean=false):String
 		{
-			return ( number >= 0 || forceZero ? 
+			return ( number > 0 || ( number == 0 && forceZero ) ? 
 								( number < 10 ? '0' + number.toString() : number.toString() ) :
 								'' );
 		}
