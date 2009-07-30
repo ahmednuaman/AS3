@@ -19,6 +19,11 @@ package com.firestartermedia.lib.puremvc.display
 		public var ready:Boolean								= false;
 		public var tweenResize:Boolean							= false;
 		
+		public function Sprite()
+		{
+			registered = true;
+		}
+		
 		public function sendEvent(eventName:String, body:Object=null):void
 		{
 			dispatchEvent( new SpriteEvent( eventName, body, true ) );
