@@ -11,6 +11,7 @@ package com.firestartermedia.lib.as3.utils
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Loader;
 	import flash.net.URLRequest;
+	import flash.system.LoaderContext;
 	
 	public class DisplayObjectUtil
 	{
@@ -25,6 +26,7 @@ package com.firestartermedia.lib.as3.utils
 		public static function loadMovie(url:String, parent:DisplayObjectContainer=null):Loader
 		{
 			var request:URLRequest = new URLRequest( url );
+			var context:LoaderContext = new LoaderContext();
 			var loader:Loader = new Loader();
 			
 			if ( parent )
@@ -34,7 +36,7 @@ package com.firestartermedia.lib.as3.utils
 			
 			try 
 			{
-				loader.load( request );
+				loader.load( request, context );
 			}
 			catch (e:*)
 			{ }
