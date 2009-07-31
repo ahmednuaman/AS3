@@ -17,7 +17,7 @@ package com.firestartermedia.lib.as3.utils
 	{
 		public static function flatten(source:DisplayObject):BitmapData
 		{
-			return grab( source, new Rectangle( 0, 0, source.width, source.height ) );
+			return grab( source, new Rectangle( 0, 0, source.width, source.height ) ); 
 		}
 		
 		public static function grab(source:DisplayObject, rect:Rectangle, smoothing:Boolean=true):BitmapData
