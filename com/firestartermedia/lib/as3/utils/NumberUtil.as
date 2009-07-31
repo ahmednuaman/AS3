@@ -52,9 +52,9 @@ package com.firestartermedia.lib.as3.utils
 								'' );
 		}
 		
-		public static function toUint(string:String):uint
+		public static function toUint(string:Object):uint
 		{
-			return uint( string.toString().replace('#','0x') );
+			return uint( string.toString().replace( '#', '0x' ) );
 		}
 	}
 }

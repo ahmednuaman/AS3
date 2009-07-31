@@ -9,6 +9,8 @@
 package com.firestartermedia.lib.as3.utils
 {
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Loader;
+	import flash.net.URLRequest;
 	
 	public class DisplayObjectUtil
 	{
@@ -18,6 +20,21 @@ package com.firestartermedia.lib.as3.utils
 			{
 				target.removeChildAt( i );
 			}
+		}
+		
+		public static function loadMovie(url:String, parent:DisplayObjectContainer=null):Loader
+		{
+			var request:URLRequest = new URLRequest( url );
+			var loader:Loader = new Loader();
+			
+			if ( parent )
+			{
+				parent.addChild( loader );
+			}
+			
+			loader.load( request );
+			
+			return loader;
 		}
 	}
 }
