@@ -12,6 +12,8 @@ package com.firestartermedia.lib.as3.utils
 	{
 		public static function toUint(string:String):uint
 		{
+			trace( '*** This class is depreciated, please use NumberUtil instead ***' );
+			
 			return uint( string.toString().replace('#','0x') );
 		}
 	}

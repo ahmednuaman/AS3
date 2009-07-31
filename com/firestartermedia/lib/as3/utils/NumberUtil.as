@@ -51,5 +51,10 @@ package com.firestartermedia.lib.as3.utils
 								( number < 10 ? '0' + number.toString() : number.toString() ) :
 								'' );
 		}
+		
+		public static function toUint(string:String):uint
+		{
+			return uint( string.toString().replace('#','0x') );
+		}
 	}
 }
