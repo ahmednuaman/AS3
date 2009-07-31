@@ -32,7 +32,12 @@ package com.firestartermedia.lib.as3.utils
 				parent.addChild( loader );
 			}
 			
-			loader.load( request );
+			try 
+			{
+				loader.load( request );
+			}
+			catch (e:*)
+			{ }
 			
 			return loader;
 		}
