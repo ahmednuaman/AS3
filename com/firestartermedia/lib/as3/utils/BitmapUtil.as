@@ -15,6 +15,11 @@ package com.firestartermedia.lib.as3.utils
 
 	public class BitmapUtil
 	{
+		public static function flatten(source:DisplayObject):BitmapData
+		{
+			return grab( source, new Rectangle( 0, 0, source.width, source.height ) );
+		}
+		
 		public static function grab(source:DisplayObject, rect:Rectangle, smoothing:Boolean=true):BitmapData
 		{
 			var draw:BitmapData = new BitmapData( source.width, source.height, true, 0 );
