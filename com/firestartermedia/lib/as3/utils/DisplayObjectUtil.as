@@ -10,7 +10,9 @@ package com.firestartermedia.lib.as3.utils
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Loader;
+	import flash.events.Event;
 	import flash.net.URLRequest;
+	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 	
 	public class DisplayObjectUtil
@@ -23,15 +25,20 @@ package com.firestartermedia.lib.as3.utils
 			}
 		}
 		
-		public static function loadMovie(url:String, parent:DisplayObjectContainer=null):Loader
+		public static function loadMovie(url:String, parent:DisplayObjectContainer=null, completeFunction:Function=null):Loader
 		{
 			var request:URLRequest = new URLRequest( url );
-			var context:LoaderContext = new LoaderContext();
+			var context:LoaderContext = new LoaderContext( false, ApplicationDomain.currentDomain );
 			var loader:Loader = new Loader();
 			
 			if ( parent )
 			{
 				parent.addChild( loader );
+			}
+			
+			if ( completeFunction != null )
+			{
+				loader.contentLoaderInfo.addEventListener( Event.COMPLETE, completeFunction );
 			}
 			
 			try 
