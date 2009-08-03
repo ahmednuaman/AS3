@@ -25,10 +25,10 @@ package com.firestartermedia.lib.as3.utils
 			}
 		}
 		
-		public static function loadMovie(url:String, parent:DisplayObjectContainer=null, completeFunction:Function=null):Loader
+		public static function loadMovie(url:String, parent:DisplayObjectContainer=null, completeFunction:Function=null, applicationDomain:ApplicationDomain=null):Loader
 		{
 			var request:URLRequest = new URLRequest( url );
-			var context:LoaderContext = new LoaderContext( false, ApplicationDomain.currentDomain );
+			var context:LoaderContext = new LoaderContext( false, ( applicationDomain ||= ApplicationDomain.currentDomain ) );
 			var loader:Loader = new Loader();
 			
 			if ( parent )
