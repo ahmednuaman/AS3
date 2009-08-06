@@ -45,5 +45,10 @@ package com.firestartermedia.lib.puremvc.display
 		{
 			
 		}
+		
+		/* public function addBetterEventListener(type:String):void
+		{
+			
+		} */
 	}
 }
