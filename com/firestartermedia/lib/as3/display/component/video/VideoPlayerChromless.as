@@ -208,6 +208,12 @@ package com.firestartermedia.lib.as3.display.component.video
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.BUFFERING ) );
 				
 				break;
+				
+				case 'NetStream.Play.StreamNotFound':
+				case 'NetStream.Play.Failed':
+				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.FAILED ) );
+				
+				break;
 			}
 		}
 		
