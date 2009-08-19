@@ -226,11 +226,13 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			if ( !metaData.hasOwnProperty( 'height') && !metaData.hasOwnProperty( 'width' ) )
 			{
-				setTimeout( resize, 200, width, height );
+				setTimeout( resize, 250, width, height );
 			}
 			else
 			{
 				doResize( width, height );
+				
+				setTimeout( doResize, 250, width, height );
 			}
 		}
 		
