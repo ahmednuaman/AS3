@@ -20,7 +20,7 @@ package com.firestartermedia.lib.as3.display.component.video
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 	import flash.utils.setTimeout;
-
+	
 	public class VideoPlayerChromless extends Sprite
 	{
 		public var bufferTime:Number							= 2;
@@ -143,7 +143,6 @@ package com.firestartermedia.lib.as3.display.component.video
 					
 					lastFiredCuePoint = cuePoint;
 				}
-				
 			}
 
 			if ( !isOverHalfWay && time > ( playingTime.total / 2 ) )
@@ -222,17 +221,15 @@ package com.firestartermedia.lib.as3.display.component.video
 			rawHeight = height;
 			rawWidth = width;
 			
-			video.visible = false;
-			
-			if ( !metaData.hasOwnProperty( 'height') && !metaData.hasOwnProperty( 'width' ) )
-			{
-				setTimeout( resize, 250, width, height );
+			if ( metaData.hasOwnProperty( 'height') && metaData.hasOwnProperty( 'width' ) )
+			{				
+				doResize( width, height );
 			}
 			else
 			{
-				doResize( width, height );
-				
-				setTimeout( doResize, 250, width, height );
+				video.visible = false;
+			
+				setTimeout( resize, 250, width, height );
 			}
 		}
 		
@@ -243,18 +240,18 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			if ( targetWidth > width )
 			{
-				targetWidth = ( width > 0 ? width : videoWidth );
-				targetHeight = targetWidth * ( metaData.height / metaData.width );
+				targetWidth 	= ( width > 0 ? width : videoWidth );
+				targetHeight 	= targetWidth * ( metaData.height / metaData.width );
 			}
 			
-			videoHeight = targetHeight;
-			videoWidth = targetWidth;
+			videoHeight 		= targetHeight;
+			videoWidth 			= targetWidth;
 			
-			video.height = targetHeight;
-			video.width = targetWidth;
-			video.visible = true;
-			video.x = ( width / 2 ) - ( targetWidth / 2 );
-			video.y = ( height / 2 ) - ( targetHeight / 2 );
+			video.height 		= targetHeight;
+			video.width 		= targetWidth;
+			video.visible 		= true;
+			video.x 			= ( width / 2 ) - ( targetWidth / 2 );
+			video.y 			= ( height / 2 ) - ( targetHeight / 2 );
 		}
 		
 		public function get loadingProgress():Object
