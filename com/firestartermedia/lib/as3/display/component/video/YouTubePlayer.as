@@ -16,6 +16,7 @@ package com.firestartermedia.lib.as3.display.component.video
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLRequest;
+	import flash.utils.setTimeout;
 
 	public class YouTubePlayer extends Sprite
 	{
@@ -110,7 +111,26 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function stop():void
 		{
-			bridge.send( 'stopVideo' );
+			if ( isLoaded )
+			{
+				bridge.send( 'stopVideo' );
+			}
+			else
+			{
+				setTimeout( stop, 250 );
+			}
+		}
+		
+		public function resize(width:Number, height:Number):void
+		{
+			if ( isLoaded )
+			{
+				bridge.send( 'resizePlayer', width, height );
+			}
+			else
+			{
+				setTimeout( resize, 250, width, height );
+			}
 		}
 		
 		public function sendEvent(e:String):void
