@@ -14,27 +14,27 @@ package com.firestartermedia.lib.as3.display.component.video
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.net.URLRequest;
 
 	public class YouTubePlayer extends Sprite
 	{
 		public static const NAME:String							= 'YouTubePlayer';
 	
-		public static const BRIDGE_AS3_TO_AS2:String			= 'PlayerWrapperBridgeAS3ToAS2';
-		public static const BRIDGE_AS2_TO_AS3:String			= 'PlayerWrapperBridgeAS2ToAS3';
-		
+		public var bridgeName:String							= 'YouTubePlayerBridge';		
 		public var chromeless:Boolean							= false;
+		public var playerHeight:Number							= 240;
+		public var playerWidth:Number							= 320;
 		
 		public var autoPlay:Boolean;
 		public var pars:String;
-		public var playerWidth:Number;
-		public var playerHeight:Number;
 		public var wrapperURL:String;
+		
+		private var isLoaded:Boolean							= false;
 		
 		private var player:Loader;
 		private var bridge:SWFBridgeAS3;
 		private var videoId:String;
-		private var loaded:Boolean;
 		
 		public function init(videoId:String):void
 		{
@@ -45,24 +45,62 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function play(videoId:String):void
 		{
+			var request:URLRequest;
+			
 			this.videoId = videoId;
 			
-			if ( !loaded )
+			if ( !isLoaded )
 			{
-				var request:URLRequest = new URLRequest( wrapperURL );
+				if ( wrapperURL )
+				{
+					request = new URLRequest( wrapperURL );
 				
-				player = new Loader();
-				
-				addChild( player );
-				
-				player.contentLoaderInfo.addEventListener( Event.INIT, handlePlayerLoadedComplete );
-				
-				player.load( request );
+					player = new Loader();
+					
+					addChild( player );
+					
+					player.contentLoaderInfo.addEventListener( IOErrorEvent.IO_ERROR, 		handlePlayerLoadFailed );
+					player.contentLoaderInfo.addEventListener( Event.INIT, 					handlePlayerLoadComplete );
+					
+					player.load( request );
+				}
+				else
+				{
+					throw new Error( 'You need to specify the wrapper url' );
+				}
 			}
 			else
 			{
-				handlePlayerLoadedComplete();
+				handlePlayerLoadComplete();
 			}
+		}	
+		
+		private function handlePlayerLoadFailed(e:IOErrorEvent):void
+		{
+			throw new Error( 'Failed to load wrapper, check the url and permissions?' );
+		}
+		
+		private function handlePlayerLoadComplete(e:Event=null):void
+		{						
+			if ( bridge )
+			{
+				handleBridgeConnect(); 
+			}
+			else
+			{
+				bridge = new SWFBridgeAS3( bridgeName, this );
+			
+				bridge.addEventListener( Event.CONNECT, handleBridgeConnect );				
+			}
+		}
+		
+		private function handleBridgeConnect(e:Event=null):void
+		{			
+			isLoaded = true;
+			
+			trace( 'connected' );
+			
+			playVideo( videoId );
 		}	
 		
 		private function playVideo(videoId:String):void
@@ -75,32 +113,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			bridge.send( 'stopVideo' );
 		}
 		
-		public function handlePlayerLoadedComplete(e:Event=null):void
-		{						
-			if ( bridge )
-			{
-				handleBridgeConnect(); 
-			}
-			else
-			{
-				bridge = new SWFBridgeAS3( BRIDGE_AS3_TO_AS2, this );
-			
-				bridge.addEventListener( Event.CONNECT, handleBridgeConnect );				
-			}
-		}
-		
 		public function sendEvent(e:String):void
 		{
 			var event:String = YouTubePlayerEvent.NAME + e.replace( /on|player/ , '' );
 			
 			dispatchEvent( new YouTubePlayerEvent( event ) );
 		}
-		
-		private function handleBridgeConnect(e:Event=null):void
-		{			
-			loaded = true;
-			
-			playVideo( videoId );
-		}	
 	}
 }
