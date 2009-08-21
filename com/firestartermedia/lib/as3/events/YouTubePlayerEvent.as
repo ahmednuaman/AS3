@@ -14,6 +14,7 @@ package com.firestartermedia.lib.as3.events
 	{
 		public static const NAME:String							= 'YouTubePlayerEvent';
 		
+		public static const READY:String						= NAME + 'Ready';
 		public static const STATE_CHANGED:String				= NAME + 'StateChange';
 		public static const ERROR:String						= NAME + 'Error';
 		public static const PLAYING:String						= NAME + 'Playing';

@@ -16,6 +16,7 @@ package com.firestartermedia.lib.as3.display.component.video
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLRequest;
+	import flash.system.Security;
 	import flash.utils.setTimeout;
 
 	public class YouTubePlayer extends Sprite
@@ -36,6 +37,15 @@ package com.firestartermedia.lib.as3.display.component.video
 		private var player:Loader;
 		private var bridge:SWFBridgeAS3;
 		private var videoId:String;
+		
+		public function YouTubePlayer():void
+		{
+			Security.allowDomain( '*' );
+			Security.allowDomain( 'www.youtube.com' );  
+			Security.allowDomain( 'youtube.com' );  
+			Security.allowDomain( 's.ytimg.com' );  
+			Security.allowDomain( 'i.ytimg.com' );
+		}
 		
 		public function init(videoId:String):void
 		{
@@ -98,8 +108,6 @@ package com.firestartermedia.lib.as3.display.component.video
 		private function handleBridgeConnect(e:Event=null):void
 		{			
 			isLoaded = true;
-			
-			trace( 'connected' );
 			
 			playVideo( videoId );
 		}	
