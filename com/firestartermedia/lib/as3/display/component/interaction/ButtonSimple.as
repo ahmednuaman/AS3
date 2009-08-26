@@ -39,7 +39,7 @@ package com.firestartermedia.lib.as3.display.component.interaction
 		
 		public function ButtonSimple(upState:DisplayObject=null, overState:DisplayObject=null, downState:DisplayObject=null, hitTestState:DisplayObject=null)
 		{
-			super(upState, overState, downState, hitTestState);
+			super( upState, overState, downState, hitTestState );
 			
 			textFormat = new TextFormat();
 			

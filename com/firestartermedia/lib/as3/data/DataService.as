@@ -61,12 +61,14 @@ package com.firestartermedia.lib.as3.data
 		
 		public function handleLoaderComplete(e:Event):void
 		{
-			var data:Object = ( dataType == TYPE_XML ? new XML( e.target.data ) : JSON.decode( e.target.data ) );
+			var data:Object;
 			
-			dispatchEvent( new DataServiceEvent( loadedEvent, data ) );
+			dispatchEvent( new DataServiceEvent( loadedEvent, e.target.data ) );
 			
 			if ( handleReady )
 			{
+				data = ( dataType == TYPE_XML ? new XML( e.target.data ) : JSON.decode( e.target.data ) );
+				
 				handleLoaderDataReady( data );
 			}
 		}
