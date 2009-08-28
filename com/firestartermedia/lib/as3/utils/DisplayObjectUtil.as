@@ -8,6 +8,7 @@
 */
 package com.firestartermedia.lib.as3.utils
 {
+	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Loader;
 	import flash.events.Event;
@@ -49,6 +50,21 @@ package com.firestartermedia.lib.as3.utils
 			{ }
 			
 			return loader;
+		}
+		
+		public static function scale(target:DisplayObject, width:Number=0, height:Number=0):void
+		{
+			var targetHeight:Number = ( height > 0 ? height : target.height );
+			var targetWidth:Number = targetHeight * ( target.width / target.height );
+			
+			if ( targetWidth > target.width )
+			{
+				targetWidth 	= ( width > 0 ? width : target.width );
+				targetHeight 	= targetWidth * ( target.height / target.width );
+			}
+			
+			target.height		= targetHeight;
+			target.width		= targetWidth;
 		}
 	}
 }
