@@ -125,7 +125,7 @@ package com.firestartermedia.lib.as3.display.tools
 		override public function set width(value:Number):void
 		{
 			var targetWidth:Number = Math.floor( value - bitmapTL.width - bitmapTR.width );
-			var targetX:Number = Math.floor( value - bitmapTL.width );
+			var targetX:Number = Math.floor( targetWidth + bitmapTL.width );
 			
 			bitmapTC.width 		= targetWidth;
 			bitmapMC.width 		= targetWidth;
