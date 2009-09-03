@@ -21,8 +21,6 @@ package com.firestartermedia.lib.as3.display.component.video
 
 	public class YouTubePlayer extends Sprite
 	{
-		public static const NAME:String							= 'YouTubePlayer';
-	
 		public var bridgeName:String							= 'YouTubePlayerBridge';		
 		public var chromeless:Boolean							= false;
 		public var playerHeight:Number							= 240;
