@@ -32,6 +32,8 @@ package com.firestartermedia.lib.as3.events
 		public static const FULL_SCREEN_ON:String				= NAME + 'FullScreenOn';
 		public static const FULL_SCREEN_OFF:String				= NAME + 'FullScreenOff';
 		public static const FAILED:String						= NAME + 'Failed';
+		public static const SHOWING_ADS:String					= NAME + 'ShowingAds';
+		public static const FINISHED_ADS:String					= NAME + 'FinishedAds';
 		
 		public var data:Object;
 		
