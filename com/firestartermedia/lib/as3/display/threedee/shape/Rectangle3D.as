@@ -47,6 +47,8 @@ package com.firestartermedia.lib.as3.display.threedee.shape
 		
 		protected function render(width:Number, height:Number, depth:Number):void
 		{
+			this.depth = depth;
+			
 			if ( faces.hasOwnProperty( 'all' ) )
 			{
 				faces.front		= faces.all;
@@ -57,12 +59,12 @@ package com.firestartermedia.lib.as3.display.threedee.shape
 				faces.bottom	= faces.all;
 			}
 			
-			addChild( faces.front );
 			addChild( faces.back );
 			addChild( faces.left );
 			addChild( faces.right );
 			addChild( faces.top );
 			addChild( faces.bottom );
+			addChild( faces.front );
 			
 			faces.back.rotationY 		= 180;
 			faces.back.x				= width;
@@ -80,6 +82,18 @@ package com.firestartermedia.lib.as3.display.threedee.shape
 			
 			faces.bottom.rotationX 		= 90;
 			faces.bottom.y				= height;
+		}
+		
+		private function positionCorrectly():void
+		{
+			x 	= width / 2;
+			y 	= height / 2;
+			z	= depth / 2;
+		}
+		
+		private function orderFaces():void
+		{
+			positionCorrectly();
 		}
 		
 		/* public function set faceAll(object:DisplayObject):void
@@ -150,6 +164,34 @@ package com.firestartermedia.lib.as3.display.threedee.shape
 		public function get faceRight():DisplayObject
 		{
 			return faces.right as DisplayObject;
+		}
+		
+		override public function set rotation(value:Number):void
+		{
+			super.rotation = value;
+			
+			orderFaces();
+		}
+		
+		override public function set rotationX(value:Number):void
+		{
+			super.rotationX = value;
+			
+			orderFaces();
+		}
+		
+		override public function set rotationY(value:Number):void
+		{
+			super.rotationY = value;
+			
+			orderFaces();
+		}
+		
+		override public function set rotationZ(value:Number):void
+		{
+			super.rotationZ = value;
+			
+			orderFaces();
 		}
 	}
 }
