@@ -8,5 +8,10 @@ package com.firestartermedia.lib.as3.display.threedee.shape
 		{
 			super();
 		}
+		
+		override protected function render(width:Number, height:Number, depth:Number):void
+		{
+			
+		}
 	}
 }

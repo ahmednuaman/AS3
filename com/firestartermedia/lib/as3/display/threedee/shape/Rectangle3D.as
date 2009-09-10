@@ -6,7 +6,7 @@ package com.firestartermedia.lib.as3.display.threedee.shape
 
 	public class Rectangle3D extends Sprite3D
 	{
-		private var faces:Object								= { };
+		protected var faces:Object								= { };
 		
 		public function Rectangle3D()
 		{
@@ -65,21 +65,21 @@ package com.firestartermedia.lib.as3.display.threedee.shape
 			addChild( faces.bottom );
 			
 			faces.back.rotationY 		= 180;
-			faces.back.x				= 300;
-			faces.back.z				= 300;
+			faces.back.x				= width;
+			faces.back.z				= depth;
 			
 			faces.right.rotationY 		= 90;
-			faces.right.x				= 300;
-			faces.right.z				= 300;
+			faces.right.x				= width;
+			faces.right.z				= depth;
 			
 			faces.left.rotationY 		= 270;
 			faces.left.x				= 0;
 			
 			faces.top.rotationX 		= 270;
-			faces.top.y					= 300;
-			faces.top.z					= 300;
+			faces.top.z					= depth;
 			
 			faces.bottom.rotationX 		= 90;
+			faces.bottom.y				= height;
 		}
 		
 		/* public function set faceAll(object:DisplayObject):void
