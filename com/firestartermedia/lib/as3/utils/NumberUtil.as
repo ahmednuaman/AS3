@@ -12,15 +12,15 @@ package com.firestartermedia.lib.as3.utils
 	{
 		public static function format(number:Number):String
 		{
-			var numString:String = number.toString()
-	        var result:String = ''
+			var numString:String 	= number.toString()
+	        var result:String 		= ''
 	        var chunk:String;
 	
 	        while ( numString.length > 3 )
 	        {
-				chunk = numString.substr( -3 );
-				numString = numString.substr( 0, numString.length - 3 );
-				result = ',' + chunk + result;
+				chunk 				= numString.substr( -3 );
+				numString 			= numString.substr( 0, numString.length - 3 );
+				result 				= ',' + chunk + result;
 	        }
 	
 	        if ( numString.length > 0 )
@@ -33,14 +33,14 @@ package com.firestartermedia.lib.as3.utils
 		
 		public static function toTimeString(number:Number):String
 		{
-			var hours:Number = Math.floor( number / 3600 );
-    		var minutes:Number = Math.floor( ( number % 3600 ) / 60 );
-    		var seconds:Number = Math.floor( ( number % 3600 ) % 60 );
-    		var times:Array = [ likeTime( hours ), likeTime( minutes, true ), likeTime( seconds, true ) ];	
-    		var test:Function = function(item:String, index:Number, array:Array):Boolean
-    							{
-    								return ObjectUtil.isValid( item );
-    							}
+			var hours:Number 		= Math.floor( number / 3600 );
+    		var minutes:Number 		= Math.floor( ( number % 3600 ) / 60 );
+    		var seconds:Number 		= Math.floor( ( number % 3600 ) % 60 );
+    		var times:Array 		= [ likeTime( hours ), likeTime( minutes, true ), likeTime( seconds, true ) ];	
+    		var test:Function 		= function(item:String, index:Number, array:Array):Boolean
+    								{
+    									return ObjectUtil.isValid( item );
+    								}
     		
     		return times.filter( test ).join( ':' );
 		}
@@ -55,6 +55,51 @@ package com.firestartermedia.lib.as3.utils
 		public static function toUint(string:Object):uint
 		{
 			return uint( string.toString().replace( '#', '0x' ) );
+		}
+		
+		public static function actualDegrees(degrees:Number):Number
+		{
+			var actual:Number		= degrees;
+			
+			while ( actual >= 360 )
+			{
+				actual -= 360;
+			}
+			
+			while ( actual < -360 ) 
+			{
+				actual += 360;
+			}
+			
+			return actual;
+		}
+		
+		public static function actualRadians(radians:Number):Number
+		{
+			var PI2:Number 			= Math.PI * 2;
+			var actual:Number 		= radians;
+			
+			while ( actual >= PI2 )
+			{
+				actual -= PI2;
+			}
+			
+			while ( actual < -PI2 ) 
+			{
+				actual += PI2;
+			}
+			
+			return actual;
+		}
+		
+		public static function toDegrees(radians:Number):Number
+		{
+			return ( Math.PI * actualRadians( radians ) ) / 180;
+		}
+		
+		public static function toRadians(degrees:Number):Number
+		{
+			return actualDegrees( degrees ) / Math.PI;
 		}
 	}
 }
