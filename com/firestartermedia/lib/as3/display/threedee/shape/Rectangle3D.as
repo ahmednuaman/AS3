@@ -84,16 +84,8 @@ package com.firestartermedia.lib.as3.display.threedee.shape
 			faces.bottom.y				= height;
 		}
 		
-		private function positionCorrectly():void
-		{
-			x 	= width / 2;
-			y 	= height / 2;
-			z	= depth / 2;
-		}
-		
 		private function orderFaces():void
 		{
-			positionCorrectly();
 		}
 		
 		/* public function set faceAll(object:DisplayObject):void

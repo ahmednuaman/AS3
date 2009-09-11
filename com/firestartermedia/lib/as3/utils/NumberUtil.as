@@ -94,12 +94,26 @@ package com.firestartermedia.lib.as3.utils
 		
 		public static function toDegrees(radians:Number):Number
 		{
-			return ( Math.PI * actualRadians( radians ) ) / 180;
+			return actualRadians( radians ) * ( 180 / Math.PI );
 		}
 		
 		public static function toRadians(degrees:Number):Number
 		{
-			return actualDegrees( degrees ) / Math.PI;
+			return actualDegrees( degrees ) * ( Math.PI / 180 );
+		}
+		
+		public static function calculateAdjacent(value:Number, hypotenuse:Number, isAngle:Boolean=false):Number
+		{
+			var radians:Number = ( isAngle ? toRadians( value ) : actualRadians( value ) );
+			
+			return Math.cos( radians ) * hypotenuse;
+		}
+		
+		public static function calculateOppposite(value:Number, hypotenuse:Number, isAngle:Boolean=false):Number
+		{
+			var radians:Number = ( isAngle ? toRadians( value ) : actualRadians( value ) );
+			
+			return Math.sin( radians ) * hypotenuse;
 		}
 	}
 }
