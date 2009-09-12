@@ -6,6 +6,9 @@ package com.firestartermedia.lib.as3.display.threedee
 
 	public class Sprite3D extends Sprite
 	{
+		private var _angleX:Number								= 0;
+		private var _angleY:Number								= 0;
+		private var _angleZ:Number								= 0;
 		private var _depth:Number								= 1;
 		private var _x:Number									= 0;
 		private var _y:Number									= 0;
@@ -21,10 +24,16 @@ package com.firestartermedia.lib.as3.display.threedee
 		private function calculatePosition():void
 		{
 			calculateDepth();
-
-			super.x		= _x - ( width / 2 );
-			super.y		= _y - ( height / 2 );
-			super.z		= _z - ( depth / 2 );
+			
+			super.x		= _x;
+			super.y		= _y;
+			super.z		= _z;
+			
+			_angleX		= NumberUtil.actualDegrees( rotationX );
+			_angleY		= NumberUtil.actualDegrees( rotationY );
+			_angleZ		= NumberUtil.actualDegrees( rotationZ );
+			
+			trace( angleX );
 		}
 		
 		private function calculateDepth():void
@@ -59,17 +68,17 @@ package com.firestartermedia.lib.as3.display.threedee
 		
 		public function get angleX():Number
 		{
-			return NumberUtil.actualDegrees( rotationX );
+			return _angleX;
 		}
 		
 		public function get angleY():Number
 		{
-			return NumberUtil.actualDegrees( rotationY );
+			return _angleY;
 		}
 		
 		public function get angleZ():Number
 		{
-			return NumberUtil.actualDegrees( rotationZ );
+			return _angleZ;
 		}
 		
 		public function set depth(value:Number):void

@@ -57,39 +57,31 @@ package com.firestartermedia.lib.as3.utils
 			return uint( string.toString().replace( '#', '0x' ) );
 		}
 		
-		public static function actualDegrees(degrees:Number):Number
+		public static function denominate(value:Number, denominator:Number):Number
 		{
-			var actual:Number		= degrees;
+			var actual:Number = value;
 			
-			while ( actual >= 360 )
+			while ( actual >= denominator )
 			{
-				actual -= 360;
+				actual -= denominator;
 			}
 			
-			while ( actual < -360 ) 
+			while ( actual < -denominator )
 			{
-				actual += 360;
+				actual += denominator;
 			}
 			
 			return actual;
 		}
 		
-		public static function actualRadians(radians:Number):Number
+		public static function actualDegrees(degrees:Number):Number
 		{
-			var PI2:Number 			= Math.PI * 2;
-			var actual:Number 		= radians;
-			
-			while ( actual >= PI2 )
-			{
-				actual -= PI2;
-			}
-			
-			while ( actual < -PI2 ) 
-			{
-				actual += PI2;
-			}
-			
-			return actual;
+			return denominate( degrees, 360 );
+		}
+		
+		public static function actualRadians(radians:Number):Number
+		{	
+			return denominate( radians, Math.PI * 2 );
 		}
 		
 		public static function toDegrees(radians:Number):Number
