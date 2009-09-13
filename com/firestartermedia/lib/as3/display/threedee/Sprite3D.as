@@ -33,7 +33,7 @@ package com.firestartermedia.lib.as3.display.threedee
 		
 		public function rotate(rotX:Number, rotY:Number, rotZ:Number, p:Vector3D=null):void
 		{
-			var pivot:Vector3D = ( p ||= new Vector3D( width / 2, height / 2, depth / 2 ) );
+			var pivot:Vector3D = ( p ||= calculatePivotPoint() );
 			var matrix:Matrix3D = container.transform.matrix3D;
 			
 			if ( matrix )
@@ -45,6 +45,13 @@ package com.firestartermedia.lib.as3.display.threedee
 		        matrix.appendRotation( rotZ, Vector3D.Z_AXIS );
 		        matrix.appendTranslation( pivot.x, pivot.y, pivot.z );
 			}
+		}
+		
+		private function calculatePivotPoint():Vector3D
+		{
+			var pivot:Vector3D = new Vector3D( width / 2, height / 2, depth / 2 );
+			
+			return pivot;
 		}
 		
 		private function calculatePosition():void
