@@ -57,6 +57,11 @@ package com.firestartermedia.lib.as3.utils
 			return uint( string.toString().replace( '#', '0x' ) );
 		}
 		
+		public static function toScalar(value:Number):Number
+		{
+			return value * ( value < 0 ? -1 : 1 );
+		}
+		
 		public static function denominate(value:Number, denominator:Number):Number
 		{
 			var actual:Number = value;

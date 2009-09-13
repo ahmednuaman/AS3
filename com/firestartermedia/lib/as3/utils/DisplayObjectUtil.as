@@ -66,5 +66,17 @@ package com.firestartermedia.lib.as3.utils
 			target.height		= targetHeight;
 			target.width		= targetWidth;
 		}
+		
+		public static function eachChild(target:DisplayObjectContainer, func:Function):Array
+		{
+			var funcReturn:Array = [ ];
+			
+			for ( var i:Number = 0; i < target.numChildren; i++ )
+			{
+				funcReturn.push( func.apply( null, [ target.getChildAt( i ) ] ) );
+			}
+			
+			return funcReturn;
+		}
 	}
 }

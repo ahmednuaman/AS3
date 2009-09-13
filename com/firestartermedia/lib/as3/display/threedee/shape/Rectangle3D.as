@@ -41,7 +41,7 @@ package com.firestartermedia.lib.as3.display.threedee.shape
 			}
 			else
 			{
-				throw new Error( 'Sorry, you need to specify the faces, so either "all" or "front, back, left, right, top and bottom"' );
+				throw new Error( 'Sorry, you need to specify the faces, so either "all" (not working yet...) or "front, back, left, right, top and bottom"' );
 			}
 		}
 		
