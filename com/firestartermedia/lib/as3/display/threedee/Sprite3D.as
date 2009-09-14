@@ -18,6 +18,9 @@ package com.firestartermedia.lib.as3.display.threedee
 
 	public class Sprite3D extends Sprite
 	{
+		public static const SHAPE_RECTANGLE:String				= 'rectangle';
+		public static const SHAPE_SPHERE:String					= 'sphere';
+		
 		protected var _container:Sprite							= new Sprite();
 		
 		private var _angleX:Number								= 0;
@@ -31,8 +34,9 @@ package com.firestartermedia.lib.as3.display.threedee
 		private var _z:Number									= 0;
 		
 		private var _depthInitial:Number;
+		private var _shape:String;
 			
-		public function Sprite3D()
+		public function Sprite3D(shape:String='rectangle')
 		{
 			super();
 			
@@ -57,7 +61,7 @@ package com.firestartermedia.lib.as3.display.threedee
 		
 		private function calculatePivotPoint():Vector3D
 		{
-			var pivot:Vector3D = new Vector3D( container.width / 2, container.height / 2, depth / 2 );
+			var pivot:Vector3D = new Vector3D( width / 2, height / 2, depth / 2 );
 			
 			return pivot;
 		}
@@ -72,7 +76,19 @@ package com.firestartermedia.lib.as3.display.threedee
 		}
 		
 		private function calculateDepth():void
-		{ 
+		{
+			if ( shape === SHAPE_RECTANGLE )
+			{
+				calculateDepthRectangle();
+			}
+			else
+			{
+				calculateDepthSphere();
+			}
+		}
+		
+		private function calculateDepthRectangle():void
+		{
 			var depthX:Number		= NumberUtil.toScalar( NumberUtil.calculateOppposite( rotationX, _height, true ) 		+ NumberUtil.calculateAdjacent( rotationX, _depthInitial, true ) );
 			var depthY:Number		= NumberUtil.toScalar( NumberUtil.calculateOppposite( rotationX, _width / 2, true ) 	+ NumberUtil.calculateAdjacent( rotationX, _depthInitial, true ) );
 			var depthZ:Number		= NumberUtil.toScalar( NumberUtil.calculateOppposite( rotationX, _height / 2, true ) );
@@ -94,6 +110,11 @@ package com.firestartermedia.lib.as3.display.threedee
 			}
 			
 			_depth = ( newDepth === 0 ? _depthInitial : newDepth );
+		}
+		
+		private function calculateDepthSphere():void
+		{
+			_depth = _depthInitial;
 		}
 		
 		private function calculateHeight():void
@@ -150,6 +171,11 @@ package com.firestartermedia.lib.as3.display.threedee
 		public function get depth():Number
 		{
 			return _depth;
+		}
+		
+		public function get shape():String
+		{
+			return _shape;
 		}
 		
 		override public function addChild(child:DisplayObject):DisplayObject
