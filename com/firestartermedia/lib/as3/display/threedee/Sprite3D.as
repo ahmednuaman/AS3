@@ -1,3 +1,11 @@
+/**
+ * @author			Ahmed Nuaman (http://www.ahmednuaman.com)
+ * @langversion		3
+ * 
+ * This work is licenced under the Creative Commons Attribution-Share Alike 2.0 UK: England & Wales License. 
+ * To view a copy of this licence, visit http://creativecommons.org/licenses/by-sa/2.0/uk/ or send a letter 
+ * to Creative Commons, 171 Second Street, Suite 300, San Francisco, California 94105, USA.
+*/
 package com.firestartermedia.lib.as3.display.threedee
 {
 	import com.firestartermedia.lib.as3.utils.DisplayObjectUtil;
@@ -49,7 +57,7 @@ package com.firestartermedia.lib.as3.display.threedee
 		
 		private function calculatePivotPoint():Vector3D
 		{
-			var pivot:Vector3D = new Vector3D( width / 2, height / 2, depth / 2 );
+			var pivot:Vector3D = new Vector3D( container.width / 2, container.height / 2, depth / 2 );
 			
 			return pivot;
 		}
@@ -93,10 +101,10 @@ package com.firestartermedia.lib.as3.display.threedee
 			var callback:Function;
 			var heights:Array;
 			
-			callback = function(target:DisplayObject):Number
-			{
-				return target.height;
-			}
+			callback 	= function(target:DisplayObject):Number
+						{
+							return target.height;
+						}
 			
 			heights = DisplayObjectUtil.eachChild( container, callback );
 			
@@ -110,10 +118,10 @@ package com.firestartermedia.lib.as3.display.threedee
 			var callback:Function;
 			var widths:Array;
 			
-			callback = function(target:DisplayObject):Number
-			{
-				return target.width;
-			}
+			callback 	= function(target:DisplayObject):Number
+						{
+							return target.width;
+						}
 			
 			widths = DisplayObjectUtil.eachChild( container, callback );
 			
