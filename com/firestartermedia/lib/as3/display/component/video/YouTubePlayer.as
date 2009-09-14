@@ -112,14 +112,15 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function playVideo(videoId:String):void
 		{
-			bridge.send( 'playVideo', videoId, playerWidth, playerHeight, autoPlay, pars, chromeless );
+			sendCommand( 'playVideo', videoId, playerWidth, playerHeight, autoPlay, pars, chromeless );
 		}
 		
-		public function stop():void
+		private function sendCommand(...args):void
 		{
 			if ( isLoaded )
 			{
-				bridge.send( 'stopVideo' );
+				bridge.send.apply( null, args);
+				
 			}
 			else
 			{
@@ -127,16 +128,24 @@ package com.firestartermedia.lib.as3.display.component.video
 			}
 		}
 		
+		public function stop():void
+		{
+			sendCommand( 'stopVideo' );
+		}
+		
+		public function pause():void
+		{
+			sendCommand( 'pauseVideo' );
+		}
+		
+		public function resume():void
+		{
+			sendCommand( 'resumeVideo' );
+		}
+		
 		public function resize(width:Number, height:Number):void
 		{
-			if ( isLoaded )
-			{
-				bridge.send( 'resizePlayer', width, height );
-			}
-			else
-			{
-				setTimeout( resize, 250, width, height );
-			}
+			sendCommand( 'resizePlayer', width, height );
 		}
 		
 		public function sendEvent(e:String):void
