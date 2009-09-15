@@ -64,7 +64,7 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				if ( wrapperURL )
 				{
-					player = DisplayObjectUtil.loadMovie( wrapperURL + '?bridge=' + bridgeName, this, handlePlayerLoadComplete, new ApplicationDomain() );
+					player = DisplayObjectUtil.loadMovie( wrapperURL + '?bridgeName=' + bridgeName, this, handlePlayerLoadComplete, new ApplicationDomain() );
 				}
 				else
 				{
