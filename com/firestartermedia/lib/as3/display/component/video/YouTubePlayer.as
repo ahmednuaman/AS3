@@ -9,13 +9,15 @@
 package com.firestartermedia.lib.as3.display.component.video
 {
 	import com.firestartermedia.lib.as3.events.YouTubePlayerEvent;
+	import com.firestartermedia.lib.as3.utils.DisplayObjectUtil;
 	import com.gskinner.utils.SWFBridgeAS3;
 	
 	import flash.display.Loader;
 	import flash.display.Sprite;
+	import flash.errors.IllegalOperationError;
 	import flash.events.Event;
-	import flash.events.IOErrorEvent;
 	import flash.net.URLRequest;
+	import flash.system.ApplicationDomain;
 	import flash.system.Security;
 	import flash.utils.setTimeout;
 
@@ -62,20 +64,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				if ( wrapperURL )
 				{
-					request = new URLRequest( wrapperURL );
-				
-					player = new Loader();
-					
-					addChild( player );
-					
-					player.contentLoaderInfo.addEventListener( IOErrorEvent.IO_ERROR, 		handlePlayerLoadFailed );
-					player.contentLoaderInfo.addEventListener( Event.INIT, 					handlePlayerLoadComplete );
-					
-					player.load( request );
+					player = DisplayObjectUtil.loadMovie( wrapperURL + '?bridge=' + bridgeName, this, handlePlayerLoadComplete, new ApplicationDomain() );
 				}
 				else
 				{
-					throw new Error( 'You need to specify the wrapper url' );
+					throw new IllegalOperationError( 'You need to specify the wrapper url' );
 				}
 			}
 			else
@@ -84,13 +77,8 @@ package com.firestartermedia.lib.as3.display.component.video
 			}
 		}	
 		
-		private function handlePlayerLoadFailed(e:IOErrorEvent):void
-		{
-			throw new Error( 'Failed to load wrapper, check the url and permissions?' );
-		}
-		
 		private function handlePlayerLoadComplete(e:Event=null):void
-		{						
+		{
 			if ( bridge )
 			{
 				handleBridgeConnect(); 
@@ -120,7 +108,6 @@ package com.firestartermedia.lib.as3.display.component.video
 			if ( isLoaded )
 			{
 				bridge.send.apply( null, args);
-				
 			}
 			else
 			{
