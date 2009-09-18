@@ -48,8 +48,13 @@ package com.firestartermedia.lib.as3.utils
 		public static function likeTime(number:Number, forceZero:Boolean=false):String
 		{
 			return ( number > 0 || ( number == 0 && forceZero ) ? 
-								( number < 10 ? '0' + number.toString() : number.toString() ) :
+								 prependZero( number ) :
 								'' );
+		}
+		
+		public static function prependZero(number:Number):String
+		{
+			return ( number < 10 ? '0' + number.toString() : number.toString() );
 		}
 		
 		public static function toUint(string:Object):uint

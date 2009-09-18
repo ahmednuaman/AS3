@@ -81,5 +81,15 @@ package com.firestartermedia.lib.as3.utils
 			}
             return finalDate;
 		}
+		
+		public static function toTimestamp(date:Date):String
+		{
+			var timestamp:String = '';
+			
+			timestamp 	+= date.getFullYear() + '-' + ( date.getMonth() + 1 ) + '-' + date.getDate() + ' ';
+			timestamp	+= NumberUtil.prependZero( date.getHours() ) + ':' + NumberUtil.prependZero( date.getMinutes() ) + ':' + NumberUtil.prependZero( date.getSeconds() );
+			
+			return timestamp;
+		}
 	}
 }

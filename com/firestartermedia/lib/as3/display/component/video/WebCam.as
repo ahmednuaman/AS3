@@ -8,31 +8,57 @@
 */
 package com.firestartermedia.lib.as3.display.component.video
 {
+	import com.firestartermedia.lib.as3.events.WebCamEvent;
 	import com.firestartermedia.lib.as3.utils.BitmapUtil;
+	import com.firestartermedia.lib.as3.utils.DateUtil;
 	
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
+	import flash.events.NetStatusEvent;
 	import flash.geom.Rectangle;
 	import flash.media.Camera;
+	import flash.media.Microphone;
 	import flash.media.Video;
+	import flash.net.NetConnection;
+	import flash.net.NetStream;
 
 	public class WebCam extends Sprite
 	{
+		public var recordingName:String							= 'Recording' + DateUtil.toTimestamp( new Date() );
+		
+		private var isRecording:Boolean							= false;
+		
+		public var captureURL:String;
+		
+		private var bandwidth:Number;
+		private var camera:Camera;
 		private var cameraHeight:Number;
 		private var cameraWidth:Number;
+		private var connection:NetConnection;
+		private var microphone:Microphone;
+		private var quality:Number;
+		private var stream:NetStream;
 		private var video:Video;
 		
-		public function WebCam(width:Number=320, height:Number=240)
+		public function WebCam(width:Number=320, height:Number=240, bandwidth:Number=0, quality:Number=90)
 		{
 			cameraHeight	= height;
 			cameraWidth		= width;
+			
+			this.bandwidth	= bandwidth;
+			this.quality	= quality;
 			
 			init();
 		}
 		
 		private function init():void
 		{
-			var camera:Camera 	= Camera.getCamera();
+			camera = Camera.getCamera();
+			
+			camera.setMode( cameraWidth, cameraHeight, 20, true );
+			camera.setQuality( bandwidth, quality );
+			
+			microphone = Microphone.getMicrophone();
 			
 			video = new Video( cameraWidth, cameraHeight );
 			
@@ -48,6 +74,96 @@ package com.firestartermedia.lib.as3.display.component.video
 			var image:Bitmap = new Bitmap( BitmapUtil.grab( video, new Rectangle( 0, 0, cameraWidth, cameraHeight ), true ) );
 			
 			return image;
+		}
+		
+		public function captureVideo():void
+		{
+			if ( captureURL )
+			{
+				connection = new NetConnection();
+				
+				connection.addEventListener( NetStatusEvent.NET_STATUS, handleNetStatus );
+				
+				dispatchEvent( new WebCamEvent( WebCamEvent.CONNECTING ) );
+				
+				connection.connect( captureURL );
+			}
+			else
+			{
+				throw new ArgumentError( 'You need to specify the captureURL before you start recording' );
+			}
+		}
+		
+		private function handleNetStatus(e:NetStatusEvent):void
+		{
+			var name:String = e.info.code;
+			
+			switch ( name )
+			{
+				case 'NetConnection.Connect.Failed':
+				case 'NetConnection.Connect.Rejected':
+				case 'NetConnection.Connect.InvalidApp':
+				case 'NetConnection.Connect.AppShutdown':
+				throw new Error( 'Can\'t connect to the application!' );
+				
+				break;
+				
+				case 'NetConnection.Connect.Success':
+				dispatchEvent( new WebCamEvent( WebCamEvent.CONNECTED ) );
+				
+				startRecording();
+				
+				break;
+				
+				case 'NetConnection.Connect.Closed':
+				dispatchEvent( new WebCamEvent( WebCamEvent.CONNECTION_FAILED ) );
+				
+				break;
+				
+				case 'NetStream.Record.NoAccess':
+				case 'NetStream.Record.Failed':
+				throw new Error( 'Can\'t record stream!' );
+				
+				break;
+				
+				case 'NetStream.Record.Start':
+				dispatchEvent( new WebCamEvent( WebCamEvent.RECORDING_STARTED ) );
+				
+				isRecording = true;
+				
+				break;
+				
+				case 'NetStream.Record.Stop':
+				dispatchEvent( new WebCamEvent( WebCamEvent.RECORDING_STOPPED ) );
+				
+				isRecording = false;
+				
+				break;
+			}
+		}
+		
+		private function startRecording():void
+		{
+			stream = new NetStream( connection );
+			
+			stream.addEventListener( NetStatusEvent.NET_STATUS, handleNetStatus );
+			
+			stream.attachAudio( microphone );
+			stream.attachCamera( camera );
+			
+			stream.publish( recordingName, 'record' );
+		}
+		
+		public function captureVideoStop():void
+		{
+			if ( isRecording )
+			{
+				stream.close();
+			}
+			else
+			{
+				throw new Error( 'Nothing\'s recording!' );
+			}
 		}
 	}
 }
