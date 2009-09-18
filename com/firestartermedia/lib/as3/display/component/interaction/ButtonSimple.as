@@ -23,6 +23,7 @@ package com.firestartermedia.lib.as3.display.component.interaction
 		public var bgColourDown:*								= 0x000000;
 		public var bgColourOver:*								= 0x666666;
 		public var bgColourUp:*									= 0x333333;
+		public var border:Boolean								= true;
 		public var borderColourDown:uint						= 0x333333;
 		public var borderColourOver:uint						= 0x333333;
 		public var borderColourUp:uint							= 0x333333;
@@ -89,7 +90,11 @@ package com.firestartermedia.lib.as3.display.component.interaction
 				button.graphics.beginFill( bgColour );
 			}
 			
-			button.graphics.lineStyle( borderWidth, borderColour );
+			if ( border )
+			{
+				button.graphics.lineStyle( borderWidth, borderColour );
+			}
+			
 			button.graphics.drawRoundRect( 0, 0, 300, 30, borderCornerRadius, borderCornerRadius );
 			button.graphics.endFill();
 			button.scale9Grid 			= new Rectangle( borderCornerRadius, borderCornerRadius, 300 - ( borderCornerRadius * 2 ), 30 - ( borderCornerRadius * 2 ) );
