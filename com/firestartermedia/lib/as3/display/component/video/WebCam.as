@@ -24,7 +24,7 @@ package com.firestartermedia.lib.as3.display.component.video
 
 	public class WebCam extends Sprite
 	{
-		public var recordingName:String							= 'Recording' + DateUtil.toTimestamp( new Date() );
+		public var recordingName:String							= 'Recording' + DateUtil.toNumericalTimestamp( new Date() );
 		
 		private var isRecording:Boolean							= false;
 		
@@ -139,6 +139,11 @@ package com.firestartermedia.lib.as3.display.component.video
 				isRecording = false;
 				
 				break;
+				
+				case 'NetStream.Unpublish.Success':
+				dispatchEvent( new WebCamEvent( WebCamEvent.RECORDING_FINISHED ) );				
+				
+				break;
 			}
 		}
 		
@@ -164,6 +169,16 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				throw new Error( 'Nothing\'s recording!' );
 			}
+		}
+		
+		public function get recording():Boolean
+		{
+			return isRecording;
+		}
+		
+		public function get filename():String
+		{
+			return recordingName + '.flv';
 		}
 	}
 }

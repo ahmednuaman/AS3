@@ -11,6 +11,7 @@ package com.firestartermedia.lib.as3.events
 		public static const CONNECTION_FAILED:String			= NAME + 'ConnectionFailed';
 		public static const RECORDING_STARTED:String			= NAME + 'RecordingStarted';
 		public static const RECORDING_STOPPED:String			= NAME + 'RecordingStopped';
+		public static const RECORDING_FINISHED:String			= NAME + 'RecordingFinished';
 		
 		public function WebCamEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
