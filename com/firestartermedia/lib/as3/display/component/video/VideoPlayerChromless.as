@@ -56,7 +56,7 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			stream.addEventListener( NetStatusEvent.NET_STATUS, handleNetStatus );
 			
-			//video.smoothing = true;
+			video.smoothing = true;
 			
 			video.attachNetStream( stream );
 			
