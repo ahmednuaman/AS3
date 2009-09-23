@@ -19,6 +19,8 @@ package com.firestartermedia.lib.as3.display.component.video
 	import flash.media.Video;
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
+	import flash.utils.clearInterval;
+	import flash.utils.setInterval;
 	import flash.utils.setTimeout;
 	
 	public class VideoPlayerChromless extends Sprite
@@ -30,7 +32,8 @@ package com.firestartermedia.lib.as3.display.component.video
 		private var metaData:Object								= { };
 		private var video:Video									= new Video();
 		
-		private var isLoading:Boolean;
+		private var frameInterval:Number;
+		private var isLoaded:Boolean;
 		private var isOverHalfWay:Boolean;
 		private var isPlaying:Boolean;
 		private var rawHeight:Number;
@@ -48,13 +51,12 @@ package com.firestartermedia.lib.as3.display.component.video
 			connection.connect( null );
 			
 			stream = new NetStream( connection );
-			
-			stream.bufferTime = 5;
+
 			stream.client = { onMetaData: handleOnMetaData };
 			
 			stream.addEventListener( NetStatusEvent.NET_STATUS, handleNetStatus );
 			
-			video.smoothing = true;
+			//video.smoothing = true;
 			
 			video.attachNetStream( stream );
 			
@@ -69,20 +71,36 @@ package com.firestartermedia.lib.as3.display.component.video
 						
 			stream.play( url );
 			
-			isLoading = true;
+			isLoaded = false;
 			
 			isOverHalfWay = false;
 			
-			isPlaying = false;
+			isPlaying = true;
 			
-			addEventListener( Event.ENTER_FRAME, handleEnterFrame );
+			//addEventListener( Event.ENTER_FRAME, handleEnterFrame );
+			
+			createInterval();
+		}
+		
+		private function createInterval():void
+		{
+			frameInterval = setInterval( handleEnterFrame, 250 );
+		}
+		
+		private function deleteInterval():void
+		{
+			clearInterval( frameInterval );
 		}
 		
 		public function stop():void
 		{
 			stream.close();
 			
+			isPlaying = false;
+			
 			video.alpha = 0;
+			
+			deleteInterval();
 		}
 		
 		public function seekTo(seconds:Number):void
@@ -97,9 +115,9 @@ package com.firestartermedia.lib.as3.display.component.video
 			stream.soundTransform = sound;
 		}
 		
-		private function handleEnterFrame(e:Event):void
+		private function handleEnterFrame(e:Event=null):void
 		{
-			if ( isLoading )
+			if ( !isLoaded )
 			{
 				checkLoadingStatus();
 			}
@@ -116,13 +134,15 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			if ( progress.total === 1 )
 			{
-				isLoading = false;
+				isLoaded = true;
 				
-				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADED ) );
+				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADED ) ); trace('loaded');
 			}
 			else
 			{
-				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADING, progress ) );
+				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADING, progress ) ); trace('loading');
+			
+				isLoaded = false;
 			}
 		}
 		
@@ -164,6 +184,8 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			isPlaying = false;
 			
+			deleteInterval();
+			
 			dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.PAUSED ) );
 		}
 		
@@ -172,6 +194,8 @@ package com.firestartermedia.lib.as3.display.component.video
 			stream.resume();
 			
 			isPlaying = true;
+			
+			createInterval();
 			
 			dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.PLAYING ) );
 		}
@@ -196,6 +220,8 @@ package com.firestartermedia.lib.as3.display.component.video
 				
 				case 'NetStream.Play.Stop':
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.ENDED, { point: playingTime.total, halfway: false, finished: true } ) );
+			
+				deleteInterval();
 				
 				break;
 				
@@ -212,6 +238,8 @@ package com.firestartermedia.lib.as3.display.component.video
 				case 'NetStream.Play.StreamNotFound':
 				case 'NetStream.Play.Failed':
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.FAILED ) );
+			
+				deleteInterval();
 				
 				break;
 			}
