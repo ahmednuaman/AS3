@@ -136,11 +136,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				isLoaded = true;
 				
-				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADED ) ); trace('loaded');
+				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADED ) );
 			}
 			else
 			{
-				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADING, progress ) ); trace('loading');
+				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADING, progress ) );
 			
 				isLoaded = false;
 			}
