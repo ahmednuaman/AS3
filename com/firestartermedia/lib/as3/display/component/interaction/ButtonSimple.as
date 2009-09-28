@@ -35,6 +35,7 @@ package com.firestartermedia.lib.as3.display.component.interaction
 		public var textColourDown:uint							= 0xCCCCCC;
 		public var textColourOver:uint							= 0xFFFFFF;
 		public var textColourUp:uint							= 0xFFFFFF;
+		public var textEmbedFonts:Boolean						= true;
 		
 		public var textFormat:TextFormat;
 		
@@ -104,7 +105,7 @@ package com.firestartermedia.lib.as3.display.component.interaction
 			field.autoSize				= TextFieldAutoSize.CENTER;
 			field.condenseWhite			= true;
 			field.defaultTextFormat		= textFormat;
-			field.embedFonts			= true;
+			field.embedFonts			= textEmbedFonts;
 			field.textColor				= textColour;
 			field.text					= buttonText;
 			
