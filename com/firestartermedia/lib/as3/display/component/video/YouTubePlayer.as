@@ -23,14 +23,16 @@ package com.firestartermedia.lib.as3.display.component.video
 
 	public class YouTubePlayer extends Sprite
 	{
-		public var bridgeName:String							= 'YouTubePlayerBridge';		
+		public static const BRIDGE_NAME:String					= 'YouTubePlayerBridge';
+		
+		public var bridgeName:String							= BRIDGE_NAME;		
 		public var chromeless:Boolean							= false;
 		public var playerHeight:Number							= 240;
 		public var playerWidth:Number							= 320;
+		public var wrapperURL:String							= 'http://github.com/ahmednuaman/YouTube-Player-Wrapper/raw/master/YouTubePlayerWrapper.swf';
 		
 		public var autoPlay:Boolean;
 		public var pars:String;
-		public var wrapperURL:String;
 		
 		private var isLoaded:Boolean							= false;
 		
@@ -64,7 +66,7 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				if ( wrapperURL )
 				{
-					player = DisplayObjectUtil.loadMovie( wrapperURL + '?bridgeName=' + bridgeName, this, handlePlayerLoadComplete, new ApplicationDomain() );
+					player = DisplayObjectUtil.loadMovie( wrapperURL + ( BRIDGE_NAME !== bridgeName ?  '?bridgeName=' + bridgeName : '' ), this, handlePlayerLoadComplete, new ApplicationDomain() );
 				}
 				else
 				{
@@ -94,6 +96,8 @@ package com.firestartermedia.lib.as3.display.component.video
 		private function handleBridgeConnect(e:Event=null):void
 		{			
 			isLoaded = true;
+			
+			dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.CONNECTED ) );
 			
 			playVideo( videoId );
 		}	
