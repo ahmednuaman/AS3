@@ -50,9 +50,9 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			connection.connect( null );
 			
-			stream = new NetStream( connection );
+			stream 			= new NetStream( connection );
 
-			stream.client = { onMetaData: handleOnMetaData };
+			stream.client 	= { onMetaData: handleOnMetaData };
 			
 			stream.addEventListener( NetStatusEvent.NET_STATUS, handleNetStatus );
 			
@@ -71,11 +71,11 @@ package com.firestartermedia.lib.as3.display.component.video
 						
 			stream.play( url );
 			
-			isLoaded = false;
+			isLoaded 		= false;
 			
-			isOverHalfWay = false;
+			isOverHalfWay 	= false;
 			
-			isPlaying = true;
+			isPlaying 		= true;
 			
 			//addEventListener( Event.ENTER_FRAME, handleEnterFrame );
 			
@@ -96,9 +96,9 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			stream.close();
 			
-			isPlaying = false;
+			isPlaying 		= false;
 			
-			video.alpha = 0;
+			video.alpha 	= 0;
 			
 			deleteInterval();
 		}
@@ -110,9 +110,9 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function setVolume(volume:Number):void
 		{
-			var sound:SoundTransform = new SoundTransform( volume );
+			var sound:SoundTransform 	= new SoundTransform( volume );
 			
-			stream.soundTransform = sound;
+			stream.soundTransform 		= sound;
 		}
 		
 		private function handleEnterFrame(e:Event=null):void
@@ -252,8 +252,8 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function resize(width:Number=0, height:Number=0):void
 		{
-			rawHeight = height;
-			rawWidth = width;
+			rawHeight 	= height;
+			rawWidth 	= width;
 			
 			if ( metaData.hasOwnProperty( 'height') && metaData.hasOwnProperty( 'width' ) )
 			{				
@@ -269,8 +269,8 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function doResize(width:Number, height:Number):void
 		{
-			var targetHeight:Number = ( height > 0 ? height : videoHeight );
-			var targetWidth:Number = targetHeight * ( metaData.width / metaData.height );
+			var targetHeight:Number 	= ( height > 0 ? height : videoHeight );
+			var targetWidth:Number 		= targetHeight * ( metaData.width / metaData.height );
 			
 			if ( targetWidth > width )
 			{
@@ -292,9 +292,9 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			var progress:Object = { };
 			
-			progress.total = stream.bytesLoaded / stream.bytesTotal;
-			progress.bytesLoaded = stream.bytesLoaded;
-			progress.bytesTotal = stream.bytesTotal;
+			progress.total 			= stream.bytesLoaded / stream.bytesTotal;
+			progress.bytesLoaded 	= stream.bytesLoaded;
+			progress.bytesTotal 	= stream.bytesTotal;
 			
 			return progress;
 		}
@@ -303,9 +303,9 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			var time:Object = { };
 			
-			time.current = stream.time;
-			time.total = metaData.duration;
-			time.formatted = NumberUtil.toTimeString( Math.round( stream.time ) ) + ' / ' + NumberUtil.toTimeString( Math.round( metaData.duration ) );
+			time.current 		= stream.time;
+			time.total 			= metaData.duration;
+			time.formatted 		= NumberUtil.toTimeString( Math.round( stream.time ) ) + ' / ' + NumberUtil.toTimeString( Math.round( metaData.duration ) );
 		
 			return time;
 		}
