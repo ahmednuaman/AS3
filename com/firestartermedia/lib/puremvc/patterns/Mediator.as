@@ -12,10 +12,10 @@ package com.firestartermedia.lib.puremvc.patterns
 	
 	import flash.utils.Dictionary;
 	
-	import org.puremvc.as3.multicore.interfaces.INotification;
-	import org.puremvc.as3.multicore.patterns.mediator.Mediator;
+	import org.puremvc.as3.interfaces.INotification;
+	import org.puremvc.as3.patterns.mediator.Mediator;
 
-	public class Mediator extends org.puremvc.as3.multicore.patterns.mediator.Mediator
+	public class Mediator extends org.puremvc.as3.patterns.mediator.Mediator
 	{
 		protected var notificationInterests:Array				= [ ];
 		protected var notificationHandlers:Dictionary			= new Dictionary();

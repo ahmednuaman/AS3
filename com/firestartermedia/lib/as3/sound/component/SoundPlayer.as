@@ -69,13 +69,15 @@ package com.firestartermedia.lib.as3.sound.component
 		
 		public function play(url:String):void
 		{
-			var request:URLRequest = new URLRequest( url );
+			var request:URLRequest 	= new URLRequest( url );
 			
-			context.bufferTime = 2;
+			context.bufferTime 		= 2;
+			
+			currentPosition			= 0;
 			
 			if ( channel )
 			{
-				channel = null;
+				channel 			= null;
 			}
 			
 			if ( sound )
@@ -118,7 +120,7 @@ package com.firestartermedia.lib.as3.sound.component
 		
 		public function get loadingProgress():Object
 		{
-			var progress:Object = { };
+			var progress:Object 	= { };
 			
 			progress.total 			= sound.bytesLoaded / sound.bytesTotal;
 			progress.bytesLoaded 	= sound.bytesLoaded;
@@ -129,7 +131,7 @@ package com.firestartermedia.lib.as3.sound.component
 		
 		public function get playingTime():Object
 		{
-			var time:Object = { };
+			var time:Object 	= { };
 			
 			/*time.current 		= stream.time;
 			time.total 			= metaData.duration;
