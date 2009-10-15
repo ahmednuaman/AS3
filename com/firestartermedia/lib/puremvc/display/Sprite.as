@@ -41,7 +41,7 @@ package com.firestartermedia.lib.puremvc.display
 			ready = false;
 		}
 		
-		public function handleResize(e:Object):void
+		public function handleResize(e:Object=null):void
 		{
 			
 		}
