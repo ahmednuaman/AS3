@@ -10,6 +10,7 @@ package com.firestartermedia.lib.puremvc.display
 {
 	import com.firestartermedia.lib.puremvc.events.SpriteEvent;
 	
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 
 	public class Sprite extends flash.display.Sprite
@@ -22,6 +23,14 @@ package com.firestartermedia.lib.puremvc.display
 		public function Sprite()
 		{
 			registered = true;
+		}
+		
+		public function addChildren(...children):void
+		{
+			for each ( var child:DisplayObject in children )
+			{
+				addChild( child );
+			}
 		}
 		
 		public function sendEvent(eventName:String, body:Object=null):void

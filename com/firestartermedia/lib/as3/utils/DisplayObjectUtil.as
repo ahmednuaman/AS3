@@ -26,11 +26,19 @@ package com.firestartermedia.lib.as3.utils
 			}
 		}
 		
+		public static function addChildren(target:DisplayObjectContainer, ...children):void
+		{
+			for each ( var child:DisplayObject in children )
+			{
+				target.addChild( child );
+			}
+		}
+		
 		public static function loadMovie(url:String, parent:DisplayObjectContainer=null, completeFunction:Function=null, applicationDomain:ApplicationDomain=null, checkPolicyFile:Boolean=false):Loader
 		{
-			var request:URLRequest = new URLRequest( url );
-			var context:LoaderContext = new LoaderContext( checkPolicyFile, ( applicationDomain ||= ApplicationDomain.currentDomain ) );
-			var loader:Loader = new Loader();
+			var request:URLRequest 			= new URLRequest( url );
+			var context:LoaderContext 		= new LoaderContext( checkPolicyFile, ( applicationDomain ||= ApplicationDomain.currentDomain ) );
+			var loader:Loader 				= new Loader();
 			
 			if ( parent )
 			{
@@ -54,22 +62,22 @@ package com.firestartermedia.lib.as3.utils
 		
 		public static function scale(target:DisplayObject, width:Number=0, height:Number=0):void
 		{
-			var targetHeight:Number = ( height > 0 ? height : target.height );
-			var targetWidth:Number = targetHeight * ( target.width / target.height );
+			var targetHeight:Number 		= ( height > 0 ? height : target.height );
+			var targetWidth:Number 			= targetHeight * ( target.width / target.height );
 			
 			if ( targetWidth > target.width )
 			{
-				targetWidth 	= ( width > 0 ? width : target.width );
-				targetHeight 	= targetWidth * ( target.height / target.width );
+				targetWidth 				= ( width > 0 ? width : target.width );
+				targetHeight 				= targetWidth * ( target.height / target.width );
 			}
 			
-			target.height		= targetHeight;
-			target.width		= targetWidth;
+			target.height					= targetHeight;
+			target.width					= targetWidth;
 		}
 		
 		public static function eachChild(target:DisplayObjectContainer, func:Function):Array
 		{
-			var funcReturn:Array = [ ];
+			var funcReturn:Array 			= [ ];
 			
 			for ( var i:Number = 0; i < target.numChildren; i++ )
 			{

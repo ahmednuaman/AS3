@@ -10,6 +10,9 @@ package com.firestartermedia.lib.as3.utils
 {
 	public class StringUtil
 	{
-		
+		public static function removeSpaces(string:String):String
+		{
+			return string.replace( /\s*/gim, '' );
+		}
 	}
 }
