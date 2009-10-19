@@ -40,7 +40,7 @@ package com.firestartermedia.lib.as3.utils
 			var context:LoaderContext 		= new LoaderContext( checkPolicyFile, ( applicationDomain ||= ApplicationDomain.currentDomain ) );
 			var loader:Loader 				= new Loader();
 			
-			if ( parent )
+			if ( parent != null )
 			{
 				parent.addChild( loader );
 			}

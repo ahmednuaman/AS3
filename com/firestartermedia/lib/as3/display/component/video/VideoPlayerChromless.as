@@ -25,7 +25,9 @@ package com.firestartermedia.lib.as3.display.component.video
 	
 	public class VideoPlayerChromless extends Sprite
 	{
+		public var autoPlay:Boolean								= true;
 		public var bufferTime:Number							= 2;
+		public var loop:Boolean									= false;
 		
 		private var cuePoints:Array								= [ ];
 		private var lastFiredCuePoint:Number					= 0;
@@ -137,6 +139,11 @@ package com.firestartermedia.lib.as3.display.component.video
 				isLoaded = true;
 				
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADED ) );
+				
+				if ( !autoPlay )
+				{
+					pause();
+				}
 			}
 			else
 			{
@@ -222,6 +229,13 @@ package com.firestartermedia.lib.as3.display.component.video
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.ENDED, { point: playingTime.total, halfway: false, finished: true } ) );
 			
 				deleteInterval();
+				
+				if ( loop )
+				{
+					seekTo( 0 );
+					
+					resume();
+				}
 				
 				break;
 				
