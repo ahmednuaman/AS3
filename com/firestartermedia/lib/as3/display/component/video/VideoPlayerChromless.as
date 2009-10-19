@@ -166,7 +166,7 @@ package com.firestartermedia.lib.as3.display.component.video
 				
 				if ( cuePoint > lastFiredCuePoint )
 				{
-					dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.CUE_POINT, { point: cuePoint, halfway: false, finished: false } ) );
+					dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.CUE_POINT, { point: cuePoint, halfway: false, finished: false, duration: playingTime.total } ) );
 					
 					lastFiredCuePoint = cuePoint;
 				}
@@ -176,7 +176,7 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				isOverHalfWay = true;
 				
-				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.HALF_WAY, { point: checkTime, halfway: true, finished: false } ) );
+				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.HALF_WAY, { point: checkTime, halfway: true, finished: false, duration: playingTime.total } ) );
 			}
 		}
 		
