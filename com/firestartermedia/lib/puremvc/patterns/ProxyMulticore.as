@@ -12,6 +12,8 @@ package com.firestartermedia.lib.puremvc.patterns
 
 	public class ProxyMulticore extends Proxy
 	{
+		protected var declare:Boolean							= true;
+		
 		private var name:String;
 		
 		public function ProxyMulticore(name:String=null, data:Object=null)
@@ -30,7 +32,10 @@ package com.firestartermedia.lib.puremvc.patterns
 		{
 			super.initializeNotifier( key );
 			
-			trackEvent( 'Registered ' + name );
+			if ( declare )
+			{
+				trackEvent( 'Registered ' + name );
+			}
 		}
 	}
 }
