@@ -14,5 +14,17 @@ package com.firestartermedia.lib.as3.utils
 		{
 			return string.replace( /\s*/gim, '' );
 		}
+		
+		public static function multiply(string:String, times:Number):String
+		{
+			var result:String	= '';
+			
+			for ( var i:Number = 0; i < times; i++ )
+			{
+				result			+= string;
+			}
+			
+			return result;
+		}
 	}
 }
