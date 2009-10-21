@@ -40,9 +40,12 @@ package com.firestartermedia.lib.puremvc.display
 		
 		public function sendReady(eventName:String):void
 		{
-			ready = true;
+			if ( !ready )
+			{
+				ready = true;
 			
-			sendEvent( eventName );
+				sendEvent( eventName );
+			}
 		}
 		
 		public function handleReset():void
