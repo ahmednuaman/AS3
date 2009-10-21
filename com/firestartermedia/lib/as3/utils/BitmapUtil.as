@@ -8,8 +8,10 @@
 */
 package com.firestartermedia.lib.as3.utils
 {
+	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
+	import flash.display.PixelSnapping;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 
@@ -31,6 +33,11 @@ package com.firestartermedia.lib.as3.utils
 			draw.dispose();
 			
 			return copy;
+		}
+		
+		public static function clone(source:DisplayObject):Bitmap
+		{
+			return new Bitmap( grab( source, new Rectangle( 0, 0, source.width, source.height ) ), PixelSnapping.AUTO, true );
 		}
 	}
 }
