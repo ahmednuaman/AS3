@@ -185,6 +185,14 @@ package com.firestartermedia.lib.as3.display.component.video
 			cuePoints.push( seconds );
 		}
 		
+		public function addCuePoints(points:Array):void
+		{
+			for each ( var point:Number in points )
+			{
+				addCuePoint( point );
+			}
+		}
+		
 		public function pause():void
 		{
 			stream.pause();
