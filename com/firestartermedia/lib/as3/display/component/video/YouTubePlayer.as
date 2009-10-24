@@ -107,11 +107,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			sendCommand( 'playVideo', videoId, playerWidth, playerHeight, autoPlay, pars, chromeless );
 		}
 		
-		private function sendCommand(...args):void
+		private function sendCommand(...args):*
 		{
 			if ( isLoaded )
 			{
-				bridge.send.apply( null, args);
+				return bridge.send.apply( null, args);
 			}
 			else
 			{
@@ -137,6 +137,31 @@ package com.firestartermedia.lib.as3.display.component.video
 		public function resize(width:Number, height:Number):void
 		{
 			sendCommand( 'resizePlayer', width, height );
+		}
+		
+		public function getCurrentTime():Number
+		{
+			return sendCommand( 'getCurrentTime' );
+		}
+		
+		public function getDuration():Number
+		{
+			return sendCommand( 'getDuration' );
+		}
+		
+		public function getVideoUrl():String
+		{
+			return sendCommand( 'getVideoUrl' );
+		}
+		
+		public function getPlaybackQuality():String
+		{
+			return sendCommand( 'getPlaybackQuality' );
+		}
+		
+		public function setPlaybackQuality(suggestedQuality:String):void
+		{
+			sendCommand( 'setPlaybackQuality', suggestedQuality );
 		}
 		
 		public function sendEvent(e:String):void
