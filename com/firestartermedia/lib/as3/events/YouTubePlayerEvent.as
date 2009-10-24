@@ -24,10 +24,15 @@ package com.firestartermedia.lib.as3.events
 		public static const QUEUED:String						= NAME + 'Queued';
 		public static const BUFFERING:String					= NAME + 'Buffering';
 		public static const NOT_STARTED:String					= NAME + 'NotStarted';
+		public static const QUALITY_CHANGED:String				= NAME + 'QualityChanged';
 		
-		public function YouTubePlayerEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public var data:Object;
+		
+		public function YouTubePlayerEvent(type:String, data:Object=null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super( type, bubbles, cancelable );
+			
+			this.data = data;
 		}
 	}
 }

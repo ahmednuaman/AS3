@@ -8,6 +8,8 @@
 */
 package com.firestartermedia.lib.as3.display.component.video
 {
+	import com.firestartermedia.lib.as3.events.YouTubePlayerEvent;
+	
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.Sprite;
@@ -62,7 +64,10 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			var player:Object = e.target.content;
 			
-			player.addEventListener( 'onReady', handlePlayerReady );
+			player.addEventListener( 'onReady', 				handlePlayerReady );
+			player.addEventListener( 'onStateChange', 			handlePlayerStateChange );
+			player.addEventListener( 'onPlaybackQualityChange', handlePlayerQualityChange );
+			player.addEventListener( 'onError', 				handlePlayerError );
 			
 			addChild( player as DisplayObject );
 		}
@@ -71,29 +76,96 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			player = e.target;
 			
+			dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.READY ) );
+			
 			player.setSize( playerWidth, playerHeight );
 			
 			playVideo();
 		}
 		
+		private function handlePlayerStateChange(e:Object):void
+		{
+			var state:Number = player.getPlayerState();
+			
+			switch ( state )
+			{
+				case 0:
+				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.ENDED ) );
+				
+				break;
+				
+				case 1:
+				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.PLAYING ) );
+				
+				break;
+				
+				case 2:
+				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.PAUSED ) );
+				
+				break;
+				
+				case 3:
+				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.BUFFERING ) );
+				
+				break;
+				
+				case 4:
+				// hmmm?
+									
+				break;
+				
+				case 5:
+				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.QUEUED ) );
+				
+				break;
+				
+				default:
+				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.NOT_STARTED ) );
+				
+				break;
+			}
+		}
+		
+		private function handlePlayerQualityChange(e:Object):void
+		{
+			dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.QUALITY_CHANGED, getPlaybackQuality() ) ); 
+		}
+		
+		private function handlePlayerError(e:Object):void
+		{
+			dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.ERROR, e ) );
+		}
+		
 		private function playVideo():void
 		{
-			player.loadVideoById( videoId );
+			if ( player )
+			{	
+				player.loadVideoById( videoId );
+			}
 		}
 		
 		public function stop():void
 		{
-			player.stopVideo();
+			if ( player )
+			{
+				player.stopVideo();
+			}
 		}
 		
 		public function pause():void
 		{
-			player.pauseVideo();
+			if ( player )
+			{
+				player.pauseVideo();
+			}
 		}
 		
 		public function resume():void
 		{
-			player.resumeVideo();
+			if ( player )
+			{
+				player.resumeVideo();
+			}
 		}
 		
 		public function getCurrentTime():Number
