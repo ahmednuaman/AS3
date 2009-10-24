@@ -22,6 +22,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		public var playerHeight:Number							= 300;
 		public var playerWidth:Number							= 400;
 		
+		private var isLoaded:Boolean							= false;
 		private var requestURL:String							= 'http://www.youtube.com/apiplayer?version=3';
 		
 		private var player:Object;
@@ -40,7 +41,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			this.videoId = videoId;
 			
-			if ( !player )
+			if ( !isLoaded )
 			{
 				loadPlayer();
 			}
@@ -52,8 +53,8 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function loadPlayer():void
 		{
-			var request:URLRequest = new URLRequest( requestURL );
-			var loader:Loader = new Loader();
+			var request:URLRequest 	= new URLRequest( requestURL );
+			var loader:Loader 		= new Loader();
 			
 			loader.contentLoaderInfo.addEventListener( Event.INIT, handleLoaderInit );
 			
@@ -74,7 +75,9 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function handlePlayerReady(e:Event):void
 		{
-			player = e.target;
+			player 					= e.target;
+			
+			isLoaded 				= true;
 			
 			dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.READY ) );
 			
@@ -85,7 +88,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function handlePlayerStateChange(e:Object):void
 		{
-			var state:Number = player.getPlayerState();
+			var state:Number 		= player.getPlayerState();
 			
 			switch ( state )
 			{
@@ -138,7 +141,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function playVideo():void
 		{
-			if ( player )
+			if ( isLoaded )
 			{	
 				player.loadVideoById( videoId );
 			}
@@ -146,7 +149,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function stop():void
 		{
-			if ( player )
+			if ( isLoaded )
 			{
 				player.stopVideo();
 			}
@@ -154,7 +157,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function pause():void
 		{
-			if ( player )
+			if ( isLoaded )
 			{
 				player.pauseVideo();
 			}
@@ -162,7 +165,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function resume():void
 		{
-			if ( player )
+			if ( isLoaded )
 			{
 				player.resumeVideo();
 			}
@@ -195,16 +198,22 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		override public function set height(value:Number):void
 		{
-			playerHeight = value;
+			playerHeight 			= value;
 			
-			player.setSize( playerWidth, playerHeight );
+			if ( isLoaded )
+			{
+				player.resize( playerWidth, playerHeight );
+			}
 		}
 		
 		override public function set width(value:Number):void
 		{
-			playerHeight = value;
+			playerWidth 			= value;
 			
-			player.setSize( playerWidth, playerHeight );
+			if ( isLoaded )
+			{
+				player.resize( playerWidth, playerHeight );
+			}
 		}
 	}
 }
