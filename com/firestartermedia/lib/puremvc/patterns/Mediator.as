@@ -20,6 +20,8 @@ package com.firestartermedia.lib.puremvc.patterns
 		protected var notificationInterests:Array				= [ ];
 		protected var notificationHandlers:Dictionary			= new Dictionary();
 		
+		protected var view:Object;
+		
 		public function Mediator(name:String=null, viewComponent:Object=null)
 		{
 			super( name, viewComponent );
@@ -54,6 +56,16 @@ package com.firestartermedia.lib.puremvc.patterns
 		override public function handleNotification(notification:INotification):void
 		{
 			notificationHandlers[ notification.getName() ].apply( null, [ notification ] );
+		}
+		
+		public function handleReset(n:INotification):void
+		{
+			view.handleReset();
+		}
+		
+		public function handleResize(n:INotification):void
+		{
+			view.handleResize( n.getBody() );
 		}
 	}
 }

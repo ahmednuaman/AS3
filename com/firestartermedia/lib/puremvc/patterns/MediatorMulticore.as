@@ -12,13 +12,14 @@ package com.firestartermedia.lib.puremvc.patterns
 	
 	import flash.utils.Dictionary;
 	
-	import org.puremvc.as3.multicore.interfaces.INotification;
-	import org.puremvc.as3.multicore.patterns.mediator.Mediator;
+	import org.puremvc.as3.interfaces.INotification;
 
 	public class MediatorMulticore extends Mediator
 	{
 		protected var notificationInterests:Array				= [ ];
 		protected var notificationHandlers:Dictionary			= new Dictionary();
+		
+		protected var view:Object;
 		
 		private var name:String;
 		
@@ -63,6 +64,16 @@ package com.firestartermedia.lib.puremvc.patterns
 			super.initializeNotifier( key );
 			
 			trackEvent( 'Registered ' + name );
+		}
+		
+		public function handleReset(n:INotification):void
+		{
+			view.handleReset();
+		}
+		
+		public function handleResize(n:INotification):void
+		{
+			view.handleResize( n.getBody() );
 		}
 	}
 }
