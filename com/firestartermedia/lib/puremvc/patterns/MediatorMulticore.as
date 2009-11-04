@@ -12,8 +12,9 @@ package com.firestartermedia.lib.puremvc.patterns
 	
 	import flash.utils.Dictionary;
 	
-	import org.puremvc.as3.interfaces.INotification;
-
+	import org.puremvc.as3.multicore.interfaces.INotification;
+	import org.puremvc.as3.multicore.patterns.mediator.Mediator;
+	
 	public class MediatorMulticore extends Mediator
 	{
 		protected var notificationInterests:Array				= [ ];
