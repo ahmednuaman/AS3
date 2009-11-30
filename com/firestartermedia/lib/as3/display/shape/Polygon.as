@@ -21,7 +21,6 @@ package com.firestartermedia.lib.as3.display.shape
 			var vectorRadians:Number;
 			var vectorX:Number;
 			var vectorY:Number;
-			var prevVector:Array;
 			
 			graphics.beginFill( bgColour );
 			graphics.lineStyle( borderThickness, borderColour );
