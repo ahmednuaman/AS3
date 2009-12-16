@@ -26,6 +26,8 @@ package com.firestartermedia.lib.puremvc.patterns
 		{
 			super( name, viewComponent );
 			
+			view					= viewComponent;
+			
 			trackEvent( 'Registered ' + name );
 		}
 		
@@ -43,7 +45,7 @@ package com.firestartermedia.lib.puremvc.patterns
 		{			
 			notificationInterests.push( notificationName );
 			
-			notificationInterests = ArrayUtil.createUniqueCopy( notificationInterests );
+			notificationInterests	= ArrayUtil.createUniqueCopy( notificationInterests );
 			
 			notificationHandlers[ notificationName ] = func;
 		}
