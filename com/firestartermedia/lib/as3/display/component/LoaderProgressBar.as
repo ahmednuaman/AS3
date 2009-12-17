@@ -30,14 +30,14 @@ package com.firestartermedia.lib.as3.display.component
 			this.bar 		= bar;
 			this.maxWidth 	= ( maxWidth ||= bar.width );
 			
-			alpha 			= 0;
-			
 			init();
 		}
 		
 		private function init():void
 		{
 			bar.width 		= 0;
+			
+			alpha 			= 0;
 			
 			addChild( bar );
 		}

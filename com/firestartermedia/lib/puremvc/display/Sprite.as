@@ -24,6 +24,8 @@ package com.firestartermedia.lib.puremvc.display
 		
 		protected var readyEvent:String;
 		protected var resetEvent:String;
+		protected var stageHeight:Number;
+		protected var stageWidth:Number;
 		
 		public function Sprite(readyEvent:String='SpriteReady', resetEvent:String='SpriteReset')
 		{
