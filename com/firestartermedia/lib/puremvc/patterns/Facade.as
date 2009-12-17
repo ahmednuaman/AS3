@@ -13,9 +13,9 @@ package com.firestartermedia.lib.puremvc.patterns
 
 	public class Facade extends org.puremvc.as3.patterns.facade.Facade
 	{
-		public var faultEvent:String;
-		public var resizeEvent:String;
-		public var trackEvent:String;
+		protected var faultEvent:String;
+		protected var resizeEvent:String;
+		protected var trackEvent:String;
 		
 		public function Facade(faultEvent:String, resizeEvent:String, trackEvent:String)
 		{

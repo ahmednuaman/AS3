@@ -22,7 +22,10 @@ package com.firestartermedia.lib.puremvc.display
 		public var ready:Boolean								= false;
 		public var tweenResize:Boolean							= false;
 		
-		public function Sprite()
+		protected var readyEvent:String;
+		protected var resetEvent:String;
+		
+		public function Sprite(readyEvent:String='SpriteReady', resetEvent:String='SpriteReset')
 		{
 			registered = true;
 		}
@@ -58,19 +61,21 @@ package com.firestartermedia.lib.puremvc.display
 			dispatchEvent( new SpriteEvent( eventName, body, true ) );
 		}
 		
-		public function sendReady(eventName:String):void
+		public function sendReady(eventName:String=null):void
 		{
 			if ( !ready )
 			{
 				ready = true;
 			
-				sendEvent( eventName );
+				sendEvent( ( eventName ||= readyEvent ) );
 			}
 		}
 		
 		public function handleReset():void
 		{
 			ready = false;
+			
+			sendEvent( resetEvent );
 		}
 		
 		public function handleResize(e:Object=null):void
