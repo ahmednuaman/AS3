@@ -20,7 +20,7 @@ package com.firestartermedia.lib.as3.utils
 			
 			for each ( var entry:XML in data..*::entry )
 			{  
-				if ( StringUtil.trim( entry..*::videoid ) != '' )
+				if ( mx.utils.StringUtil.trim( entry..*::videoid ) != '' )
 				{
 					cleanData.push({ 
 						title: entry.*::title, 
