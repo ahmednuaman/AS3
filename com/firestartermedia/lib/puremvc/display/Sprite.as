@@ -35,6 +35,24 @@ package com.firestartermedia.lib.puremvc.display
 			}
 		}
 		
+		public function removeChildren(...children):void
+		{
+			if ( children )
+			{
+				for each ( var child:DisplayObject in children )
+				{
+					removeChild( child );
+				}
+			}
+			else
+			{
+				for ( var i:Number = 0; i < numChildren; i++ )
+				{
+					removeChildAt( i );
+				}
+			}
+		}
+		
 		public function sendEvent(eventName:String, body:Object=null):void
 		{
 			dispatchEvent( new SpriteEvent( eventName, body, true ) );
