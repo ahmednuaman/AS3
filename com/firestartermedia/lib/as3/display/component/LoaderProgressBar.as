@@ -20,15 +20,16 @@ package com.firestartermedia.lib.as3.display.component
 		private var bar:DisplayObject;
 		private var maxWidth:Number;
 		
-		public function LoaderProgressBar(bar:DisplayObject=null, maxWidth:Number=null)
+		public function LoaderProgressBar(bar:DisplayObject=null, maxWidth:Number=200)
 		{
+			this.maxWidth 	= maxWidth;
+			
 			if ( !bar )
 			{
 				bar			= createBar();
 			}
 			
 			this.bar 		= bar;
-			this.maxWidth 	= ( maxWidth ||= bar.width );
 			
 			init();
 		}
@@ -76,7 +77,7 @@ package com.firestartermedia.lib.as3.display.component
 			var bar:Sprite		= new Sprite();
 			
 			bar.graphics.beginFill( 0xFFFFFF );
-			bar.graphics.drawRect( 0, 0, 200, 10 );
+			bar.graphics.drawRect( 0, 0, maxWidth, 10 );
 			bar.graphics.endFill();
 			
 			return bar;
