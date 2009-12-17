@@ -12,6 +12,8 @@ package com.firestartermedia.lib.puremvc.patterns
 
 	public class Proxy extends org.puremvc.as3.patterns.proxy.Proxy
 	{
+		public static const NAME:String							= 'Proxy';
+		
 		public function Proxy(name:String=null, data:Object=null)
 		{
 			super( name, data );

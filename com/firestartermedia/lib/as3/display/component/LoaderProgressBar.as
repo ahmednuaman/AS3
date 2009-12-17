@@ -9,31 +9,35 @@
 package com.firestartermedia.lib.as3.display.component
 {
 	import com.firestartermedia.lib.as3.events.LoaderProgressEvent;
+	import com.greensock.TweenLite;
+	import com.greensock.easing.Strong;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
-	
-	import gs.TweenLite;
-	import gs.easing.Strong;
 
 	public class LoaderProgressBar extends Sprite
 	{
 		private var bar:DisplayObject;
 		private var maxWidth:Number;
 		
-		public function LoaderProgressBar(bar:DisplayObject, maxWidth:Number)
+		public function LoaderProgressBar(bar:DisplayObject=null, maxWidth:Number=null)
 		{
-			this.bar = bar;
-			this.maxWidth = maxWidth;
+			if ( !bar )
+			{
+				bar			= createBar();
+			}
 			
-			alpha = 0;
+			this.bar 		= bar;
+			this.maxWidth 	= ( maxWidth ||= bar.width );
+			
+			alpha 			= 0;
 			
 			init();
 		}
 		
 		private function init():void
 		{
-			bar.width = 0;
+			bar.width 		= 0;
 			
 			addChild( bar );
 		}
@@ -65,6 +69,17 @@ package com.firestartermedia.lib.as3.display.component
 			TweenLite.to( this, .5, { autoAlpha: 0 } );
 			
 			dispatchEvent( new LoaderProgressEvent( LoaderProgressEvent.HIDE, true ) );
+		}
+		
+		private function createBar():Sprite
+		{
+			var bar:Sprite		= new Sprite();
+			
+			bar.graphics.beginFill( 0xFFFFFF );
+			bar.graphics.drawRect( 0, 0, 200, 10 );
+			bar.graphics.endFill();
+			
+			return bar;
 		}
 	}
 }
