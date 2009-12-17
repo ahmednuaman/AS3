@@ -64,12 +64,18 @@ package com.firestartermedia.lib.puremvc.patterns
 		
 		public function handleReset(n:INotification):void
 		{
-			view.handleReset();
+			if ( view.hasOwnProperty( 'handleReset' ) )
+			{
+				view.handleReset();
+			}
 		}
 		
 		public function handleResize(n:INotification):void
 		{
-			view.handleResize( n.getBody() );
+			if ( view.hasOwnProperty( 'handleResize' ) )
+			{
+				view.handleResize( n.getBody() );
+			}
 		}
 	}
 }
