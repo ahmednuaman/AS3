@@ -15,6 +15,8 @@ package com.firestartermedia.lib.puremvc.display
 
 	public class Sprite extends flash.display.Sprite
 	{
+		public static const NAME:String							= 'Sprite';
+		
 		public var display:Boolean								= true;
 		public var registered:Boolean							= false;	
 		public var ready:Boolean								= false;
