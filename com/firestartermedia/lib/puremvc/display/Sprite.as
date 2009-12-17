@@ -29,7 +29,10 @@ package com.firestartermedia.lib.puremvc.display
 		
 		public function Sprite(readyEvent:String='SpriteReady', resetEvent:String='SpriteReset')
 		{
-			registered = true;
+			this.readyEvent	= readyEvent;
+			this.resetEvent	= resetEvent;
+			
+			registered 		= true;
 		}
 		
 		public function addChildren(...children):void
@@ -67,15 +70,15 @@ package com.firestartermedia.lib.puremvc.display
 		{
 			if ( !ready )
 			{
-				ready = true;
+				ready 		= true;
 			
-				sendEvent( ( eventName ||= readyEvent ) );
+				sendEvent( ( eventName ? eventName : readyEvent ) );
 			}
 		}
 		
 		public function handleReset():void
 		{
-			ready = false;
+			ready 			= false;
 			
 			sendEvent( resetEvent );
 		}

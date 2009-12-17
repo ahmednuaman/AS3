@@ -22,7 +22,7 @@ package com.firestartermedia.lib.as3.display.component
 		
 		public function LoaderProgressBar(bar:DisplayObject=null, maxWidth:Number=200)
 		{
-			this.maxWidth 	= maxWidth;
+			this.maxWidth 	= ( bar ? bar.width : maxWidth );
 			
 			if ( !bar )
 			{
@@ -30,6 +30,8 @@ package com.firestartermedia.lib.as3.display.component
 			}
 			
 			this.bar 		= bar;
+			
+			createMask();
 			
 			init();
 		}
@@ -45,7 +47,7 @@ package com.firestartermedia.lib.as3.display.component
 		
 		public function show():void
 		{
-			TweenLite.to( this, .5, { autoAlpha: 1 } );
+			TweenLite.to( this, .5, { alpha: 1 } );
 			
 			dispatchEvent( new LoaderProgressEvent( LoaderProgressEvent.SHOW, true ) );
 		}
@@ -67,7 +69,7 @@ package com.firestartermedia.lib.as3.display.component
 		
 		public function hide():void
 		{
-			TweenLite.to( this, .5, { autoAlpha: 0 } );
+			TweenLite.to( this, .5, { alpha: 0 } );
 			
 			dispatchEvent( new LoaderProgressEvent( LoaderProgressEvent.HIDE, true ) );
 		}
@@ -81,6 +83,17 @@ package com.firestartermedia.lib.as3.display.component
 			bar.graphics.endFill();
 			
 			return bar;
+		}
+		
+		private function createMask():void
+		{
+			var mask:Sprite		= new Sprite();
+			
+			mask.graphics.beginFill( 0xFFFFFF, 0 );
+			mask.graphics.drawRect( 0, 0, maxWidth, bar.height );
+			mask.graphics.endFill();
+			
+			addChild( mask );
 		}
 	}
 }
