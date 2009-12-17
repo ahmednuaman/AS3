@@ -28,6 +28,8 @@ package com.firestartermedia.lib.puremvc.patterns
 			
 			view					= viewComponent;
 			
+			declareNotificationInterest( 'ApplicationFacadeResize', handleReset );
+			
 			trackEvent( 'Registered ' + name );
 		}
 		
