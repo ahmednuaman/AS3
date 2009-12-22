@@ -22,6 +22,8 @@ package com.firestartermedia.lib.puremvc.display
 		public var ready:Boolean								= false;
 		public var tweenResize:Boolean							= false;
 		
+		protected var tweenTime:Number							= 1;
+		
 		protected var readyEvent:String;
 		protected var resetEvent:String;
 		protected var stageHeight:Number;
@@ -85,7 +87,11 @@ package com.firestartermedia.lib.puremvc.display
 		
 		public function handleResize(e:Object=null):void
 		{
-			
+			if ( e )
+			{
+				stageHeight	= e.height;
+				stageWidth	= e.width;
+			}
 		}
 		
 		/* public function addBetterEventListener(type:String):void
