@@ -167,7 +167,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			if ( isLoaded )
 			{
-				player.resumeVideo();
+				player.playVideo();
 			}
 		}
 		
@@ -191,9 +191,29 @@ package com.firestartermedia.lib.as3.display.component.video
 			return player.getPlaybackQuality();
 		}
 		
+		public function getVideoBytesLoaded():Number
+		{
+			return player.getVideoBytesLoaded();
+		}
+		
+		public function getVideoBytesTotal():Number
+		{
+			return player.getVideoBytesTotal();
+		}
+		
 		public function setPlaybackQuality(suggestedQuality:String):void
 		{
 			player.setPlaybackQuality( suggestedQuality );
+		}
+		
+		public function mute():void
+		{
+			player.mute();
+		}
+		
+		public function unMute():void
+		{
+			player.unMute();
 		}
 		
 		override public function set height(value:Number):void
