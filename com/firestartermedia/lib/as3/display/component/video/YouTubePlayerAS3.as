@@ -19,6 +19,12 @@ package com.firestartermedia.lib.as3.display.component.video
 
 	public class YouTubePlayerAS3 extends Sprite
 	{
+		public static const QUALITY_SMALL:String				= 'small';
+		public static const QUALITY_MEDIUM:String				= 'medium';
+		public static const QUALITY_LARGE:String				= 'large';
+		public static const QUALITY_HD:String					= 'hd720';
+		public static const QUALITY_DEFAULT:String				= 'default';
+		
 		public var playerHeight:Number							= 300;
 		public var playerWidth:Number							= 400;
 		
@@ -203,7 +209,10 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function setPlaybackQuality(suggestedQuality:String):void
 		{
-			player.setPlaybackQuality( suggestedQuality );
+			if ( isLoaded )
+			{
+				player.setPlaybackQuality( suggestedQuality );
+			}
 		}
 		
 		public function mute():void
