@@ -106,5 +106,12 @@ package com.firestartermedia.lib.as3.data.gdata
 			
 			dispatchEvent( new DataServiceEvent( DataServiceEvent.READY, { entries: matchEntries } ) );
 		}
+		
+		public function getUserVideos(username:String, startIndex:Number=1, max:Number=50):void
+		{
+			var request:URLRequest = new URLRequest( VIDEOS_URL + '?v=2&max-results=' + max + '&start-index=' + startIndex + '&author=' + username );
+			
+			loader.load( request );
+		}
 	}
 }
