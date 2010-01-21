@@ -12,6 +12,8 @@ package com.firestartermedia.lib.as3.utils
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Loader;
 	import flash.events.Event;
+	import flash.geom.Matrix;
+	import flash.geom.Point;
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
@@ -85,6 +87,21 @@ package com.firestartermedia.lib.as3.utils
 			}
 			
 			return funcReturn;
+		}
+		
+		public static function centerRotate(target:DisplayObject, center:Point, degrees:Number):void
+		{
+			var m:Matrix			= target.transform.matrix;
+			
+			m.tx 					-= center.x; 
+		    m.ty 					-= center.y; 
+		    
+		    m.rotate( NumberUtil.toRadians( degrees ) ); 
+		    
+		    m.tx 					+= center.x; 
+		    m.ty 					+= center.y; 
+		    
+			target.transform.matrix	= m;
 		}
 	}
 }
