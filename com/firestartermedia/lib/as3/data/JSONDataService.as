@@ -10,7 +10,6 @@ package com.firestartermedia.lib.as3.data
 {
 	import com.firestartermedia.lib.as3.events.DataServiceEvent;
 	
-	import flash.errors.IOError;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
@@ -32,6 +31,8 @@ package com.firestartermedia.lib.as3.data
 			try 
 			{
 				loader.load( request );
+				
+				dispatchEvent( new DataServiceEvent( DataServiceEvent.LOADING ) );
 			} 
 			catch (e:*) 
 			{ }

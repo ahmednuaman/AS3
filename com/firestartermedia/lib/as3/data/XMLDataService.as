@@ -32,6 +32,8 @@ package com.firestartermedia.lib.as3.data
 			try 
 			{
 				loader.load( request );
+				
+				dispatchEvent( new DataServiceEvent( DataServiceEvent.LOADING ) );
 			} 
 			catch (e:*) 
 			{ }

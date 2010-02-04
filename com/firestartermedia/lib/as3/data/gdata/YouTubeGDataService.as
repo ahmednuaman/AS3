@@ -35,14 +35,14 @@ package com.firestartermedia.lib.as3.data.gdata
 		{
 			var request:URLRequest = new URLRequest( VIDEOS_URL + '/' + videoId );
 			
-			loader.load( request );
+			load( request );
 		}
 		
 		public function getPlaylistData(playlistId:String, startIndex:Number=1):void
 		{
 			var request:URLRequest = new URLRequest( PLAYLISTS_URL + '/' + playlistId + '?v=2&max-results=50&start-index=' + startIndex );
 			
-			loader.load( request );
+			load( request );
 		}
 		
 		public function searchPlaylistData(playlistId:String, playlistSearch:String):void
@@ -111,7 +111,14 @@ package com.firestartermedia.lib.as3.data.gdata
 		{
 			var request:URLRequest = new URLRequest( VIDEOS_URL + '?v=2&max-results=' + max + '&start-index=' + startIndex + '&author=' + username );
 			
+			load( request );
+		}
+		
+		private function load(request:URLRequest):void
+		{
 			loader.load( request );
+			
+			dispatchEvent( new DataServiceEvent( DataServiceEvent.LOADING ) );
 		}
 	}
 }
