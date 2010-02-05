@@ -25,11 +25,13 @@ package com.firestartermedia.lib.as3.display.component.video
 		public static const QUALITY_HD:String					= 'hd720';
 		public static const QUALITY_DEFAULT:String				= 'default';
 		
+		public var chromeless:Boolean							= true;
 		public var playerHeight:Number							= 300;
 		public var playerWidth:Number							= 400;
 		
 		private var isLoaded:Boolean							= false;
-		private var requestURL:String							= 'http://www.youtube.com/apiplayer?version=3';
+		private var requestURLChromed:String					= 'http://www.youtube.com/v/ID?version=3 ';
+		private var requestURLChromeless:String					= 'http://www.youtube.com/apiplayer?version=3';
 		
 		private var player:Object;
 		private var videoId:String;
@@ -59,7 +61,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function loadPlayer():void
 		{
-			var request:URLRequest 	= new URLRequest( requestURL );
+			var request:URLRequest 	= new URLRequest( ( chromeless ? requestURLChromeless : requestURLChromed.replace( 'ID', videoId ) ) );
 			var loader:Loader 		= new Loader();
 			
 			loader.contentLoaderInfo.addEventListener( Event.INIT, handleLoaderInit );
