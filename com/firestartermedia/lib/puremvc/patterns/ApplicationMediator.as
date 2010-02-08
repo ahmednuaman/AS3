@@ -9,7 +9,7 @@ package com.firestartermedia.lib.puremvc.patterns
 	public class ApplicationMediator extends Mediator implements IMediator
 	{
 		protected var classPath:String;
-		protected var currentMediator:Mediator;
+		protected var currentMediator:String;
 		protected var excludedMediators:Array;
 		protected var tabbedMediators:Array;
 		
