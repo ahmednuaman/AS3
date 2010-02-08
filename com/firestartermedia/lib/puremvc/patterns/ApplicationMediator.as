@@ -57,7 +57,7 @@ package com.firestartermedia.lib.puremvc.patterns
 		
 		protected function removeOtherMediators(mediator:String=''):void
 		{
-			if ( ArrayUtil.search( excludedMediators, mediator ) === -1 || ArrayUtil.search( tabbedMediators, mediator ) !== -1 || mediator === '' )
+			if ( ( ArrayUtil.search( excludedMediators, mediator ) === -1 && ArrayUtil.search( tabbedMediators, mediator ) !== -1 ) || mediator === '' )
 			{
 				for each ( var m:String in tabbedMediators )
 				{
