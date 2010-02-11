@@ -30,7 +30,17 @@ package com.firestartermedia.lib.puremvc.patterns
 			
 			declareNotificationInterest( 'ApplicationFacadeResize', handleResize );
 			
-			trackEvent( 'Registered ' + name );
+			trackEvent( 'Created ' + mediatorName );
+		}
+		
+		override public function onRegister():void
+		{
+			trackEvent( 'Registered ' + mediatorName );
+		}
+		
+		override public function onRemove():void
+		{
+			trackEvent( 'Removed ' + mediatorName );
 		}
 		
 		public function trackEvent(event:String):void
