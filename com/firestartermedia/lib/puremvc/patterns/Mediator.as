@@ -41,6 +41,18 @@ package com.firestartermedia.lib.puremvc.patterns
 		override public function onRemove():void
 		{
 			trackEvent( 'Removed ' + mediatorName );
+			
+			onReset();
+		}
+		
+		private function onReset():void
+		{
+			if ( view.hasOwnProperty( 'handleReset' ) )
+			{
+				trackEvent( 'Reset ' + mediatorName );
+				
+				view.handleReset();
+			}
 		}
 		
 		public function trackEvent(event:String):void
@@ -74,10 +86,7 @@ package com.firestartermedia.lib.puremvc.patterns
 		
 		public function handleReset(n:INotification):void
 		{
-			if ( view.hasOwnProperty( 'handleReset' ) )
-			{
-				view.handleReset();
-			}
+			onReset();
 		}
 		
 		public function handleResize(n:INotification):void
