@@ -117,5 +117,10 @@ package com.firestartermedia.lib.as3.utils
 			
 			return Math.sin( radians ) * hypotenuse;
 		}
+		
+		public static function calculatePartPercentage(current:Number, total:Number, loaded:Number):Number
+		{
+			return ( loaded * ( 1 / total ) * 100 ) + ( current / total ) * 100;
+		}
 	}
 }
