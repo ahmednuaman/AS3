@@ -63,12 +63,12 @@ package com.firestartermedia.lib.puremvc.display
 			}
 		}
 		
-		public function sendEvent(eventName:String, body:Object=null):void
+		protected function sendEvent(eventName:String, body:Object=null):void
 		{
 			dispatchEvent( new SpriteEvent( eventName, body, true ) );
 		}
 		
-		public function sendReady(eventName:String=null):void
+		protected function sendReady(eventName:String=null):void
 		{
 			if ( !ready )
 			{
