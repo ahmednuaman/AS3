@@ -101,5 +101,28 @@ package com.firestartermedia.lib.as3.utils
 			
 			return timestamp;
 		}
+		
+		/* "stolen" from http://stackoverflow.com/questions/3163/actionscript-3-fastest-way-to-parse-yyyy-mm-dd-hhmmss-to-a-date-object */
+		public static function parseUTCDate(str:String):Date 
+		{
+		    var matches : Array = str.match(/(\d\d\d\d)-(\d\d)-(\d\d) (\d\d):(\d\d):(\d\d)Z/);
+		    var d : Date = new Date();
+		
+		    d.setUTCFullYear(int(matches[1]), int(matches[2]) - 1, int(matches[3]));
+		    d.setUTCHours(int(matches[4]), int(matches[5]), int(matches[6]), 0);
+		
+		    return d;
+		}
+		
+		/* "stolen" from http://stackoverflow.com/questions/3163/actionscript-3-fastest-way-to-parse-yyyy-mm-dd-hhmmss-to-a-date-object */
+		public static function parseDate(str:String):Date
+		{
+			var matches : Array = str.match(/(\d\d\d\d)-(\d\d)-(\d\d)/);
+		    var d : Date = new Date();
+		
+		    d.setUTCFullYear(int(matches[1]), int(matches[2]) - 1, int(matches[3]));
+		
+		    return d;
+		}
 	}
 }
