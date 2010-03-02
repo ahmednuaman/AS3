@@ -54,5 +54,17 @@ package com.firestartermedia.lib.as3.utils
 			
 			return ( found ? i : -1 );
 		}
+		
+		public static function toArray(data:Object):Array
+		{
+			var array:Array	= [ ];
+			
+			for each ( var item:Object in data )
+			{
+				array.push( item );
+			}
+			
+			return array;
+		}
 	}
 }
