@@ -31,7 +31,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		public var playerWidth:Number							= 400;
 		
 		private var isLoaded:Boolean							= false;
-		private var requestURLChromed:String					= 'http://www.youtube.com/v/ID?version=3 ';
+		private var requestURLChromed:String					= 'http://www.youtube.com/v/ID?version=3';
 		private var requestURLChromeless:String					= 'http://www.youtube.com/apiplayer?version=3';
 		
 		
