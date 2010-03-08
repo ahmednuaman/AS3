@@ -13,6 +13,7 @@ package com.firestartermedia.lib.as3.display.component.video
 	import com.firestartermedia.lib.as3.utils.DateUtil;
 	
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.NetStatusEvent;
 	import flash.geom.Rectangle;
@@ -71,7 +72,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function captureImage():Bitmap
 		{
-			var image:Bitmap = new Bitmap( BitmapUtil.grab( video, new Rectangle( 0, 0, cameraWidth, cameraHeight ), true ) );
+			var image:Bitmap = new Bitmap( bitmapData );
 			
 			return image;
 		}
@@ -171,6 +172,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			}
 		}
 		
+		public function get bitmapData():BitmapData
+		{
+			return BitmapUtil.grab( video, new Rectangle( 0, 0, cameraWidth, cameraHeight ), true );
+		}
+		
 		public function get recording():Boolean
 		{
 			return isRecording;
@@ -179,6 +185,16 @@ package com.firestartermedia.lib.as3.display.component.video
 		public function get filename():String
 		{
 			return recordingName + '.flv';
+		}
+		
+		override public function get height():Number
+		{
+			return cameraHeight;
+		}
+		
+		override public function get width():Number
+		{
+			return cameraWidth;
 		}
 	}
 }
