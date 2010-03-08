@@ -22,9 +22,9 @@ package com.firestartermedia.lib.as3.utils
 	{
 		public static function removeChildren(target:DisplayObjectContainer):void
 		{
-			for ( var i:Number = 0; i < target.numChildren; i++ )
+			while ( target.numChildren )
 			{
-				target.removeChildAt( i );
+				target.removeChildAt( target.numChildren - 1 );
 			}
 		}
 		
