@@ -17,12 +17,12 @@ package com.firestartermedia.lib.as3.utils
 
 	public class BitmapUtil
 	{
-		public static function flatten(source:DisplayObject):BitmapData
+		public static function flatten(source:*):BitmapData
 		{
 			return grab( source, new Rectangle( 0, 0, source.width, source.height ) ); 
 		}
 		
-		public static function grab(source:DisplayObject, rect:Rectangle, smoothing:Boolean=true):BitmapData
+		public static function grab(source:*, rect:Rectangle, smoothing:Boolean=true):BitmapData
 		{
 			var draw:BitmapData = new BitmapData( source.width, source.height, true, 0 );
 			var copy:BitmapData = new BitmapData( rect.width, rect.height, true, 0 );
@@ -35,7 +35,7 @@ package com.firestartermedia.lib.as3.utils
 			return copy;
 		}
 		
-		public static function clone(source:DisplayObject):Bitmap
+		public static function clone(source:*):Bitmap
 		{
 			return new Bitmap( grab( source, new Rectangle( 0, 0, source.width, source.height ) ), PixelSnapping.AUTO, true );
 		}

@@ -11,7 +11,6 @@ package com.firestartermedia.lib.as3.display.tools
 	import com.firestartermedia.lib.as3.utils.BitmapUtil;
 	
 	import flash.display.BitmapData;
-	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
 
@@ -26,10 +25,10 @@ package com.firestartermedia.lib.as3.display.tools
 		private var bitmapBL:Sprite;
 		private var bitmapBC:Sprite;
 		private var bitmapBR:Sprite;
-		private var master:DisplayObject;
+		private var master:*;
 		private var scaleGrid:Rectangle;
 		
-		public function ScaleObject(master:DisplayObject, scaleGrid:Rectangle)
+		public function ScaleObject(master:*, scaleGrid:Rectangle)
 		{
 			this.master = master;
 			this.scaleGrid = scaleGrid;
