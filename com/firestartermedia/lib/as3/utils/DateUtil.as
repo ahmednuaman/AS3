@@ -105,7 +105,7 @@ package com.firestartermedia.lib.as3.utils
 		/* "stolen" from http://stackoverflow.com/questions/3163/actionscript-3-fastest-way-to-parse-yyyy-mm-dd-hhmmss-to-a-date-object */
 		public static function parseUTCDate(str:String):Date 
 		{
-		    var matches : Array = str.match(/(\d\d\d\d)-(\d\d)-(\d\d) (\d\d):(\d\d):(\d\d)/);
+		    var matches : Array = str.match(/(\d\d\d\d)-(\d\d)-(\d\d)[\s|T]?(\d\d):(\d\d):(\d\d)/);
 		    var d : Date = new Date();
 		
 		    d.setUTCFullYear(int(matches[1]), int(matches[2]) - 1, int(matches[3]));
