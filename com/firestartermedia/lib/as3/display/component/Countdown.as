@@ -100,7 +100,7 @@ package com.firestartermedia.lib.as3.display.component
 			
 			if ( visualTargets.hasOwnProperty( 'mSecs' ) )
 			{
-				
+				_mSecs = diff;
 			}
 			
 			dispatchEvent( new CountdownEvent( CountdownEvent.TIME, 
