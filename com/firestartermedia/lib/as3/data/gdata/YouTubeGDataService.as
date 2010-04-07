@@ -13,6 +13,9 @@ package com.firestartermedia.lib.as3.data.gdata
 	import com.firestartermedia.lib.as3.utils.YouTubeUtil;
 	
 	import flash.net.URLRequest;
+	import flash.net.URLRequestHeader;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
 	
 	public class YouTubeGDataService extends DataService
 	{
@@ -110,6 +113,21 @@ package com.firestartermedia.lib.as3.data.gdata
 		public function getUserVideos(username:String, startIndex:Number=1, max:Number=50):void
 		{
 			var request:URLRequest = new URLRequest( VIDEOS_URL + '?v=2&max-results=' + max + '&start-index=' + startIndex + '&author=' + username );
+			
+			load( request );
+		}
+		
+		public function getAuthedUserVideos(token:String, devkey:String, startIndex:Number=1, max:Number=50):void
+		{
+			var request:URLRequest 	= new URLRequest( USERS_URL + '/default/uploads' );
+			
+			request.contentType		= 'application/atom+xml; charset=UTF-8';
+			request.method			= URLRequestMethod.POST;
+			request.requestHeaders	= [ new URLRequestHeader( 'X-HTTP-Method-Override', 'GET' ),
+										new URLRequestHeader( 'Authorization', 'AuthSub token="' + token + '"' ), 
+										new URLRequestHeader( 'GData-Version', '2' ),
+										new URLRequestHeader( 'X-GData-Key', 'key=' + devkey ) ];
+			request.data			= new URLVariables( 'key=' + devkey );
 			
 			load( request );
 		}
