@@ -26,6 +26,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		public static const QUALITY_DEFAULT:String				= 'default';
 		
 		public var chromeless:Boolean							= true;
+		public var loop:Boolean									= false;
 		public var pars:String									= '';
 		public var playerHeight:Number							= 300;
 		public var playerWidth:Number							= 400;
@@ -104,6 +105,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				case 0:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.ENDED ) );
+				
+				if ( loop )
+				{
+					playVideo();
+				}
 				
 				break;
 				
