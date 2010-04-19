@@ -12,6 +12,7 @@ package com.firestartermedia.lib.as3.utils
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Loader;
 	import flash.events.Event;
+	import flash.geom.ColorTransform;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.net.URLRequest;
@@ -102,6 +103,21 @@ package com.firestartermedia.lib.as3.utils
 		    m.ty 					+= center.y; 
 		    
 			target.transform.matrix	= m;
+		}
+		
+		public static function changeColour(target:DisplayObject, colour:*):void
+		{
+			var trans:ColorTransform		= target.transform.colorTransform;
+			var c:uint						= ( colour is uint ? colour : NumberUtil.toUint( colour ) );
+			
+			trans.color						= c;
+			
+			target.transform.colorTransform	= trans;
+		}
+		
+		public static function revertColour(target:DisplayObject):void
+		{
+			target.transform.colorTransform	= null;
 		}
 	}
 }
