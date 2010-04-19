@@ -117,7 +117,7 @@ package com.firestartermedia.lib.as3.utils
 		
 		public static function revertColour(target:DisplayObject):void
 		{
-			target.transform.colorTransform	= null;
+			target.transform.colorTransform	= new ColorTransform();
 		}
 	}
 }
