@@ -22,6 +22,11 @@ package com.firestartermedia.lib.puremvc.patterns
 		{
 			var m:Object;
 			
+			if ( !mediator.hasOwnProperty( 'NAME' ) )
+			{
+				mediator		= getDefinitionByName( classPath + mediator ) as Class
+			}
+			
 			if ( !facade.hasMediator( mediator.NAME ) )
 			{
 				removeOtherMediators( mediator.NAME );				

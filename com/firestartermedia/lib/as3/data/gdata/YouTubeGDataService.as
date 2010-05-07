@@ -12,6 +12,7 @@ package com.firestartermedia.lib.as3.data.gdata
 	import com.firestartermedia.lib.as3.events.DataServiceEvent;
 	import com.firestartermedia.lib.as3.utils.YouTubeUtil;
 	
+	import flash.display.Loader;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestHeader;
 	import flash.net.URLRequestMethod;
@@ -128,6 +129,19 @@ package com.firestartermedia.lib.as3.data.gdata
 										new URLRequestHeader( 'GData-Version', '2' ),
 										new URLRequestHeader( 'X-GData-Key', 'key=' + devkey ) ];
 			request.data			= new URLVariables( 'key=' + devkey );
+			
+			load( request );
+		}
+		
+		public function exchangeForSessionToken(token:String):void
+		{
+			var request:URLRequest 	= new URLRequest( 'https://accounts.googleapis.com/accounts/AuthSubSessionToken' );
+			
+			request.contentType		= 'application/x-www-form-urlencoded';
+			request.method			= URLRequestMethod.POST;
+			request.requestHeaders	= [ /* new URLRequestHeader( 'X-HTTP-Method-Override', 'GET' ), */
+										new URLRequestHeader( 'Authorization', 'AuthSub token="' + token + '"' ) ];
+			request.data			= new URLVariables( 'foo=bar' );
 			
 			load( request );
 		}
