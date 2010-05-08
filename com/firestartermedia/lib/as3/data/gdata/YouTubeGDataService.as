@@ -12,7 +12,6 @@ package com.firestartermedia.lib.as3.data.gdata
 	import com.firestartermedia.lib.as3.events.DataServiceEvent;
 	import com.firestartermedia.lib.as3.utils.YouTubeUtil;
 	
-	import flash.display.Loader;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestHeader;
 	import flash.net.URLRequestMethod;
@@ -129,6 +128,25 @@ package com.firestartermedia.lib.as3.data.gdata
 										new URLRequestHeader( 'GData-Version', '2' ),
 										new URLRequestHeader( 'X-GData-Key', 'key=' + devkey ) ];
 			request.data			= new URLVariables( 'key=' + devkey );
+			
+			load( request );
+		}
+		
+		public function subscribeToUser(username:String, token:String, devkey:String):void
+		{
+			var request:URLRequest 	= new URLRequest( USERS_URL + '/default/subscriptions' );
+			
+			request.contentType		= 'application/atom+xml; charset=UTF-8';
+			request.method			= URLRequestMethod.POST;
+			request.requestHeaders	= [ /* new URLRequestHeader( 'X-HTTP-Method-Override', 'GET' ), */
+										new URLRequestHeader( 'Authorization', 'AuthSub token="' + token + '"' ), 
+										new URLRequestHeader( 'GData-Version', '2' ),
+										new URLRequestHeader( 'X-GData-Key', 'key=' + devkey ) ];
+			request.data			= '<?xml version="1.0" encoding="UTF-8"?>' +
+										'<entry xmlns="http://www.w3.org/2005/Atom" xmlns:yt="http://gdata.youtube.com/schemas/2007">' +
+										'<category scheme="http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat" term="channel"/>' +
+										'<yt:username>' + username + '</yt:username>' +
+										'</entry>';
 			
 			load( request );
 		}
