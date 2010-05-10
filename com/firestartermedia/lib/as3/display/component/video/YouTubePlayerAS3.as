@@ -235,6 +235,14 @@ package com.firestartermedia.lib.as3.display.component.video
 			player.unMute();
 		}
 		
+		public function seekTo(seconds:Number, allowSeekAhead:Boolean=true):void
+		{
+			if ( isLoaded )
+			{
+				player.seekTo( seconds, allowSeekAhead );
+			}
+		}
+		
 		override public function set height(value:Number):void
 		{
 			playerHeight 			= value;
