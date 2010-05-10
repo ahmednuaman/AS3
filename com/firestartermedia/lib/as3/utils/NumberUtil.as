@@ -31,7 +31,7 @@ package com.firestartermedia.lib.as3.utils
 	        return result
 		}
 		
-		public static function toTimeString(number:Number):String
+		public static function toTimeString(number:Number, seperator:String=':'):String
 		{
 			var hours:Number 		= Math.floor( number / 3600 );
     		var minutes:Number 		= Math.floor( ( number % 3600 ) / 60 );
@@ -42,7 +42,7 @@ package com.firestartermedia.lib.as3.utils
     									return ObjectUtil.isValid( item );
     								}
     		
-    		return times.filter( test ).join( ':' );
+    		return times.filter( test ).join( seperator );
 		}
 		
 		public static function likeTime(number:Number, forceZero:Boolean=false):String
