@@ -25,6 +25,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		public static const QUALITY_HD:String					= 'hd720';
 		public static const QUALITY_DEFAULT:String				= 'default';
 		
+		public var autoplay:Boolean								= true;
 		public var chromeless:Boolean							= true;
 		public var loop:Boolean									= false;
 		public var pars:String									= '';
@@ -34,7 +35,6 @@ package com.firestartermedia.lib.as3.display.component.video
 		private var isLoaded:Boolean							= false;
 		private var requestURLChromed:String					= 'http://www.youtube.com/v/ID?version=3';
 		private var requestURLChromeless:String					= 'http://www.youtube.com/apiplayer?version=3';
-		
 		
 		private var player:Object;
 		private var videoId:String;
@@ -126,6 +126,11 @@ package com.firestartermedia.lib.as3.display.component.video
 				case 3:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.BUFFERING ) );
 				
+				if ( !chromeless && !autoplay )
+				{
+					pause();
+				}
+				
 				break;
 				
 				case 4:
@@ -158,8 +163,15 @@ package com.firestartermedia.lib.as3.display.component.video
 		private function playVideo():void
 		{
 			if ( isLoaded )
-			{	
-				player.loadVideoById( videoId );
+			{
+				if ( chromeless && !autoplay )
+				{
+					player.cueVideoById( videoId );
+				}
+				else
+				{
+					player.loadVideoById( videoId );
+				}
 			}
 		}
 		
