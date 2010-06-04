@@ -151,6 +151,24 @@ package com.firestartermedia.lib.as3.data.gdata
 			load( request );
 		}
 		
+		public function rateVideo(videoId:String, rating:Number, token:String, devkey:String):void
+		{
+			var request:URLRequest 	= new URLRequest( VIDEOS_URL + '/' + videoId + '/ratings' );
+			
+			request.contentType		= 'application/atom+xml; charset=UTF-8';
+			request.method			= URLRequestMethod.POST;
+			request.requestHeaders	= [ /* new URLRequestHeader( 'X-HTTP-Method-Override', 'GET' ), */
+										new URLRequestHeader( 'Authorization', 'AuthSub token="' + token + '"' ), 
+										new URLRequestHeader( 'GData-Version', '2' ),
+										new URLRequestHeader( 'X-GData-Key', 'key=' + devkey ) ];
+			request.data			= '<?xml version="1.0" encoding="UTF-8"?>' +
+										'<entry xmlns="http://www.w3.org/2005/Atom" xmlns:gd="http://schemas.google.com/g/2005">' +
+										'<gd:rating value="' + rating + '" min="1" max="5"/>' +
+										'</entry>';
+			
+			load( request );
+		}
+		
 		public function exchangeForSessionToken(token:String):void
 		{
 			var request:URLRequest 	= new URLRequest( 'https://accounts.googleapis.com/accounts/AuthSubSessionToken' );

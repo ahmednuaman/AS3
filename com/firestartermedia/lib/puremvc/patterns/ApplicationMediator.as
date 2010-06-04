@@ -24,7 +24,7 @@ package com.firestartermedia.lib.puremvc.patterns
 			
 			if ( !mediator.hasOwnProperty( 'NAME' ) )
 			{
-				mediator		= getDefinitionByName( classPath + mediator ) as Class
+				mediator		= getDefinitionByName( classPath + mediator.toString().split( '-' )[ 0 ] ) as Class
 			}
 			
 			if ( !facade.hasMediator( mediator.NAME ) )
