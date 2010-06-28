@@ -41,6 +41,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		private var rawHeight:Number;
 		private var rawWidth:Number;
 		private var stream:NetStream;
+		private var totalSize:Number;
 		private var videoHeight:Number;
 		private var videoWidth:Number;
 		
@@ -86,12 +87,17 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function createInterval():void
 		{
-			frameInterval = setInterval( handleEnterFrame, 250 );
+			if ( !frameInterval )
+			{
+				frameInterval = setInterval( handleEnterFrame, 250 );
+			}
 		}
 		
 		private function deleteInterval():void
 		{
 			clearInterval( frameInterval );
+			
+			frameInterval = 0;
 		}
 		
 		public function stop():void
@@ -150,7 +156,7 @@ package com.firestartermedia.lib.as3.display.component.video
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADING, progress ) );
 			
 				isLoaded = false;
-			}
+			} 
 		}
 		
 		private function checkForCuePoints():void
@@ -224,10 +230,14 @@ package com.firestartermedia.lib.as3.display.component.video
 				case 'NetStream.Play.Start':
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.BUFFERING ) );
 				
+				createInterval();
+				
 				break;
 				
 				case 'NetStream.Buffer.Full':
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.STARTED ) );
+				
+				createInterval();
 				
 				video.alpha = 1;
 				
@@ -254,6 +264,8 @@ package com.firestartermedia.lib.as3.display.component.video
 				
 				case 'NetStream.Seek.Notify':
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.BUFFERING ) );
+				
+				createInterval();
 				
 				break;
 				
@@ -312,7 +324,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function get loadingProgress():Object
 		{
-			var progress:Object = { };
+			var progress:Object 	= { };
 			
 			progress.total 			= stream.bytesLoaded / stream.bytesTotal;
 			progress.bytesLoaded 	= stream.bytesLoaded;
