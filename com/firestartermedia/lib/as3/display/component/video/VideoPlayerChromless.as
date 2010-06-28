@@ -229,13 +229,14 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				case 'NetStream.Play.Start':
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.BUFFERING ) );
+				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.STARTED ) );
 				
 				createInterval();
 				
 				break;
 				
 				case 'NetStream.Buffer.Full':
-				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.STARTED ) );
+				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.PLAYING ) );
 				
 				createInterval();
 				
