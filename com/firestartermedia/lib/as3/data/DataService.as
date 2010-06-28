@@ -17,6 +17,9 @@ package com.firestartermedia.lib.as3.data
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
 
 	public class DataService extends EventDispatcher
 	{
@@ -47,6 +50,28 @@ package com.firestartermedia.lib.as3.data
 			loader.addEventListener( IOErrorEvent.IO_ERROR, 		handleGenericEvent );
 			loader.addEventListener( ProgressEvent.PROGRESS, 		handleGenericEvent );
 			loader.addEventListener( Event.COMPLETE, 				handleLoaderComplete );
+		}
+		
+		public function send(url:String, data:URLVariables=null, method:String='GET'):void
+		{
+			var request:URLRequest = new URLRequest( url );
+			
+			request.data = data;
+			request.method = method;
+			
+			try 
+			{
+				loader.load( request );
+				
+				dispatchEvent( new DataServiceEvent( DataServiceEvent.LOADING ) );
+			} 
+			catch (e:*) 
+			{ }
+		}
+		
+		public function sendPost(url:String, data:URLVariables=null):void
+		{
+			send( url, data, URLRequestMethod.POST );
 		}
 		
 		public function handleLoaderStarted(e:Event):void

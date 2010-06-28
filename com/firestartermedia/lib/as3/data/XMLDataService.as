@@ -9,39 +9,12 @@
 package com.firestartermedia.lib.as3.data
 {
 	import com.firestartermedia.lib.as3.events.DataServiceEvent;
-	
-	import flash.errors.IOError;
-	import flash.net.URLRequest;
-	import flash.net.URLRequestMethod;
-	import flash.net.URLVariables;
 
 	public class XMLDataService extends DataService
 	{
 		public function XMLDataService()
 		{
 			super( DataServiceEvent.LOADING, DataServiceEvent.LOADED, DataServiceEvent.READY, DataService.TYPE_XML );
-		}
-		
-		public function send(url:String, data:URLVariables=null, method:String='GET'):void
-		{
-			var request:URLRequest = new URLRequest( url );
-			
-			request.data = data;
-			request.method = method;
-			
-			try 
-			{
-				loader.load( request );
-				
-				dispatchEvent( new DataServiceEvent( DataServiceEvent.LOADING ) );
-			} 
-			catch (e:*) 
-			{ }
-		}
-		
-		public function sendPost(url:String, data:URLVariables=null):void
-		{
-			send( url, data, URLRequestMethod.POST );
 		}
 	}
 }
