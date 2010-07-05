@@ -64,7 +64,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function loadPlayer():void
 		{
-			var request:URLRequest 	= new URLRequest( ( chromeless ? requestURLChromeless : requestURLChromed.replace( 'ID', videoId ) ) + pars );
+			var request:URLRequest 	= new URLRequest( ( chromeless ? requestURLChromeless : requestURLChromed.replace( 'ID', videoId ) ) + ( pars.indexOf( '&' ) !== 0 ? '&' : '' ) + pars );
 			var loader:Loader 		= new Loader();
 			
 			loader.contentLoaderInfo.addEventListener( Event.INIT, handleLoaderInit );
