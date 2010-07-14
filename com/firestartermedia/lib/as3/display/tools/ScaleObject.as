@@ -16,15 +16,16 @@ package com.firestartermedia.lib.as3.display.tools
 
 	public class ScaleObject extends Sprite
 	{
-		private var bitmapTL:Sprite;
-		private var bitmapTC:Sprite;
-		private var bitmapTR:Sprite;
-		private var bitmapML:Sprite;
-		private var bitmapMC:Sprite;
-		private var bitmapMR:Sprite;
-		private var bitmapBL:Sprite;
-		private var bitmapBC:Sprite;
-		private var bitmapBR:Sprite;
+		public var bitmapTL:Sprite;
+		public var bitmapTC:Sprite;
+		public var bitmapTR:Sprite;
+		public var bitmapML:Sprite;
+		public var bitmapMC:Sprite;
+		public var bitmapMR:Sprite;
+		public var bitmapBL:Sprite;
+		public var bitmapBC:Sprite;
+		public var bitmapBR:Sprite;
+		
 		private var master:*;
 		private var scaleGrid:Rectangle;
 		

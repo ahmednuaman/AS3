@@ -31,6 +31,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private var cuePoints:Array								= [ ];
 		private var lastFiredCuePoint:Number					= 0;
+		private var loadedBytes:Number							= 0;
 		private var metaData:Object								= { };
 		private var video:Video									= new Video();
 		
@@ -140,7 +141,9 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			var progress:Object = loadingProgress;
 			
-			if ( progress.total === 1 )
+			trace( loadedBytes, stream.bytesLoaded );
+			
+			if ( progress.total === 1 && loadedBytes === stream.bytesLoaded )
 			{
 				isLoaded = true;
 				
@@ -154,6 +157,8 @@ package com.firestartermedia.lib.as3.display.component.video
 			else
 			{
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADING, progress ) );
+				
+				loadedBytes = stream.bytesLoaded;
 			
 				isLoaded = false;
 			} 
