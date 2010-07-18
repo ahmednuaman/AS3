@@ -201,32 +201,32 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function getCurrentTime():Number
 		{
-			return player.getCurrentTime();
+			return ( isLoaded ? player.getCurrentTime() : 0 );
 		}
 		
 		public function getDuration():Number
 		{
-			return player.getDuration();
+			return ( isLoaded ? player.getDuration() : 0 );
 		}
 		
 		public function getVideoUrl():String
 		{
-			return player.getVideoUrl();
+			return ( isLoaded ? player.getVideoUrl() : '' );
 		}
 		
 		public function getPlaybackQuality():String
 		{
-			return player.getPlaybackQuality();
+			return ( isLoaded ? player.getPlaybackQuality() : '' );
 		}
 		
 		public function getVideoBytesLoaded():Number
 		{
-			return player.getVideoBytesLoaded();
+			return ( isLoaded ? player.getVideoBytesLoaded() : 0 );
 		}
 		
 		public function getVideoBytesTotal():Number
 		{
-			return player.getVideoBytesTotal();
+			return ( isLoaded ? player.getVideoBytesTotal() : 0 );
 		}
 		
 		public function setPlaybackQuality(suggestedQuality:String):void
@@ -239,12 +239,36 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public function mute():void
 		{
-			player.mute();
+			if ( isLoaded )
+			{
+				player.mute();
+			}
 		}
 		
 		public function unMute():void
 		{
-			player.unMute();
+			if ( isLoaded )
+			{
+				player.unMute();
+			}
+		}
+		
+		public function isMuted():Boolean
+		{
+			return ( isLoaded ? player.isMuted() : false );
+		}
+		
+		public function setVolume(value:Number):void
+		{
+			if ( isLoaded )
+			{
+				player.setVolume( value );
+			}
+		}
+		
+		public function getVolume():Number
+		{
+			return ( isLoaded ? player.getVolume() : 0 );
 		}
 		
 		public function seekTo(seconds:Number, allowSeekAhead:Boolean=true):void
@@ -253,6 +277,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				player.seekTo( seconds, allowSeekAhead );
 			}
+		}
+		
+		public function get ytPlayer():Object
+		{
+			return ( isLoaded ? player : null );
 		}
 		
 		override public function set height(value:Number):void
