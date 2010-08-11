@@ -15,8 +15,8 @@ package com.firestartermedia.lib.as3.display.component
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
-	import gs.TweenLite;
-	import gs.easing.Strong;
+	import com.greensock.TweenMax;
+	import com.greensock.easing.Strong;
 
 	public class LoaderProgressText extends Sprite
 	{		
@@ -58,8 +58,8 @@ package com.firestartermedia.lib.as3.display.component
 			field.x = -xMargin;
 			field.y = -yMargin;
 			
-			TweenLite.to( field, .5, { y: 0, ease: Strong.easeOut } );
-			TweenLite.to( this, .5, { autoAlpha: 1, ease: Strong.easeOut } );
+			TweenMax.to( field, .5, { y: 0, ease: Strong.easeOut } );
+			TweenMax.to( this, .5, { autoAlpha: 1, ease: Strong.easeOut } );
 			
 			dispatchEvent( new LoaderProgressEvent( LoaderProgressEvent.SHOW, true ) );
 		}
@@ -81,11 +81,11 @@ package com.firestartermedia.lib.as3.display.component
 		
 		public function hide():void
 		{
-			TweenLite.killTweensOf( field );
-			TweenLite.killTweensOf( this );
+			TweenMax.killTweensOf( field );
+			TweenMax.killTweensOf( this );
 			
-			TweenLite.to( field, .5, { y: yMargin, ease: Strong.easeOut } );
-			TweenLite.to( this, .5, { autoAlpha: 0, ease: Strong.easeOut } );
+			TweenMax.to( field, .5, { y: yMargin, ease: Strong.easeOut } );
+			TweenMax.to( this, .5, { autoAlpha: 0, ease: Strong.easeOut } );
 			
 			dispatchEvent( new LoaderProgressEvent( LoaderProgressEvent.HIDE, true ) );
 		}
