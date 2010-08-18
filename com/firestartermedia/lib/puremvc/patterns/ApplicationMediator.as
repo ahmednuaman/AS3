@@ -8,10 +8,11 @@ package com.firestartermedia.lib.puremvc.patterns
 
 	public class ApplicationMediator extends Mediator implements IMediator
 	{
+		protected var excludedMediators:Array					= [ ];
+		protected var tabbedMediators:Array						= [ ];
+		
 		protected var classPath:String;
 		protected var currentMediator:String;
-		protected var excludedMediators:Array;
-		protected var tabbedMediators:Array;
 		
 		public function ApplicationMediator(name:String=null, viewComponent:Object=null)
 		{
