@@ -12,9 +12,9 @@ package com.firestartermedia.lib.puremvc.events
 
 	public class SpriteEvent extends Event
 	{	
-		public var data:Object;
+		public var data:*;
 		
-		public function SpriteEvent(type:String, data:Object=null, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function SpriteEvent(type:String, data:*=null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super( type, bubbles, cancelable );
 			
