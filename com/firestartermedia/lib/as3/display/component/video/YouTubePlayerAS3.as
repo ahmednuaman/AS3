@@ -290,7 +290,7 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			if ( isLoaded )
 			{
-				player.resize( playerWidth, playerHeight );
+				player.setSize( playerWidth, playerHeight );
 			}
 		}
 		
@@ -300,7 +300,7 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			if ( isLoaded )
 			{
-				player.resize( playerWidth, playerHeight );
+				player.setSize( playerWidth, playerHeight );
 			}
 		}
 	}
