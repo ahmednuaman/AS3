@@ -92,7 +92,7 @@ package com.firestartermedia.lib.as3.data
 			
 			if ( handleReady )
 			{
-				if ( data )
+				if ( e.target.data.toString().length > 0 )
 				{
 					data = ( dataType == TYPE_XML ? new XML( e.target.data ) : JSON.decode( e.target.data ) );
 				}
