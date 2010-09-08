@@ -126,10 +126,10 @@ package com.firestartermedia.lib.as3.display.component.video
 				case 3:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.BUFFERING ) );
 				
-				if ( !chromeless && !autoplay )
+				/*if ( !chromeless && !autoplay )
 				{
 					pause();
-				}
+				}*/
 				
 				break;
 				
@@ -164,7 +164,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			if ( isLoaded )
 			{
-				if ( chromeless && !autoplay )
+				if ( !autoplay )
 				{
 					player.cueVideoById( videoId );
 				}
