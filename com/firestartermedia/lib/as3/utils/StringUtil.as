@@ -26,5 +26,19 @@ package com.firestartermedia.lib.as3.utils
 			
 			return result;
 		}
+		
+		public static function print(obj:*, level:Number=0):void
+		{
+			var tabs:String	= '';
+			
+			StringUtil.multiply( "\t", level );
+			
+			for ( var prop:String in obj )
+			{
+				trace( tabs + '[' + prop + '] -> ' + obj[ prop ] );
+				            
+				print( obj[ prop ], level + 1 );
+			}
+		}
 	}
 }
