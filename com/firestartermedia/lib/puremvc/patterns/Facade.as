@@ -15,13 +15,25 @@ package com.firestartermedia.lib.puremvc.patterns
 	{
 		protected var faultEvent:String;
 		protected var resizeEvent:String;
+		protected var startupEvent:String;
 		protected var trackEvent:String;
 		
-		public function Facade(faultEvent:String, resizeEvent:String, trackEvent:String)
+		public function Facade(startupEvent:String, faultEvent:String, resizeEvent:String, trackEvent:String)
 		{
 			this.faultEvent		= faultEvent;
 			this.resizeEvent	= resizeEvent;
+			this.startupEvent	= startupEvent;
 			this.trackEvent		= trackEvent;
+		}
+		
+		public function startup(stage:Object):void
+		{
+			sendNotification( startupEvent, stage );
+		}
+		
+		public function sendResize(height:Number, width:Number):void
+		{
+			sendNotification( resizeEvent, { width: width, height: height } );
 		}
 		
 		public function registerCommands(commands:Array, target:Class):void
