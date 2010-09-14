@@ -78,11 +78,21 @@ package com.firestartermedia.lib.puremvc.display
 			}
 		}
 		
+		protected function sendReset(eventName:String=null):void
+		{
+			if ( !ready )
+			{
+				ready 		= false;
+				
+				sendEvent( ( eventName ? eventName : resetEvent ) );
+			}
+		}
+		
 		public function handleReset():void
 		{
 			ready 			= false;
 			
-			sendEvent( resetEvent );
+			sendReset();
 		}
 		
 		public function handleResize(e:Object=null):void
@@ -93,10 +103,5 @@ package com.firestartermedia.lib.puremvc.display
 				stageWidth	= e.width;
 			}
 		}
-		
-		/* public function addBetterEventListener(type:String):void
-		{
-			
-		} */
 	}
 }
