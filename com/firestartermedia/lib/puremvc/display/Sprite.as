@@ -63,6 +63,24 @@ package com.firestartermedia.lib.puremvc.display
 			}
 		}
 		
+		override public function addChild(child:DisplayObject):DisplayObject
+		{
+			super.addChild( child );
+			
+			handleResize();
+			
+			return child;
+		}
+		
+		override public function addChildAt(child:DisplayObject, index:int):DisplayObject
+		{
+			super.addChildAt( child, index );
+			
+			handleResize();
+			
+			return child;
+		}
+		
 		protected function sendEvent(eventName:String, body:*=null):void
 		{
 			dispatchEvent( new SpriteEvent( eventName, body, true ) );
