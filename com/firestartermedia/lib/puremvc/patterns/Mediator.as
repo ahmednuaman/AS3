@@ -9,7 +9,9 @@
 package com.firestartermedia.lib.puremvc.patterns
 {	
 	import com.adobe.utils.ArrayUtil;
+	import com.firestartermedia.lib.puremvc.display.Sprite;
 	
+	import flash.display.DisplayObject;
 	import flash.utils.Dictionary;
 	
 	import org.puremvc.as3.interfaces.INotification;
@@ -20,13 +22,13 @@ package com.firestartermedia.lib.puremvc.patterns
 		protected var notificationInterests:Array				= [ ];
 		protected var notificationHandlers:Dictionary			= new Dictionary();
 		
-		protected var view:Object;
+		protected var view:Sprite;
 		
 		public function Mediator(name:String=null, viewComponent:Object=null)
 		{
 			super( name, viewComponent );
 			
-			view					= viewComponent;
+			view					= viewComponent as Sprite;
 			
 			declareNotificationInterest( 'ApplicationFacadeResize', handleResize );
 			
