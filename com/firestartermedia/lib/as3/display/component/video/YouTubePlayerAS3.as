@@ -25,12 +25,13 @@ package com.firestartermedia.lib.as3.display.component.video
 		public static const QUALITY_HD:String					= 'hd720';
 		public static const QUALITY_DEFAULT:String				= 'default';
 		
-		public var autoplay:Boolean								= true;
-		public var chromeless:Boolean							= true;
+		public var autoplay:Boolean								= false;
+		public var chromeless:Boolean							= false;
 		public var loop:Boolean									= false;
 		public var pars:String									= '';
 		public var playerHeight:Number							= 300;
 		public var playerWidth:Number							= 400;
+		public var quality:String								= QUALITY_LARGE;
 		
 		private var isLoaded:Boolean							= false;
 		private var requestURLChromed:String					= 'http://www.youtube.com/v/ID?version=3';
@@ -126,10 +127,10 @@ package com.firestartermedia.lib.as3.display.component.video
 				case 3:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.BUFFERING ) );
 				
-				/*if ( !chromeless && !autoplay )
+				if ( getPlaybackQuality() != quality )
 				{
-					pause();
-				}*/
+					setPlaybackQuality( quality );
+				}
 				
 				break;
 				
@@ -140,6 +141,11 @@ package com.firestartermedia.lib.as3.display.component.video
 				
 				case 5:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.QUEUED ) );
+				
+				if ( getPlaybackQuality() != quality )
+				{
+					setPlaybackQuality( quality );
+				}
 				
 				break;
 				
