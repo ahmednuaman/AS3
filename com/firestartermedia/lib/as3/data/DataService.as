@@ -30,6 +30,7 @@ package com.firestartermedia.lib.as3.data
 		
 		public var data:Object;
 		public var loader:URLLoader;
+		public var rawData:Object;
 
 		private var loadingEvent:String;
 		private var loadedEvent:String;
@@ -86,9 +87,9 @@ package com.firestartermedia.lib.as3.data
 		
 		public function handleLoaderComplete(e:Event):void
 		{
-			var data:Object;
+			rawData	= e.target.data;
 			
-			dispatchEvent( new DataServiceEvent( loadedEvent, e.target.data ) );
+			dispatchEvent( new DataServiceEvent( loadedEvent, rawData, rawData ) );
 			
 			if ( handleReady )
 			{
@@ -105,7 +106,7 @@ package com.firestartermedia.lib.as3.data
 		{
 			this.data = data;
 			
-			dispatchEvent( new DataServiceEvent( readyEvent, data ) );
+			dispatchEvent( new DataServiceEvent( readyEvent, data, rawData ) );
 		}
 	}
 }

@@ -19,12 +19,14 @@ package com.firestartermedia.lib.as3.events
 		public static const READY:String						= NAME + 'Ready';
 		
 		public var data:Object;
+		public var rawData:Object;
 		
-		public function DataServiceEvent(type:String, data:Object=null, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function DataServiceEvent(type:String, data:Object=null, rawData:Object=null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super( type, bubbles, cancelable );
 		
-			this.data = data;
+			this.data 		= data;
+			this.rawData	= rawData;
 		}
 	}
 }
