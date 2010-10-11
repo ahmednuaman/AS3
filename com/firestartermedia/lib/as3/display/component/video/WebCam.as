@@ -16,6 +16,7 @@ package com.firestartermedia.lib.as3.display.component.video
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.NetStatusEvent;
+	import flash.events.StatusEvent;
 	import flash.geom.Rectangle;
 	import flash.media.Camera;
 	import flash.media.Microphone;
@@ -27,6 +28,7 @@ package com.firestartermedia.lib.as3.display.component.video
 	{
 		public var recordingName:String							= 'Recording' + DateUtil.toNumericalTimestamp( new Date() );
 		
+		private var hasBeenDenyed:Boolean						= false;
 		private var isRecording:Boolean							= false;
 		
 		public var captureURL:String;
@@ -48,13 +50,37 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			this.bandwidth	= bandwidth;
 			this.quality	= quality;
-			
-			init();
 		}
 		
-		private function init():void
+		public function init():void
 		{
-			camera = Camera.getCamera();
+			var index:int = 0;
+			
+			for ( var i:int = 0; i < Camera.names.length; i++ ) 
+			{
+				if ( Camera.names[ i ] == 'USB Video Class Video' ) 
+				{
+					index = i;
+				}
+			}
+			
+			camera = Camera.getCamera( index.toString() );
+			
+			if ( camera == null )
+			{
+				dispatchEvent( new WebCamEvent( WebCamEvent.NO_WEBCAM ) );
+				
+				return;
+			}
+			
+			if ( camera.muted && hasBeenDenyed )
+			{
+				dispatchEvent( new WebCamEvent( WebCamEvent.NO_WEBCAM ) );
+				
+				return;
+			}
+			
+			camera.addEventListener( StatusEvent.STATUS, handleCameraStatus );
 			
 			camera.setMode( cameraWidth, cameraHeight, 20, true );
 			camera.setQuality( bandwidth, quality );
@@ -68,6 +94,16 @@ package com.firestartermedia.lib.as3.display.component.video
 			video.attachCamera( camera );
 			
 			addChild( video );
+		}
+		
+		private function handleCameraStatus(e:StatusEvent):void
+		{
+			if ( e.code == 'Camera.Muted' )
+			{
+				hasBeenDenyed	= true;
+				
+				dispatchEvent( new WebCamEvent( WebCamEvent.NO_WEBCAM ) );
+			}
 		}
 		
 		public function captureImage():Bitmap

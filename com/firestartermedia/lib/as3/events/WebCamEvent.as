@@ -9,6 +9,7 @@ package com.firestartermedia.lib.as3.events
 		public static const CONNECTING:String					= NAME + 'Connecting';
 		public static const CONNECTED:String					= NAME + 'Connected';
 		public static const CONNECTION_FAILED:String			= NAME + 'ConnectionFailed';
+		public static const NO_WEBCAM:String					= NAME + 'NoWebcam';
 		public static const RECORDING_STARTED:String			= NAME + 'RecordingStarted';
 		public static const RECORDING_STOPPED:String			= NAME + 'RecordingStopped';
 		public static const RECORDING_FINISHED:String			= NAME + 'RecordingFinished';
