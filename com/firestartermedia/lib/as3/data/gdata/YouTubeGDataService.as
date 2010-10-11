@@ -182,6 +182,27 @@ package com.firestartermedia.lib.as3.data.gdata
 			load( request );
 		}
 		
+		public function getUploadToken(token:String, devkey:String, title:String, description:String, category:String, keywords:String):void
+		{
+			var request:URLRequest 	= new URLRequest( GDATA_URL.replace( '/feeds/api/', '/action/GetUploadToken' ) );
+			
+			request.contentType		= 'application/atom+xml; charset=UTF-8';
+			request.method			= URLRequestMethod.POST;
+			request.requestHeaders	= [ /* new URLRequestHeader( 'X-HTTP-Method-Override', 'GET' ), */
+				new URLRequestHeader( 'Authorization', 'AuthSub token="' + token + '"' ), 
+				new URLRequestHeader( 'GData-Version', '2' ),
+				new URLRequestHeader( 'X-GData-Key', 'key=' + devkey ) ];
+			request.data			= '<?xml version="1.0" encoding="UTF-8"?>' +
+				'<entry xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:yt="http://gdata.youtube.com/schemas/2007">' +
+				'<media:group><media:title type="plain">' + title + '</media:title>' +
+				'<media:description type="plain">' + description + '</media:description>' +
+				'<media:category scheme="http://gdata.youtube.com/schemas/2007/categories.cat">' + category + '</media:category>' +
+				'<media:keywords>' + keywords + '</media:keywords>' + 
+				'</media:group></entry>';
+			
+			load( request );
+		}
+		
 		private function load(request:URLRequest):void
 		{
 			loader.load( request );
