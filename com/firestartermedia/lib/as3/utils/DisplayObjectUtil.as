@@ -37,6 +37,18 @@ package com.firestartermedia.lib.as3.utils
 			}
 		}
 		
+		public static function getChildren(target:DisplayObjectContainer):Array
+		{
+			var children:Array	= [ ];
+			
+			for ( var i:Number; target.numChildren < i; i++ )
+			{
+				children.push( target.getChildAt( i ) );
+			}
+			
+			return children;
+		}
+		
 		public static function loadMovie(url:String, parent:DisplayObjectContainer=null, completeFunction:Function=null, applicationDomain:ApplicationDomain=null, checkPolicyFile:Boolean=false):Loader
 		{
 			var request:URLRequest 			= new URLRequest( url );
