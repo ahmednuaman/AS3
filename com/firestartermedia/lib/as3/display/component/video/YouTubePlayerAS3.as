@@ -34,6 +34,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		public var quality:String								= QUALITY_LARGE;
 		
 		private var isLoaded:Boolean							= false;
+		private var isPlaying:Boolean							= false;
 		private var requestURLChromed:String					= 'http://www.youtube.com/v/ID?version=3';
 		private var requestURLChromeless:String					= 'http://www.youtube.com/apiplayer?version=3';
 		
@@ -100,12 +101,14 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function handlePlayerStateChange(e:Object):void
 		{
-			var state:Number 		= player.getPlayerState();
+			var state:Number = player.getPlayerState();
 			
 			switch ( state )
 			{
 				case 0:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.ENDED ) );
+				
+				isPlaying	= false;
 				
 				if ( loop )
 				{
@@ -117,15 +120,21 @@ package com.firestartermedia.lib.as3.display.component.video
 				case 1:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.PLAYING ) );
 				
+				isPlaying	= true;
+				
 				break;
 				
 				case 2:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.PAUSED ) );
 				
+				isPlaying	= false;
+				
 				break;
 				
 				case 3:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.BUFFERING ) );
+				
+				isPlaying	= false;
 				
 				if ( getPlaybackQuality() != quality )
 				{
@@ -142,6 +151,8 @@ package com.firestartermedia.lib.as3.display.component.video
 				case 5:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.QUEUED ) );
 				
+				isPlaying	= false;
+				
 				if ( getPlaybackQuality() != quality )
 				{
 					setPlaybackQuality( quality );
@@ -151,6 +162,8 @@ package com.firestartermedia.lib.as3.display.component.video
 				
 				default:
 				dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.NOT_STARTED ) );
+				
+				isPlaying	= false;
 				
 				break;
 			}
@@ -288,6 +301,11 @@ package com.firestartermedia.lib.as3.display.component.video
 		public function get ytPlayer():Object
 		{
 			return ( isLoaded ? player : null );
+		}
+		
+		public function get playing():Boolean
+		{
+			return isPlaying;
 		}
 		
 		override public function set height(value:Number):void
