@@ -51,6 +51,11 @@ package com.firestartermedia.lib.puremvc.patterns
 		{
 			var m:Object;
 			
+			if ( !mediator.hasOwnProperty( 'NAME' ) )
+			{
+				mediator		= getDefinitionByName( classPath + mediator.toString().split( '-' )[ 0 ] ) as Class
+			}
+			
 			if ( facade.hasMediator( mediator.NAME ) )
 			{	
 				m			= facade.retrieveMediator( mediator.NAME );
