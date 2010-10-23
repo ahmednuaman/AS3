@@ -81,7 +81,7 @@ package com.firestartermedia.lib.puremvc.display
 			return child;
 		}
 		
-		protected function sendEvent(eventName:String, body:*=null):void
+		protected function sendEvent(eventName:String, body:Object=null):void
 		{
 			dispatchEvent( new SpriteEvent( eventName, body, true ) );
 		}
