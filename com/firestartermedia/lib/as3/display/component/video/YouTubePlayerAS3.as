@@ -102,7 +102,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		private function handlePlayerStateChange(e:Object):void
 		{
 			var state:Number = player.getPlayerState();
-			
+
 			switch ( state )
 			{
 				case 0:
