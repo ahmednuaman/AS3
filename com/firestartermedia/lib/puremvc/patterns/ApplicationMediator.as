@@ -5,11 +5,15 @@ package com.firestartermedia.lib.puremvc.patterns
 	import flash.utils.getDefinitionByName;
 	
 	import org.puremvc.as3.interfaces.IMediator;
+	import org.puremvc.as3.interfaces.INotification;
 
 	public class ApplicationMediator extends Mediator implements IMediator
 	{
 		protected var excludedMediators:Array					= [ ];
 		protected var tabbedMediators:Array						= [ ];
+		protected var viewNamingHide:String						= 'Hide';
+		protected var viewNamingMediator:String					= 'Mediator';
+		protected var viewNamingShow:String						= 'Show';
 		
 		protected var classPath:String;
 		protected var currentMediator:String;
@@ -77,6 +81,21 @@ package com.firestartermedia.lib.puremvc.patterns
 						removeMediator( getDefinitionByName( classPath + m ) as Class );
 					}
 				}
+			}
+		}
+		
+		protected function handleSectionChange(notification:INotification):void
+		{
+			var name:String		= notification.getName();
+			var mediator:String	= name.replace( viewNamingHide, '' ).replace( viewNamingShow, '' ) + viewNamingMediator;
+			
+			if ( name.indexOf( viewNamingHide ) !== -1 )
+			{
+				removeMediator( mediator );
+			}
+			else
+			{
+				addMediator( mediator );
 			}
 		}
 		
