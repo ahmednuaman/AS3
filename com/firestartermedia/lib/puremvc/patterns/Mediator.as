@@ -9,6 +9,7 @@
 package com.firestartermedia.lib.puremvc.patterns
 {	
 	import com.adobe.utils.ArrayUtil;
+	import com.firestartermedia.lib.puremvc.vo.MediatorNotificationInterestVO;
 	
 	import flash.utils.Dictionary;
 	
@@ -65,13 +66,21 @@ package com.firestartermedia.lib.puremvc.patterns
 			sendNotification( event.type, event.data );
 		}
 		
-		public function declareNotificationInterest(notificationName:String, func:Function):void
+		public function declareNotificationInterest(notification:String, func:Function):void
 		{			
-			notificationInterests.push( notificationName );
+			notificationInterests.push( notification );
 			
 			notificationInterests	= ArrayUtil.createUniqueCopy( notificationInterests );
 			
-			notificationHandlers[ notificationName ] = func;
+			notificationHandlers[ notification ] = func;
+		}
+		
+		public function declareNotificationInterests(interests:Array):void
+		{
+			for each ( var interest:MediatorNotificationInterestVO in interests )
+			{
+				declareNotificationInterest( interest.notification, interest.func );
+			}
 		}
 		
 		override public function listNotificationInterests():Array
