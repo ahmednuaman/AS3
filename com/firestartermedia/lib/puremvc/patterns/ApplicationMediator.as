@@ -87,6 +87,7 @@ package com.firestartermedia.lib.puremvc.patterns
 		protected function handleSectionChange(notification:INotification):void
 		{
 			var name:String		= notification.getName();
+			var data:Object		= notification.getBody();
 			var mediator:String	= name.replace( viewNamingHide, '' ).replace( viewNamingShow, '' ) + viewNamingMediator;
 			
 			if ( name.indexOf( viewNamingHide ) !== -1 )
@@ -95,7 +96,7 @@ package com.firestartermedia.lib.puremvc.patterns
 			}
 			else
 			{
-				addMediator( mediator );
+				addMediator( mediator, data );
 			}
 		}
 		
