@@ -93,6 +93,11 @@ package com.firestartermedia.lib.as3.sound.component
 			channel	= sound.play();
 		}
 		
+		public function stop():void
+		{
+			sound.close();
+		}
+		
 		public function resume():void
 		{
 			if ( !channel )
