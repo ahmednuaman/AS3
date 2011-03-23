@@ -14,19 +14,17 @@ package com.firestartermedia.lib.as3.events
 	{
 		public static const NAME:String							= 'SoundPlayerEvent';
 		
-		public static const BUFFERING:String					= NAME + 'Buffering';
 		public static const LOADING:String						= NAME + 'Loading';
 		public static const LOADED:String						= NAME + 'Loaded';
 		public static const ID3_READY:String					= NAME + 'ID3Ready';
-		public static const STARTED:String						= NAME + 'Started';
 		public static const PLAYING:String						= NAME + 'Playing';
 		public static const PAUSED:String						= NAME + 'Paused';
-		public static const CUE_POINT:String					= NAME + 'CuePoint';
-		public static const HALF_WAY:String						= NAME + 'HalfWay';
 		public static const ENDED:String						= NAME + 'Ended';
 		public static const ERROR:String						= NAME + 'Error';
-		public static const SOUND_CHANGED:String				= NAME + 'SoundChanged';
-		public static const FAILED:String						= NAME + 'Failed';
+		public static const STOPPED:String						= NAME + 'Stopped';
+		public static const MUTED:String						= NAME + 'Muted';
+		public static const UNMUTED:String						= NAME + 'Unmuted';
+		public static const SEEKED:String						= NAME + 'Seeked';
 		
 		public var data:Object;
 		

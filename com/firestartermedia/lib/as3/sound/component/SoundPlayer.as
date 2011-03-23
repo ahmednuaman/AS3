@@ -52,7 +52,7 @@ package com.firestartermedia.lib.as3.sound.component
 		
 		private function handleSoundFault(e:*):void
 		{
-			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.FAILED ) );
+			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.ERROR, e ) );
 		}
 		
 		private function handleSoundDataReady(e:Event):void
@@ -62,6 +62,8 @@ package com.firestartermedia.lib.as3.sound.component
 		
 		private function handleSoundComplete(e:Event):void
 		{
+			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.LOADED ) );
+			
 			if ( autoPlay )
 			{
 				resume();
@@ -99,6 +101,8 @@ package com.firestartermedia.lib.as3.sound.component
 		{
 			if ( channel )
 			{
+				dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.STOPPED ) );
+				
 				channel.stop();
 				
 				sound.close();
@@ -115,6 +119,8 @@ package com.firestartermedia.lib.as3.sound.component
 		
 		public function resume():void
 		{
+			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.PLAYING ) );
+			
 			if ( !channel )
 			{
 				channel = sound.play();
@@ -127,6 +133,8 @@ package com.firestartermedia.lib.as3.sound.component
 		
 		public function pause():void
 		{
+			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.PAUSED ) );
+			
 			if ( channel )
 			{
 				currentPosition = channel.position;
@@ -147,6 +155,8 @@ package com.firestartermedia.lib.as3.sound.component
 			
 			if ( channel )
 			{
+				dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.MUTED ) );
+				
 				channel.soundTransform	= t;
 			}
 			else
@@ -161,6 +171,8 @@ package com.firestartermedia.lib.as3.sound.component
 			
 			if ( channel )
 			{
+				dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.UNMUTED ) );
+				
 				channel.soundTransform	= t;
 			}
 			else
@@ -173,6 +185,8 @@ package com.firestartermedia.lib.as3.sound.component
 		{
 			if ( sound )
 			{
+				dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.SEEKED ) );
+				
 				channel	= sound.play( seconds );
 				
 				if ( !play )
