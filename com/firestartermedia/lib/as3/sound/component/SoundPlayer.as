@@ -18,6 +18,7 @@ package com.firestartermedia.lib.as3.sound.component
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	import flash.media.SoundLoaderContext;
+	import flash.media.SoundTransform;
 	import flash.net.URLRequest;
 
 	public class SoundPlayer extends EventDispatcher implements IEventDispatcher
@@ -85,9 +86,11 @@ package com.firestartermedia.lib.as3.sound.component
 				sound.close();
 			}
 			
-			sound = new Sound();
+			sound 	= new Sound();
 			
 			sound.load( request, context );
+			
+			channel	= sound.play();
 		}
 		
 		public function resume():void
@@ -115,6 +118,20 @@ package com.firestartermedia.lib.as3.sound.component
 			else
 			{
 				throw new Error( 'There\'s nothing to pause!' );
+			}
+		}
+		
+		public function mute():void
+		{
+			var t:SoundTransform		= new SoundTransform( 0, 0 );
+			
+			if ( channel )
+			{
+				channel.soundTransform	= t;
+			}
+			else
+			{
+				throw new Error( 'There\'s nothing to mute!' );
 			}
 		}
 		
