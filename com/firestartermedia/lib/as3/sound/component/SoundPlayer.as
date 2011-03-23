@@ -72,30 +72,45 @@ package com.firestartermedia.lib.as3.sound.component
 		{
 			var request:URLRequest 	= new URLRequest( url );
 			
-			context.bufferTime 		= 2;
+			context.bufferTime 		= bufferTime;
 			
 			currentPosition			= 0;
 			
-			if ( channel )
+			/*if ( channel )
 			{
+				channel.stop();
+				
 				channel 			= null;
 			}
 			
 			if ( sound )
 			{
 				sound.close();
-			}
+			}*/
+			
+			stop();
 			
 			sound 	= new Sound();
 			
 			sound.load( request, context );
-			
-			channel	= sound.play();
 		}
 		
 		public function stop():void
 		{
-			sound.close();
+			if ( channel )
+			{
+				channel.stop();
+				
+				sound.close();
+				
+				isPlaying 	= false;
+				
+				channel		= null;
+			}
+			else
+			{
+				throw new Error( 'There\'s nothing to pause!' );
+			}
 		}
 		
 		public function resume():void
@@ -147,6 +162,23 @@ package com.firestartermedia.lib.as3.sound.component
 			if ( channel )
 			{
 				channel.soundTransform	= t;
+			}
+			else
+			{
+				throw new Error( 'There\'s nothing to unmute!' );
+			}
+		}
+		
+		public function seek(seconds:Number, play:Boolean=true):void
+		{
+			if ( sound )
+			{
+				channel	= sound.play( seconds );
+				
+				if ( !play )
+				{
+					pause();
+				}
 			}
 			else
 			{
