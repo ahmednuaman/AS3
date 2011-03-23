@@ -135,6 +135,20 @@ package com.firestartermedia.lib.as3.sound.component
 			}
 		}
 		
+		public function unmute():void
+		{
+			var t:SoundTransform		= new SoundTransform( 1, 0 );
+			
+			if ( channel )
+			{
+				channel.soundTransform	= t;
+			}
+			else
+			{
+				throw new Error( 'There\'s nothing to unmute!' );
+			}
+		}
+		
 		public function get loadingProgress():Object
 		{
 			var progress:Object 	= { };
