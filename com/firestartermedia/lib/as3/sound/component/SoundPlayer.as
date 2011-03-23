@@ -133,9 +133,9 @@ package com.firestartermedia.lib.as3.sound.component
 		{
 			var time:Object 	= { };
 			
-			/*time.current 		= stream.time;
-			time.total 			= metaData.duration;
-			time.formatted 		= NumberUtil.toTimeString( Math.round( stream.time ) ) + ' / ' + NumberUtil.toTimeString( Math.round( metaData.duration ) ); */
+			time.current		= channel.position / 1000;
+			time.total			= sound.length / 1000;
+			time.formatted		= NumberUtil.toTimeString( Math.round( time.current ) ) + ' / ' + NumberUtil.toTimeString( Math.round( time.total ) );
 		
 			return time;
 		}
