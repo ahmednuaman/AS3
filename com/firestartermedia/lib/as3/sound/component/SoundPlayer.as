@@ -9,6 +9,7 @@
 package com.firestartermedia.lib.as3.sound.component
 {
 	import com.firestartermedia.lib.as3.events.SoundPlayerEvent;
+	import com.firestartermedia.lib.as3.utils.NumberUtil;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -23,7 +24,7 @@ package com.firestartermedia.lib.as3.sound.component
 
 	public class SoundPlayer extends EventDispatcher implements IEventDispatcher
 	{
-		public var autoPlay:Boolean								= true;
+		public var autoPlay:Boolean								= false;
 		public var bufferTime:Number							= 2;
 		
 		private var context:SoundLoaderContext					= new SoundLoaderContext();
@@ -35,9 +36,14 @@ package com.firestartermedia.lib.as3.sound.component
 		private var channel:SoundChannel;
 		private var sound:Sound;
 		
-		public function SoundPlayer()
+		public function SoundPlayer(t:String='')
 		{
 			super( this );
+			
+			if ( t )
+			{
+				play( t );
+			}
 			
 			sound.addEventListener( ProgressEvent.PROGRESS, 	handleSoundProgress );
 			sound.addEventListener( IOErrorEvent.IO_ERROR,		handleSoundFault );
@@ -111,10 +117,10 @@ package com.firestartermedia.lib.as3.sound.component
 				
 				channel		= null;
 			}
-			else
+			/*else
 			{
-				throw new Error( 'There\'s nothing to pause!' );
-			}
+				throw new Error( 'There\'s nothing to stop!' );
+			}*/
 		}
 		
 		public function resume():void
@@ -143,10 +149,10 @@ package com.firestartermedia.lib.as3.sound.component
 				
 				isPlaying = false;
 			}
-			else
+			/*else
 			{
 				throw new Error( 'There\'s nothing to pause!' );
-			}
+			}*/
 		}
 		
 		public function mute():void
@@ -159,10 +165,10 @@ package com.firestartermedia.lib.as3.sound.component
 				
 				channel.soundTransform	= t;
 			}
-			else
+			/*else
 			{
 				throw new Error( 'There\'s nothing to mute!' );
-			}
+			}*/
 		}
 		
 		public function unmute():void
@@ -175,10 +181,10 @@ package com.firestartermedia.lib.as3.sound.component
 				
 				channel.soundTransform	= t;
 			}
-			else
+			/*else
 			{
 				throw new Error( 'There\'s nothing to unmute!' );
-			}
+			}*/
 		}
 		
 		public function seek(seconds:Number, play:Boolean=true):void
@@ -194,10 +200,10 @@ package com.firestartermedia.lib.as3.sound.component
 					pause();
 				}
 			}
-			else
+			/*else
 			{
-				throw new Error( 'There\'s nothing to unmute!' );
-			}
+				throw new Error( 'There\'s nothing to seek!' );
+			}*/
 		}
 		
 		public function get loadingProgress():Object

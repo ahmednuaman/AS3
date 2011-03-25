@@ -21,7 +21,7 @@ package com.firestartermedia.lib.as3.utils
 			
 			for ( var i:Number = 0; i < times; i++ )
 			{
-				result			+= string;
+				result			= result + string;
 			}
 			
 			return result;
@@ -29,15 +29,13 @@ package com.firestartermedia.lib.as3.utils
 		
 		public static function print(obj:*, level:Number=0):void
 		{
-			var tabs:String	= '';
-			
-			StringUtil.multiply( "\t", level );
+			var tabs:String	= StringUtil.multiply( "\t", level );
 			
 			for ( var prop:String in obj )
 			{
 				trace( tabs + '[' + prop + '] -> ' + obj[ prop ] );
 				            
-				print( obj[ prop ], level + 1 );
+				StringUtil.print( obj[ prop ], level + 1 );
 			}
 		}
 	}

@@ -31,7 +31,7 @@ package com.firestartermedia.lib.puremvc.patterns
 			sendNotification( startupEvent, stage );
 		}
 		
-		public function sendResize(height:Number, width:Number):void
+		public function sendResize(width:Number, height:Number):void
 		{
 			sendNotification( resizeEvent, { width: width, height: height } );
 		}
