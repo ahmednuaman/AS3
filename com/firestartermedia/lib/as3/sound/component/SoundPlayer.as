@@ -111,7 +111,10 @@ package com.firestartermedia.lib.as3.sound.component
 				
 				channel.stop();
 				
-				sound.close();
+				if ( sound.isBuffering )
+				{
+					sound.close();
+				}
 				
 				isPlaying 	= false;
 				
@@ -127,12 +130,7 @@ package com.firestartermedia.lib.as3.sound.component
 		{
 			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.PLAYING ) );
 			
-			if ( !channel )
-			{
-				channel = sound.play();
-			}
-			
-			sound.play( currentPosition );
+			channel	= sound.play( currentPosition );
 			
 			isPlaying = true;
 		}
@@ -221,7 +219,7 @@ package com.firestartermedia.lib.as3.sound.component
 		{
 			var time:Object 	= { };
 			
-			time.current		= channel.position / 1000;
+			time.current		= channel ? channel.position / 1000 : 0;
 			time.total			= sound.length / 1000;
 			time.formatted		= NumberUtil.toTimeString( Math.round( time.current ) ) + ' / ' + NumberUtil.toTimeString( Math.round( time.total ) );
 		

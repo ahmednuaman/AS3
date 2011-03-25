@@ -36,7 +36,7 @@ package com.firestartermedia.lib.as3.utils
 			var hours:Number 		= Math.floor( number / 3600 );
     		var minutes:Number 		= Math.floor( ( number % 3600 ) / 60 );
     		var seconds:Number 		= Math.floor( ( number % 3600 ) % 60 );
-    		var times:Array 		= [ likeTime( hours ), likeTime( minutes, true ), likeTime( seconds, true ) ];	
+    		var times:Array 		= [ likeTime( hours ), likeTime( minutes, true ), likeTime( seconds, true ) ];
     		var test:Function 		= function(item:String, index:Number, array:Array):Boolean
     								{
     									return ObjectUtil.isValid( item );
