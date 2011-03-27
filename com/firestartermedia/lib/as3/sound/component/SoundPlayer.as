@@ -132,6 +132,8 @@ package com.firestartermedia.lib.as3.sound.component
 			
 			channel	= sound.play( currentPosition );
 			
+			channel.addEventListener( Event.SOUND_COMPLETE, handleFinished );
+			
 			isPlaying = true;
 		}
 		
@@ -193,6 +195,8 @@ package com.firestartermedia.lib.as3.sound.component
 				
 				channel	= sound.play( seconds );
 				
+				channel.addEventListener( Event.SOUND_COMPLETE, handleFinished );
+				
 				if ( !play )
 				{
 					pause();
@@ -202,6 +206,11 @@ package com.firestartermedia.lib.as3.sound.component
 			{
 				throw new Error( 'There\'s nothing to seek!' );
 			}*/
+		}
+		
+		private function handleFinished(e:Event):void
+		{
+			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.ENDED ) );
 		}
 		
 		public function get loadingProgress():Object
