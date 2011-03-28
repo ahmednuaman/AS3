@@ -113,7 +113,11 @@ package com.firestartermedia.lib.as3.sound.component
 				
 				if ( sound.isBuffering )
 				{
-					sound.close();
+					try
+					{
+						sound.close();
+					}
+					catch (e:*) {}
 				}
 				
 				isPlaying 	= false;
