@@ -40,7 +40,21 @@ package com.firestartermedia.lib.puremvc.patterns
 				
 				m				= facade.retrieveMediator( mediator.NAME );
 				
-				view.addChild( m.getViewComponent() );
+				if ( !m )
+				{
+					sendNotification( 'ApplicationFacadeFault', 'Well it looks like ' + mediator.NAME + ' hasn\'t loaded correctly' );
+					
+					return;
+				}
+				
+				try
+				{
+					view.addChild( m.getViewComponent() );
+				}
+				catch (e:*)
+				{
+					sendNotification( 'ApplicationFacadeFault', 'Failed to add ' + mediator.NAME + '\'s view' );
+				}
 				
 				if ( m.hasOwnProperty( 'data' ) )
 				{
@@ -63,8 +77,22 @@ package com.firestartermedia.lib.puremvc.patterns
 			if ( facade.hasMediator( mediator.NAME ) )
 			{	
 				m			= facade.retrieveMediator( mediator.NAME );
-			
-				view.removeChild( m.getViewComponent() );
+				
+				if ( !m )
+				{
+					sendNotification( 'ApplicationFacadeFault', 'Well it looks like ' + mediator.NAME + ' hasn\'t loaded correctly' );
+					
+					return;
+				}
+				
+				try
+				{
+					view.removeChild( m.getViewComponent() );
+				}
+				catch (e:*)
+				{
+					sendNotification( 'ApplicationFacadeFault', 'Failed to remove ' + mediator.NAME + '\'s view' );
+				}
 				
 				facade.removeMediator( mediator.NAME );
 			}
