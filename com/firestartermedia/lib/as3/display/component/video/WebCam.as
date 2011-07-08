@@ -17,6 +17,7 @@ package com.firestartermedia.lib.as3.display.component.video
 	import flash.display.Sprite;
 	import flash.events.NetStatusEvent;
 	import flash.events.StatusEvent;
+	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
 	import flash.media.Camera;
 	import flash.media.Microphone;
@@ -206,6 +207,16 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				throw new Error( 'Nothing\'s recording!' );
 			}
+		}
+		
+		public function set reflect(b:Boolean):void
+		{
+			var matrix:Matrix		= new Matrix();
+			
+			matrix.translate( -cameraWidth, 0 ); 
+			matrix.scale( -1, 1 );
+			
+			video.transform.matrix	= matrix;
 		}
 		
 		public function get bitmapData():BitmapData
