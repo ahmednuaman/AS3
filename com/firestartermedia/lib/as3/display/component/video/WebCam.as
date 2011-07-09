@@ -34,6 +34,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		public var captureURL:String;
 		
+		private var _reflect:Boolean;
 		private var bandwidth:Number;
 		private var camera:Camera;
 		private var cameraHeight:Number;
@@ -213,15 +214,20 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			var matrix:Matrix		= new Matrix();
 			
-			matrix.translate( -cameraWidth, 0 ); 
-			matrix.scale( -1, 1 );
+			_reflect				= b;
+			
+			if ( b )
+			{
+				matrix.translate( -cameraWidth, 0 ); 
+				matrix.scale( -1, 1 );
+			}
 			
 			video.transform.matrix	= matrix;
 		}
 		
 		public function get bitmapData():BitmapData
 		{
-			return BitmapUtil.grab( video, new Rectangle( 0, 0, cameraWidth, cameraHeight ), true );
+			return BitmapUtil.grab( this, new Rectangle( 0, 0, cameraWidth, cameraHeight ), true );
 		}
 		
 		public function get recording():Boolean
