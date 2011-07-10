@@ -11,6 +11,7 @@ package com.firestartermedia.lib.puremvc.display
 	import com.firestartermedia.lib.puremvc.events.SpriteEvent;
 	
 	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 
 	public class Sprite extends flash.display.Sprite
@@ -45,20 +46,20 @@ package com.firestartermedia.lib.puremvc.display
 			}
 		}
 		
-		public function removeChildren(...children):void
+		public function removeChildren(t:DisplayObjectContainer, ...children):void
 		{
 			if ( children.length )
 			{
 				for each ( var child:DisplayObject in children )
 				{
-					removeChild( child );
+					t.removeChild( child );
 				}
 			}
 			else
 			{
-				for ( var i:Number = 0; i < numChildren; i++ )
+				for ( var i:Number = 0; i < t.numChildren; i++ )
 				{
-					removeChildAt( i );
+					t.removeChildAt( i );
 				}
 			}
 		}
