@@ -47,7 +47,7 @@ package com.firestartermedia.lib.puremvc.display
 		
 		public function removeChildren(...children):void
 		{
-			if ( children )
+			if ( children.length )
 			{
 				for each ( var child:DisplayObject in children )
 				{
