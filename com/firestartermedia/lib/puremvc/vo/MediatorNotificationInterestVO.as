@@ -10,5 +10,10 @@ package com.firestartermedia.lib.puremvc.vo
 			this.func			= func;
 			this.notification	= notification;
 		}
+		
+		public function toString():String
+		{
+			return 'Notification: ' + notification + '; Function: ' + func;
+		}
 	}
 }
