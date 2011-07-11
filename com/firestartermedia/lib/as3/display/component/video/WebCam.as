@@ -75,7 +75,7 @@ package com.firestartermedia.lib.as3.display.component.video
 				return;
 			}
 			
-			if ( camera.muted && hasBeenDenyed )
+			if ( camera.muted || hasBeenDenyed )
 			{
 				dispatchEvent( new WebCamEvent( WebCamEvent.NO_WEBCAM ) );
 				
