@@ -62,7 +62,7 @@ package com.firestartermedia.lib.as3.utils
 			
 			if ( completeFunction != null )
 			{
-				loader.contentLoaderInfo.addEventListener( Event.COMPLETE, completeFunction );
+				loader.contentLoaderInfo.addEventListener( Event.COMPLETE, completeFunction, false, 0, true );
 			}
 			
 			try 
