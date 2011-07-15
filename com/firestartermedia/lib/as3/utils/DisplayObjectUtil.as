@@ -75,7 +75,7 @@ package com.firestartermedia.lib.as3.utils
 			return loader;
 		}
 		
-		public static function scale(target:DisplayObject, width:Number=0, height:Number=0):void
+		public static function scale(target:DisplayObject, width:Number=0, height:Number=0):Number
 		{
 			/*var targetHeight:Number 		= ( height > 0 ? height : target.height );
 			var targetWidth:Number 			= targetHeight * ( target.width / target.height );
@@ -99,6 +99,7 @@ package com.firestartermedia.lib.as3.utils
 			target.height			= target.height * scale;
 			target.width			= target.width * scale;
 			
+			return scale;
 		}
 		
 		public static function eachChild(target:DisplayObjectContainer, func:Function):Array
