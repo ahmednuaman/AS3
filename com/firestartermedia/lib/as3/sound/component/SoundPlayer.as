@@ -36,9 +36,11 @@ package com.firestartermedia.lib.as3.sound.component
 		private var channel:SoundChannel;
 		private var sound:Sound;
 		
-		public function SoundPlayer(t:String=null)
+		public function SoundPlayer(t:String=null, autoPlay:Boolean=false)
 		{
 			super( this );
+			
+			this.autoPlay	= autoPlay;
 			
 			if ( t )
 			{
