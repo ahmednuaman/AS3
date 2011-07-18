@@ -36,7 +36,7 @@ package com.firestartermedia.lib.as3.sound.component
 		private var channel:SoundChannel;
 		private var sound:Sound;
 		
-		public function SoundPlayer(t:String='')
+		public function SoundPlayer(t:String=null)
 		{
 			super( this );
 			
@@ -44,11 +44,6 @@ package com.firestartermedia.lib.as3.sound.component
 			{
 				play( t );
 			}
-			
-			sound.addEventListener( ProgressEvent.PROGRESS, 	handleSoundProgress );
-			sound.addEventListener( IOErrorEvent.IO_ERROR,		handleSoundFault );
-			sound.addEventListener( Event.ID3,					handleSoundDataReady );
-			sound.addEventListener( Event.COMPLETE,				handleSoundComplete );
 		}
 		
 		private function handleSoundProgress(e:ProgressEvent):void
@@ -99,6 +94,11 @@ package com.firestartermedia.lib.as3.sound.component
 			stop();
 			
 			sound 	= new Sound();
+			
+			sound.addEventListener( ProgressEvent.PROGRESS, 	handleSoundProgress );
+			sound.addEventListener( IOErrorEvent.IO_ERROR,		handleSoundFault );
+			sound.addEventListener( Event.ID3,					handleSoundDataReady );
+			sound.addEventListener( Event.COMPLETE,				handleSoundComplete );
 			
 			sound.load( request, context );
 		}
