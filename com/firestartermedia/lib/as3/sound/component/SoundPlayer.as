@@ -136,6 +136,11 @@ package com.firestartermedia.lib.as3.sound.component
 		{
 			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.PLAYING ) );
 			
+			if ( channel )
+			{
+				channel.stop();
+			}
+			
 			channel	= sound.play( currentPosition );
 			
 			channel.addEventListener( Event.SOUND_COMPLETE, handleFinished );
@@ -198,6 +203,8 @@ package com.firestartermedia.lib.as3.sound.component
 			if ( sound )
 			{
 				dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.SEEKED ) );
+				
+				channel.stop();
 				
 				channel	= sound.play( seconds );
 				
