@@ -100,11 +100,19 @@ package com.firestartermedia.lib.as3.display.component.video
 		
 		private function handleCameraStatus(e:StatusEvent):void
 		{
-			if ( e.code == 'Camera.Muted' )
+			switch ( e.code )
 			{
-				hasBeenDenyed	= true;
+				case 'Camera.Muted':
+					hasBeenDenyed	= true;
+					
+					dispatchEvent( new WebCamEvent( WebCamEvent.NO_WEBCAM ) );
 				
-				dispatchEvent( new WebCamEvent( WebCamEvent.NO_WEBCAM ) );
+				break;
+				
+				case 'Camera.Unmuted':
+					dispatchEvent( new WebCamEvent( WebCamEvent.READY ) );
+					
+				break;
 			}
 		}
 		
