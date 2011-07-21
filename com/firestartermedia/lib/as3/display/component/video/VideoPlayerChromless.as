@@ -141,8 +141,6 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			var progress:Object = loadingProgress;
 			
-			trace( loadedBytes, stream.bytesLoaded );
-			
 			if ( progress.total === 1 && loadedBytes === stream.bytesLoaded )
 			{
 				isLoaded = true;
