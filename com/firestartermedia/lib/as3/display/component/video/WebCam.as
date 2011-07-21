@@ -218,6 +218,30 @@ package com.firestartermedia.lib.as3.display.component.video
 			}
 		}
 		
+		public function disconnect():void
+		{
+			try
+			{
+				video.attachCamera( null );
+			}
+			catch (e:*)
+			{
+				throw new Error( 'Nothing to disconnect' );
+			}
+		}
+		
+		public function getStatus():Boolean
+		{
+			try
+			{
+				return !camera.muted;
+			}
+			catch (e:*)
+			{}
+			
+			return false;
+		}
+		
 		public function set reflect(b:Boolean):void
 		{
 			var matrix:Matrix		= new Matrix();
