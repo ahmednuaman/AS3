@@ -71,6 +71,10 @@ package com.firestartermedia.lib.as3.sound.component
 			{
 				resume();
 			}
+			else
+			{
+				pause();
+			}
 		}
 		
 		public function play(url:String):void
