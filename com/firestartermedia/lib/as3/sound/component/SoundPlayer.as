@@ -71,7 +71,11 @@ package com.firestartermedia.lib.as3.sound.component
 			{
 				resume();
 			}
-			else
+		}
+		
+		private function handleSoundOpen(e:Event):void
+		{
+			if ( !autoPlay )
 			{
 				pause();
 			}
@@ -105,8 +109,11 @@ package com.firestartermedia.lib.as3.sound.component
 			sound.addEventListener( IOErrorEvent.IO_ERROR,		handleSoundFault );
 			sound.addEventListener( Event.ID3,					handleSoundDataReady );
 			sound.addEventListener( Event.COMPLETE,				handleSoundComplete );
+			sound.addEventListener( Event.OPEN,					handleSoundOpen );
 			
 			sound.load( request, context );
+			
+			channel	= sound.play();
 		}
 		
 		public function stop():void
