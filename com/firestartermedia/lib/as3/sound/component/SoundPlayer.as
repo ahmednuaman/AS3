@@ -26,6 +26,7 @@ package com.firestartermedia.lib.as3.sound.component
 	{
 		public var autoPlay:Boolean								= false;
 		public var bufferTime:Number							= 2;
+		public var loop:Boolean									= false;
 		
 		private var context:SoundLoaderContext					= new SoundLoaderContext();
 		private var currentPosition:Number						= 0;
@@ -235,6 +236,11 @@ package com.firestartermedia.lib.as3.sound.component
 		private function handleFinished(e:Event):void
 		{
 			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.ENDED ) );
+			
+			if ( loop )
+			{
+				channel	= sound.play( 0 );
+			}
 		}
 		
 		public function get loadingProgress():Object
