@@ -31,19 +31,19 @@ package com.firestartermedia.lib.as3.data.gdata
 		
 		public function YouTubeGDataService()
 		{
-			super( DataServiceEvent.LOADING, DataServiceEvent.LOADED, DataServiceEvent.READY );
+			super( DataServiceEvent.LOADING, DataServiceEvent.LOADED, DataServiceEvent.READY, DataService.TYPE_JSON );
 		}
 		
 		public function getVideoData(videoId:String):void
 		{
-			var request:URLRequest = new URLRequest( VIDEOS_URL + '/' + videoId );
+			var request:URLRequest = new URLRequest( VIDEOS_URL + '/' + videoId + '?alt=json' );
 			
 			load( request );
 		}
 		
 		public function getPlaylistData(playlistId:String, startIndex:Number=1):void
 		{
-			var request:URLRequest = new URLRequest( PLAYLISTS_URL + '/' + playlistId + '?v=2&max-results=50&start-index=' + startIndex );
+			var request:URLRequest = new URLRequest( PLAYLISTS_URL + '/' + playlistId + '?v=2&max-results=50&alt=json&start-index=' + startIndex );
 			
 			load( request );
 		}
@@ -112,14 +112,14 @@ package com.firestartermedia.lib.as3.data.gdata
 		
 		public function getUserVideos(username:String, startIndex:Number=1, max:Number=50):void
 		{
-			var request:URLRequest = new URLRequest( VIDEOS_URL + '?v=2&max-results=' + max + '&start-index=' + startIndex + '&author=' + username );
+			var request:URLRequest = new URLRequest( VIDEOS_URL + '?v=2&alt=json&max-results=' + max + '&start-index=' + startIndex + '&author=' + username );
 			
 			load( request );
 		}
 		
 		public function getAuthedUserVideos(token:String, devkey:String, startIndex:Number=1, max:Number=50):void
 		{
-			var request:URLRequest 	= new URLRequest( USERS_URL + '/default/uploads' );
+			var request:URLRequest 	= new URLRequest( USERS_URL + '/default/uploads?alt=json' );
 			
 			request.contentType		= 'application/atom+xml; charset=UTF-8';
 			request.method			= URLRequestMethod.POST;
