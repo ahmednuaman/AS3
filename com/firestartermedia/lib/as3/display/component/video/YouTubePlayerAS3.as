@@ -64,6 +64,16 @@ package com.firestartermedia.lib.as3.display.component.video
 			}	
 		}
 		
+		public function cue(videoId:String):void
+		{
+			this.videoId = videoId;
+			
+			if ( isLoaded )
+			{
+				player.cueVideoById( videoId );
+			}
+		}
+		
 		private function loadPlayer():void
 		{
 			var request:URLRequest 	= new URLRequest( ( chromeless ? requestURLChromeless : requestURLChromed.replace( 'ID', videoId ) ) + ( pars.indexOf( '&' ) !== 0 ? '&' : '' ) + pars );
