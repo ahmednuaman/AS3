@@ -12,6 +12,7 @@ package com.firestartermedia.lib.as3.display.component.video
 	import com.firestartermedia.lib.as3.utils.ArrayUtil;
 	import com.firestartermedia.lib.as3.utils.NumberUtil;
 	
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.NetStatusEvent;
@@ -75,11 +76,18 @@ package com.firestartermedia.lib.as3.display.component.video
 						
 			stream.play( url );
 			
+			if ( !autoPlay )
+			{
+				stream.pause();
+			}
+			else
+			{
+				isPlaying 	= true;
+			}
+			
 			isLoaded 		= false;
 			
 			isOverHalfWay 	= false;
-			
-			isPlaying 		= true;
 			
 			//addEventListener( Event.ENTER_FRAME, handleEnterFrame );
 			
@@ -146,11 +154,6 @@ package com.firestartermedia.lib.as3.display.component.video
 				isLoaded = true;
 				
 				dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.LOADED ) );
-				
-				if ( !autoPlay )
-				{
-					pause();
-				}
 			}
 			else
 			{
@@ -174,11 +177,11 @@ package com.firestartermedia.lib.as3.display.component.video
 				cuePoint = cuePoints[ test ];
 				
 				if ( cuePoint > lastFiredCuePoint )
-				{
+                {
 					dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.CUE_POINT, { point: cuePoint, halfway: false, finished: false, duration: playingTime.total } ) );
 					
 					lastFiredCuePoint = cuePoint;
-				}
+                }
 			}
 
 			if ( !isOverHalfWay && time > ( playingTime.total / 2 ) )
@@ -200,6 +203,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				addCuePoint( point );
 			}
+		}
+		
+		public function removeCuePoints():void
+		{
+			cuePoints	= [ ];
 		}
 		
 		public function pause():void
@@ -227,7 +235,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		private function handleNetStatus(e:NetStatusEvent):void
 		{
 			var code:String = e.info.code;
-			
+
 			switch ( code )
 			{
 				case 'NetStream.Play.Start':
@@ -286,6 +294,8 @@ package com.firestartermedia.lib.as3.display.component.video
 		private function handleOnMetaData(info:Object):void
 		{
 			metaData = info;
+			
+			resize( info.width, info.height );
 		}
 		
 		public function resize(width:Number=0, height:Number=0):void
@@ -324,6 +334,8 @@ package com.firestartermedia.lib.as3.display.component.video
 			video.visible 		= true;
 			video.x 			= ( width / 2 ) - ( targetWidth / 2 );
 			video.y 			= ( height / 2 ) - ( targetHeight / 2 );
+			
+			dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.RESIZED ) );
 		}
 		
 		public function get loadingProgress():Object
@@ -346,6 +358,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			time.formatted 		= NumberUtil.toTimeString( Math.round( stream.time ) ) + ' / ' + NumberUtil.toTimeString( Math.round( metaData.duration ) );
 		
 			return time;
+		}
+		
+		public function get vid():Video
+		{
+			return video;
 		}
 	}
 }
