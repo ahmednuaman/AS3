@@ -8,10 +8,6 @@
 */
 package com.firestartermedia.lib.as3.utils
 {
-	//import com.adobe.utils.DateUtil;
-	
-	import mx.utils.StringUtil;
-	
 	public class YouTubeUtil
 	{
 		public static function cleanGDataFeed(data:XML):Array
@@ -20,7 +16,7 @@ package com.firestartermedia.lib.as3.utils
 			
 			for each ( var entry:XML in data..*::entry )
 			{  
-				if ( mx.utils.StringUtil.trim( entry..*::videoid ) != '' )
+				if ( StringUtil.trim( entry..*::videoid ) != '' )
 				{
 					cleanData.push({ 
 						title: entry.*::title, 
