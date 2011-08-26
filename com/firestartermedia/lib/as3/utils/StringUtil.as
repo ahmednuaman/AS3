@@ -39,7 +39,7 @@ package com.firestartermedia.lib.as3.utils
 			}
 		}
 		
-		public static function trim(s:String):void
+		public static function trim(s:String):String
 		{
 			return s.replace( /^\s+|\s+$/gs, '' );
 		}
