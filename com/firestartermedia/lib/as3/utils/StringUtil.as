@@ -34,9 +34,14 @@ package com.firestartermedia.lib.as3.utils
 			for ( var prop:String in obj )
 			{
 				trace( tabs + '[' + prop + '] -> ' + obj[ prop ] );
-				            
+				
 				StringUtil.print( obj[ prop ], level + 1 );
 			}
+		}
+		
+		public static function trim(s:String):void
+		{
+			return s.replace( /^\s+|\s+$/gs, '' );
 		}
 	}
 }
