@@ -12,7 +12,6 @@ package com.firestartermedia.lib.as3.display.component.video
 	import com.firestartermedia.lib.as3.utils.ArrayUtil;
 	import com.firestartermedia.lib.as3.utils.NumberUtil;
 	
-	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.NetStatusEvent;
@@ -20,6 +19,7 @@ package com.firestartermedia.lib.as3.display.component.video
 	import flash.media.Video;
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
+	import flash.utils.Dictionary;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 	import flash.utils.setTimeout;
@@ -30,16 +30,18 @@ package com.firestartermedia.lib.as3.display.component.video
 		public var bufferTime:Number							= 2;
 		public var loop:Boolean									= false;
 		
+		private var _video:Video								= new Video();
 		private var cuePoints:Array								= [ ];
 		private var lastFiredCuePoint:Number					= 0;
 		private var loadedBytes:Number							= 0;
 		private var metaData:Object								= { };
-		private var video:Video									= new Video();
 		
+		private var _url:String;
 		private var frameInterval:Number;
 		private var isLoaded:Boolean;
 		private var isOverHalfWay:Boolean;
 		private var isPlaying:Boolean;
+		private var metaCuePoints:Dictionary;
 		private var rawHeight:Number;
 		private var rawWidth:Number;
 		private var stream:NetStream;
@@ -57,7 +59,7 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 			stream 			= new NetStream( connection );
 
-			stream.client 	= { onMetaData: handleOnMetaData };
+			stream.client 	= { onMetaData: handleOnMetaData, onCuePoint: handleOnCuePoint };
 			
 			stream.addEventListener( NetStatusEvent.NET_STATUS, handleNetStatus );
 			
@@ -125,6 +127,16 @@ package com.firestartermedia.lib.as3.display.component.video
 			stream.seek( seconds );
 		}
 		
+		public function seekToName(cue:String):void
+		{
+			seekTo( metaCuePoints[ cue ] );
+		}
+		
+		public function seekToFrame(frame:int):void
+		{
+			stream.step( frame );
+		}
+		
 		public function setVolume(volume:Number):void
 		{
 			var sound:SoundTransform 	= new SoundTransform( volume );
@@ -163,6 +175,16 @@ package com.firestartermedia.lib.as3.display.component.video
 			
 				isLoaded = false;
 			} 
+		}
+		
+		private function handleOnCuePoint(info:Object):void
+		{
+			cuePoints	= [ ];
+			
+			trace( 'cue point ' + info.time ); 
+			
+			dispatchEvent( new VideoPlayerEvent( VideoPlayerEvent.CUE_POINT, 
+				{ time: playingTime.current, name: info.name, point: Math.floor( playingTime.current ), halfway: false, finished: false, duration: playingTime.total } ) );
 		}
 		
 		private function checkForCuePoints():void
@@ -295,6 +317,16 @@ package com.firestartermedia.lib.as3.display.component.video
 		{
 			metaData = info;
 			
+			metaCuePoints	= new Dictionary();
+			
+			if ( metaData.cuePoints )
+			{
+				metaData.cuePoints.forEach( function(p:Object, ...args):void
+				{
+					metaCuePoints[ p.name ]	= p.time;
+				});
+			}
+			
 			resize( info.width, info.height );
 		}
 		
@@ -360,9 +392,14 @@ package com.firestartermedia.lib.as3.display.component.video
 			return time;
 		}
 		
-		public function get vid():Video
+		public function get video():Video
 		{
-			return video;
+			return _video;
+		}
+		
+		public function get url():String
+		{
+			return _url;
 		}
 	}
 }
