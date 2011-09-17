@@ -49,7 +49,7 @@ package com.firestartermedia.lib.puremvc.patterns
 				
 				try
 				{
-					view.addChild( m.getViewComponent() );
+					viewComponent.addChild( m.getViewComponent() );
 				}
 				catch (e:*)
 				{
@@ -87,7 +87,7 @@ package com.firestartermedia.lib.puremvc.patterns
 				
 				try
 				{
-					view.removeChild( m.getViewComponent() );
+					viewComponent.removeChild( m.getViewComponent() );
 				}
 				catch (e:*)
 				{

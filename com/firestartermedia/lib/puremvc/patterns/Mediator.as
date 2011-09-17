@@ -21,13 +21,9 @@ package com.firestartermedia.lib.puremvc.patterns
 		protected var notificationInterests:Array				= [ ];
 		protected var notificationHandlers:Dictionary			= new Dictionary();
 		
-		protected var view:Object;
-		
 		public function Mediator(name:String=null, viewComponent:Object=null)
 		{
 			super( name, viewComponent );
-			
-			view					= viewComponent;
 			
 			declareNotificationInterest( 'ApplicationFacadeResize', handleResize );
 			
@@ -48,11 +44,11 @@ package com.firestartermedia.lib.puremvc.patterns
 		
 		private function onReset():void
 		{
-			if ( view.hasOwnProperty( 'handleReset' ) )
+			if ( viewComponent.hasOwnProperty( 'handleReset' ) )
 			{
 				trackEvent( 'Reset ' + mediatorName );
 				
-				view.handleReset();
+				viewComponent.handleReset();
 			}
 		}
 		
@@ -100,9 +96,9 @@ package com.firestartermedia.lib.puremvc.patterns
 		
 		public function handleResize(n:INotification):void
 		{
-			if ( view.hasOwnProperty( 'handleResize' ) )
+			if ( viewComponent.hasOwnProperty( 'handleResize' ) )
 			{
-				view.handleResize( n.getBody() );
+				viewComponent.handleResize( n.getBody() );
 			}
 		}
 	}
