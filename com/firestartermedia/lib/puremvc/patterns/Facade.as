@@ -48,7 +48,7 @@ package com.firestartermedia.lib.puremvc.patterns
 		{
 			if ( notificationName !== faultEvent && notificationName !== resizeEvent && notificationName !== trackEvent )
 			{
-				sendNotification( trackEvent, { name: notificationName, body: body } );
+				sendNotification( trackEvent, { name: notificationName, body: body || { } } );
 			}
 			
 			notifyObservers( new Notification( notificationName, body, type ) );
