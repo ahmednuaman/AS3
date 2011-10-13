@@ -43,5 +43,10 @@ package com.firestartermedia.lib.as3.utils
 		{
 			return s.replace( /^\s+|\s+$/gs, '' );
 		}
+		
+		public static function truncate(s:String, l:Number, a:String=''):String
+		{
+			return s.length <= l ? s : s.substr( 0, l ) + a;
+		}
 	}
 }
