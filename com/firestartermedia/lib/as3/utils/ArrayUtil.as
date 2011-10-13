@@ -66,5 +66,12 @@ package com.firestartermedia.lib.as3.utils
 			
 			return array;
 		}
+		
+		public static function randomEntry(array:Array):Object
+		{
+			var i:Number	= Math.round( Math.random() * ( array.length - 1 ) );
+
+			return array[ i ];
+		}
 	}
 }
