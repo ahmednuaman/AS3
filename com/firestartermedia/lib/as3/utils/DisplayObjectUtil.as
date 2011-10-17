@@ -21,7 +21,7 @@ package com.firestartermedia.lib.as3.utils
 	
 	public class DisplayObjectUtil
 	{
-		public static function removeChildren(target:DisplayObjectContainer):void
+		public static function removeChildren(target:Object):void
 		{
 			while ( target.numChildren )
 			{
