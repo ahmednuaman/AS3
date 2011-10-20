@@ -35,9 +35,12 @@ package com.firestartermedia.lib.as3.utils
 			return copy;
 		}
 		
-		public static function clone(source:*):Bitmap
+		public static function clone(source:*, x:Number=0, y:Number=0, w:Number=0, h:Number=0):Bitmap
 		{
-			return new Bitmap( grab( source, new Rectangle( 0, 0, source.width, source.height ) ), PixelSnapping.AUTO, true );
+			h	= h || source.height;
+			w	= w || source.width;
+			
+			return new Bitmap( grab( source, new Rectangle( x, y, w, h ) ), PixelSnapping.AUTO, true );
 		}
 	}
 }
