@@ -114,7 +114,7 @@ package com.firestartermedia.lib.as3.sound.component
 			
 			sound.load( request, context );
 			
-			channel	= sound.play();
+			channel	= sound.play( currentPosition, loop ? -1 : 0 );
 		}
 		
 		public function stop():void
@@ -237,10 +237,10 @@ package com.firestartermedia.lib.as3.sound.component
 		{
 			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.ENDED ) );
 			
-			if ( loop )
+			/*if ( loop )
 			{
 				channel	= sound.play( 0 );
-			}
+			}*/
 		}
 		
 		public function get loadingProgress():Object
