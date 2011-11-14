@@ -65,12 +65,7 @@ package com.firestartermedia.lib.as3.utils
 				loader.contentLoaderInfo.addEventListener( Event.COMPLETE, completeFunction, false, 0, true );
 			}
 			
-			try 
-			{
-				loader.load( request, context );
-			}
-			catch (e:*)
-			{ }
+			loader.load( request, context );
 			
 			return loader;
 		}

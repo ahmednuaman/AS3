@@ -12,6 +12,7 @@ package com.firestartermedia.lib.as3.utils
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.PixelSnapping;
+	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 
@@ -22,12 +23,12 @@ package com.firestartermedia.lib.as3.utils
 			return grab( source, new Rectangle( 0, 0, source.width, source.height ) ); 
 		}
 		
-		public static function grab(source:*, rect:Rectangle, smoothing:Boolean=true):BitmapData
+		public static function grab(source:*, rect:Rectangle, matrix:Matrix=null):BitmapData
 		{
 			var draw:BitmapData = new BitmapData( source.width, source.height, true, 0 );
 			var copy:BitmapData = new BitmapData( rect.width, rect.height, true, 0 );
 			
-			draw.draw( source, null, null, null, null, smoothing );
+			draw.draw( source, matrix, null, null, null, true );
 			copy.copyPixels( draw, rect, new Point( 0, 0 ) );
 			
 			draw.dispose();
@@ -35,12 +36,12 @@ package com.firestartermedia.lib.as3.utils
 			return copy;
 		}
 		
-		public static function clone(source:*, x:Number=0, y:Number=0, w:Number=0, h:Number=0):Bitmap
+		public static function clone(source:*, x:Number=0, y:Number=0, w:Number=0, h:Number=0, m:Matrix=null):Bitmap
 		{
 			h	= h || source.height;
 			w	= w || source.width;
 			
-			return new Bitmap( grab( source, new Rectangle( x, y, w, h ) ), PixelSnapping.AUTO, true );
+			return new Bitmap( grab( source, new Rectangle( x, y, w, h ), m ), PixelSnapping.AUTO, true );
 		}
 	}
 }

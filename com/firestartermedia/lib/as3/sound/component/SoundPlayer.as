@@ -235,6 +235,8 @@ package com.firestartermedia.lib.as3.sound.component
 		
 		private function handleFinished(e:Event):void
 		{
+			trace(e);
+			
 			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.ENDED ) );
 			
 			/*if ( loop )
@@ -257,6 +259,8 @@ package com.firestartermedia.lib.as3.sound.component
 		public function get playingTime():Object
 		{
 			var time:Object 	= { };
+			
+			trace( channel.position, sound.length );
 			
 			time.current		= channel ? channel.position / 1000 : 0;
 			time.total			= sound.length / 1000;
