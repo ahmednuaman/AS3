@@ -8,6 +8,8 @@
 */
 package com.firestartermedia.lib.as3.utils
 {
+	import flash.utils.Dictionary;
+
 	public class ArrayUtil
 	{		
 		public static function shuffle(array:Array):Array
@@ -67,11 +69,29 @@ package com.firestartermedia.lib.as3.utils
 			return array;
 		}
 		
-		public static function randomEntry(array:Array):Object
+		public static function randomEntry(array:Array):*
 		{
 			var i:Number	= Math.round( Math.random() * ( array.length - 1 ) );
 
 			return array[ i ];
+		}
+		
+		public static function unique(array:Array):Array
+		{
+			var n:Array			= [ ];
+			var o:Dictionary	= new Dictionary();
+			
+			for ( var i:Number = 0; i < array.length; i++)
+			{
+				o[ array[ i ] ]	= true;
+			}
+			
+			for ( var p:Object in o )
+			{
+				n.push( p );
+			}
+			
+			return n;
 		}
 	}
 }
