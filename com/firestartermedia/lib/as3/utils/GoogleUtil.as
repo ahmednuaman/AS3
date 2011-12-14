@@ -16,7 +16,7 @@ package com.firestartermedia.lib.as3.utils
 		{
 			try 
 			{
-				ExternalInterface.call( 'pageTracker._trackPageview', page );
+				ExternalInterface.call( '_gaq.push', [ '_trackPageview', page ] );
 			} catch (e:*) { }
 		}
 	}

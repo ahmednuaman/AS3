@@ -46,23 +46,23 @@ package com.firestartermedia.lib.puremvc.display
 			}
 		}
 		
-		public function removeChildren(t:DisplayObjectContainer, ...children):void
-		{
-			if ( children.length )
-			{
-				for each ( var child:DisplayObject in children )
-				{
-					t.removeChild( child );
-				}
-			}
-			else
-			{
-				for ( var i:Number = 0; i < t.numChildren; i++ )
-				{
-					t.removeChildAt( i );
-				}
-			}
-		}
+//		public function removeChildren(t:DisplayObjectContainer, ...children):void
+//		{
+//			if ( children.length )
+//			{
+//				for each ( var child:DisplayObject in children )
+//				{
+//					t.removeChild( child );
+//				}
+//			}
+//			else
+//			{
+//				for ( var i:Number = 0; i < t.numChildren; i++ )
+//				{
+//					t.removeChildAt( i );
+//				}
+//			}
+//		}
 		
 		override public function addChild(child:DisplayObject):DisplayObject
 		{
