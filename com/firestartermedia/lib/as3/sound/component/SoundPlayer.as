@@ -25,7 +25,7 @@ package com.firestartermedia.lib.as3.sound.component
 	public class SoundPlayer extends EventDispatcher implements IEventDispatcher
 	{
 		public var autoPlay:Boolean								= false;
-		public var bufferTime:Number							= 2;
+		public var bufferTime:Number							= 2000;
 		public var loop:Boolean									= false;
 		
 		private var context:SoundLoaderContext					= new SoundLoaderContext();
@@ -61,7 +61,18 @@ package com.firestartermedia.lib.as3.sound.component
 		
 		private function handleSoundDataReady(e:Event):void
 		{
-			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.ID3_READY, sound.id3 ) );
+			var d:Object;
+			
+			try
+			{
+				d	= sound.id3;
+			}
+			catch (e:*)
+			{
+				d	= { };
+			}
+			
+			dispatchEvent( new SoundPlayerEvent( SoundPlayerEvent.ID3_READY, d ) );
 		}
 		
 		private function handleSoundComplete(e:Event):void
