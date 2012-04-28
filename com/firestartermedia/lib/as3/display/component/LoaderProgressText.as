@@ -46,7 +46,7 @@ package com.firestartermedia.lib.as3.display.component
 			field.defaultTextFormat = format;
 			field.embedFonts = true;
 			field.mouseEnabled = false;
-			field.text = loadingPrefix + ' 0%';
+			field.htmlText = loadingPrefix + ' 0%';
 			field.wordWrap = false;
 			
 			addChild( field );
@@ -54,7 +54,7 @@ package com.firestartermedia.lib.as3.display.component
 		
 		public function show():void
 		{
-			field.text = loadingPrefix + ' 0%';
+			field.htmlText = loadingPrefix + ' 0%';
 			field.x = -xMargin;
 			field.y = -yMargin;
 			
@@ -66,7 +66,7 @@ package com.firestartermedia.lib.as3.display.component
 		
 		public function update(percent:Number):void
 		{
-			field.text = loadingPrefix + ' ' +percent.toString() + '%';
+			field.htmlText = loadingPrefix + ' ' +percent.toString() + '%';
 			
 			width = field.width;
 			height = field.height;

@@ -40,7 +40,7 @@ package com.firestartermedia.lib.as3.utils
 			}
 		}
 		
-		public static function search(array:Array, value:Object):Number
+		public static function search(array:*, value:Object):Number
 		{
 			var found:Boolean = false;
 			
