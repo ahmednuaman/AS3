@@ -28,7 +28,7 @@ package com.firestartermedia.lib.as3.display.component.video
 		public var autoplay:Boolean								= false;
 		public var chromeless:Boolean							= false;
 		public var loop:Boolean									= false;
-		public var pars:String									= '';
+		public var pars:String									= 'modestbranding=1&fs=0&rel=0&showinfo=0&showsearch=0&hd=1&autohide=0&iv_load_policy=3&cc_load_policy=3';
 		public var playerHeight:Number							= 300;
 		public var playerWidth:Number							= 400;
 		public var quality:String								= QUALITY_LARGE;
@@ -112,7 +112,9 @@ package com.firestartermedia.lib.as3.display.component.video
 		private function handlePlayerStateChange(e:Object):void
 		{
 			var state:Number = player.getPlayerState();
-
+		
+			dispatchEvent( new YouTubePlayerEvent( YouTubePlayerEvent.STATE_CHANGED, state ) );
+			
 			switch ( state )
 			{
 				case 0:
@@ -209,6 +211,14 @@ package com.firestartermedia.lib.as3.display.component.video
 			if ( isLoaded )
 			{
 				player.stopVideo();
+			}
+		}
+		
+		public function destroy():void
+		{
+			if ( isLoaded )
+			{
+				player.destroy();
 			}
 		}
 		
@@ -313,9 +323,19 @@ package com.firestartermedia.lib.as3.display.component.video
 			return ( isLoaded ? player : null );
 		}
 		
+		public function get loaded():Boolean
+		{
+			return isLoaded;
+		}
+		
 		public function get playing():Boolean
 		{
 			return isPlaying;
+		}
+		
+		override public function get height():Number
+		{
+			return playerHeight;
 		}
 		
 		override public function set height(value:Number):void
@@ -326,6 +346,11 @@ package com.firestartermedia.lib.as3.display.component.video
 			{
 				player.setSize( playerWidth, playerHeight );
 			}
+		}
+		
+		override public function get width():Number
+		{
+			return playerWidth;
 		}
 		
 		override public function set width(value:Number):void
