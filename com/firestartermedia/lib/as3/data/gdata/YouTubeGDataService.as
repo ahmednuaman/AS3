@@ -48,6 +48,13 @@ package com.firestartermedia.lib.as3.data.gdata
 			load( request );
 		}
 		
+		public function searchFor(query:String):void
+		{
+			var request:URLRequest = new URLRequest( VIDEOS_URL + '/?q=' + escape(query) + '&alt=json' );
+			
+			load( request );
+		}
+		
 		public function searchPlaylistData(playlistId:String, playlistSearch:String):void
 		{
 			this.playlistId = playlistId;
