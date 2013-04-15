@@ -22,6 +22,7 @@ package com.firestartermedia.lib.as3.display.shape
 			var vectorX:Number;
 			var vectorY:Number;
 			
+            graphics.clear();
 			graphics.beginFill( bgColour );
 			graphics.lineStyle( borderThickness, borderColour );
 			
