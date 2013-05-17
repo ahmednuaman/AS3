@@ -8,7 +8,7 @@
 */
 package com.firestartermedia.lib.puremvc.display
 {
-    import com.firestartermedia.lib.puremvc.events.SpriteEvent;
+    import com.firestartermedia.lib.as3.events.SpriteEvent;
     
     import flash.display.DisplayObject;
     import flash.display.Sprite;
