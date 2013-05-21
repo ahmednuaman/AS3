@@ -8,7 +8,7 @@
 */
 package com.firestartermedia.lib.puremvc.display
 {
-    import com.firestartermedia.lib.as3.events.SpriteEvent;
+    import com.firestartermedia.lib.as3.events.AppEvent;
     
     import flash.display.DisplayObject;
     import flash.display.Sprite;
@@ -67,7 +67,7 @@ package com.firestartermedia.lib.puremvc.display
         
         protected function sendEvent(eventName:String, body:Object=null):void
         {
-            dispatchEvent( new SpriteEvent( eventName, body, true ) );
+            dispatchEvent( new AppEvent( eventName, body, true ) );
         }
         
         protected function sendReady(eventName:String=null):void
